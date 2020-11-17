@@ -11,10 +11,10 @@ namespace Models
         public string Raktar_Id { get; set; }
         [StringLength(100)]
         public string Bolt_Nev { get; set; }
-        [Range(0, 300)]
-        public int Darab_Szam { get; set; }
-        [Range(0, 2000000)]
-        public int Ar { get; set; }
+        [StringLength(100)]
+        public string Cim { get; set; }
+        [StringLength(100)]
+        public string Weboldal { get; set; }
         public virtual ICollection<Kes> Kesek { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace Models
         public int Penge_Hossz { get; set; }
         [StringLength(15)]
         public string Acel { get; set; }
+        [Range(0, 2000000)]
+        public int Ar{ get; set; }
         public virtual ICollection<Velemeny> Velemenyek { get; set; }
         public string Raktar_Id { get; set; }
 
