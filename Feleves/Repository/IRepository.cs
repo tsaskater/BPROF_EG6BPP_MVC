@@ -20,6 +20,6 @@ namespace Repository
 
         void Update(string oid, T NItem);
 
-        void Save();
+        void SaveAll();
     }
 }
