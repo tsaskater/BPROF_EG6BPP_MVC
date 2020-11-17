@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Logic
 {
-    class KesBoltLogic
+    public class KesBoltLogic
     {
         IRepository<Kes_Bolt_Keszlet_Info> KesBoltRepo;
 

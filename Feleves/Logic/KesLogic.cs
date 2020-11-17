@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Logic
 {
-    class KesLogic
+    public class KesLogic
     {
         IRepository<Kes> KesRepo;
 
