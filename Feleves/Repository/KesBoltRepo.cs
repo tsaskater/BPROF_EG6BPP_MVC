@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Repository
 {
-    public class KesBoltRepo : IRepository<Kes_Bolt_Keszlet_Info>
+    public class KesBoltRepo : IRepository<Kes_Bolt>
     {
         VelemenyContextDb db = new VelemenyContextDb();
 
-        public void Add(Kes_Bolt_Keszlet_Info kesbolt)
+        public void Add(Kes_Bolt kesbolt)
         {
             db.Kes_Bolt.Add(kesbolt);
             db.SaveChanges();
@@ -22,18 +22,18 @@ namespace Repository
             Delete(Read(kbId));
         }
 
-        public void Delete(Kes_Bolt_Keszlet_Info kb)
+        public void Delete(Kes_Bolt kb)
         {
             db.Kes_Bolt.Remove(kb);
             db.SaveChanges();
         }
 
-        public Kes_Bolt_Keszlet_Info Read(string Kbid)
+        public Kes_Bolt Read(string Kbid)
         {
             return db.Kes_Bolt.FirstOrDefault(tmp => tmp.Raktar_Id == Kbid);
         }
 
-        public IQueryable<Kes_Bolt_Keszlet_Info> Read()
+        public IQueryable<Kes_Bolt> Read()
         {
             return db.Kes_Bolt.AsQueryable();
         }
@@ -43,7 +43,7 @@ namespace Repository
             db.SaveChanges();
         }
 
-        public void Update(string o_KbId, Kes_Bolt_Keszlet_Info N_kb)
+        public void Update(string o_KbId, Kes_Bolt N_kb)
         {
             var Old_Kb = Read(o_KbId);
 

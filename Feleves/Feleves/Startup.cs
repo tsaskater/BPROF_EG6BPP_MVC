@@ -25,7 +25,7 @@ namespace Feleves
             services.AddTransient<KesBoltLogic, KesBoltLogic>();
             services.AddTransient<IRepository<Velemeny>, VelemenyRepo>();
             services.AddTransient<IRepository<Kes>, KesRepo>();
-            services.AddTransient<IRepository<Kes_Bolt_Keszlet_Info>, KesBoltRepo>();
+            services.AddTransient<IRepository<Kes_Bolt>, KesBoltRepo>();
             services.AddMvc(opt => opt.EnableEndpointRouting = false);
         }
 

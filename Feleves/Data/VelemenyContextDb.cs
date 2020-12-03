@@ -8,7 +8,7 @@ namespace Data
     {
         public DbSet<Velemeny> Velemenyek { get; set; }
         public DbSet<Kes> Kesek { get; set; }
-        public DbSet<Kes_Bolt_Keszlet_Info> Kes_Bolt { get; set; }
+        public DbSet<Kes_Bolt> Kes_Bolt { get; set; }
         public VelemenyContextDb(DbContextOptions<VelemenyContextDb> opt) : base(opt)
         {
 

@@ -26,6 +26,6 @@ namespace Models
         public string Raktar_Id { get; set; }
 
         [NotMapped]
-        public virtual Kes_Bolt_Keszlet_Info Kes_Bolt_Keszlet_Info { get; set; }
+        public virtual Kes_Bolt Kes_Bolt_Keszlet_Info { get; set; }
     }
 }

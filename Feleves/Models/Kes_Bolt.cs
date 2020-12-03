@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Models
 {
-    public class Kes_Bolt_Keszlet_Info
+    public class Kes_Bolt
     {
         [Key]
         public string Raktar_Id { get; set; }
