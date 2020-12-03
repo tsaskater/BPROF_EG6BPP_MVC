@@ -44,6 +44,10 @@ namespace Logic
         {
             KesBoltRepo.Update(o_kbid, n_kesbolt);
         }
+        public IQueryable<Kes> GetKesek(string raktarid)
+        {
+            return KesBoltRepo.Read(raktarid).Kesek.AsQueryable();
+        }
 
     }
 }

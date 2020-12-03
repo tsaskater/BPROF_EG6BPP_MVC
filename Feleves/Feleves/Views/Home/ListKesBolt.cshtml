@@ -37,9 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Weboldal)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a>
             </td>
         </tr>
 }

@@ -1,0 +1,28 @@
+﻿@model string 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kés hozzáadás</title>
+</head>
+<body>
+    <h1>Adjon hozzá egy kést</h1>
+    <form action="/Home/AddKes" method="post">
+        <p>Gyarto: </p>
+        <input type="text" minlength="5" maxlength="50" name="Gyarto" /> <br />
+        <p>Modell nev: </p>
+        <input type="text" minlength="5" maxlength="50" name="Modell_nev" /> <br />
+        <p>Markolat: </p>
+        <input type="text" minlength="5" maxlength="50" name="Markolat" /> <br />
+        <p>Bevont penge: </p>
+        <input type="checkbox" name="Bevont_Penge" /> <br />
+        <p>Penge hossz: </p>
+        <input type="number" min="0" max="500" name="Penge_Hossz" /> <br />
+        <p>Acél: </p>
+        <input type="text" minlength="5" maxlength="15" name="Acel" /> <br />
+        <p>Ár: </p>
+        <input type="number" min="0" max="2000000" name="Ar" /> <br />
+        <input type="hidden" value="@Model" name="Raktar_Id" />;
+        <input type="submit" value="Hozzáadás" />
+    </form>
+</body>
+</html>

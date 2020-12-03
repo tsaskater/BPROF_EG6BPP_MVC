@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Models.Kes>
+
+@{
+    ViewData["Title"] = "ListKes";
+}
+
+<h1>ListKes</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Gyartasi_Cikkszam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gyarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modell_nev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Markolat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bevont_Penge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Penge_Hossz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Raktar_Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gyartasi_Cikkszam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gyarto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modell_nev)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Markolat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bevont_Penge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Penge_Hossz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Acel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raktar_Id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

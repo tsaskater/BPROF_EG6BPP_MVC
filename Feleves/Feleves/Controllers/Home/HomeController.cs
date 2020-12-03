@@ -43,18 +43,25 @@ namespace Feleves.Controllers.Home
             return View(KnifeStoreLogic.GetAllKes_Bolt());
 
         }
-        public IActionResult AddKes()
+        [HttpGet]
+        public IActionResult AddKes(string id)
         {
-            return View();
+            return View(nameof(AddKes),id);
         }
         [HttpPost]
         public IActionResult AddKes(Kes kes)
         {
             kes.Gyartasi_Cikkszam= Guid.NewGuid().ToString();
             KnifeLogic.AddKes(kes);
-            return View();
+            return View(nameof(ListKes), KnifeStoreLogic.GetKesek(kes.Raktar_Id));
         }
-        
+        //Kes Listazasok
+        [HttpGet]
+        public IActionResult ListKes(string id)
+        {
+            return View(KnifeStoreLogic.GetKesek(id));
+
+        }
         [HttpGet]
         public IActionResult AddVelemeny()
         {
