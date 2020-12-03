@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Kés bolt hozzáadás</title>
+</head>
+<body>
+    <h1>Adjon hozzá egy kés boltot</h1>
+    <form action="/Home/AddKesBolt" method="post">
+        <p>Bolt Név: </p>
+        <input type="text" minlength="5" maxlength="100" name="Bolt_Nev" /> <br />
+        <p>Cím: </p>
+        <input type="text" minlength="5" maxlength="100" name="Cim" /> <br />
+        <p>Weboldal: </p>
+        <input type="text" minlength="5" maxlength="100" name="Weboldal" /> <br />
+        <input type="submit" value="Hozzáadás" />
+    </form>
+</body>
+</html>

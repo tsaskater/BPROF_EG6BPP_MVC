@@ -26,19 +26,19 @@ namespace Logic
             this.VelemenyRepo.Delete(vId);
         }
 
-        public IQueryable<Velemeny> GetAllPlayers()
+        public IQueryable<Velemeny> GetAllVelemeny()
         {
             return VelemenyRepo.Read();
         }
 
 
-        public Velemeny GetPlayer(string vId)
+        public Velemeny GetVelemeny(string vId)
         {
             return VelemenyRepo.Read(vId);
         }
 
 
-        public void UpdatePlayer(string o_vid, Velemeny n_review)
+        public void UpdateVelemeny(string o_vid, Velemeny n_review)
         {
             VelemenyRepo.Update(o_vid, n_review);
         }

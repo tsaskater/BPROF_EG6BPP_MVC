@@ -28,19 +28,19 @@ namespace Logic
             this.KesRepo.Delete(kId);
         }
 
-        public IQueryable<Kes> GetAllPlayers()
+        public IQueryable<Kes> GetAllKes()
         {
             return KesRepo.Read();
         }
 
 
-        public Kes GetPlayer(string kId)
+        public Kes GetKes(string kId)
         {
             return KesRepo.Read(kId);
         }
 
 
-        public void UpdatePlayer(string o_kid, Kes n_kes)
+        public void UpdateKes(string o_kid, Kes n_kes)
         {
             KesRepo.Update(o_kid, n_kes);
         }

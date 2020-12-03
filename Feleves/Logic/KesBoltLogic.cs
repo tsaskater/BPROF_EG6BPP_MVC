@@ -28,19 +28,19 @@ namespace Logic
             this.KesBoltRepo.Delete(kbId);
         }
 
-        public IQueryable<Kes_Bolt> GetAllPlayers()
+        public IQueryable<Kes_Bolt> GetAllKes_Bolt()
         {
             return KesBoltRepo.Read();
         }
 
 
-        public Kes_Bolt GetPlayer(string kbId)
+        public Kes_Bolt GetKes_Bolt(string kbId)
         {
             return KesBoltRepo.Read(kbId);
         }
 
 
-        public void UpdatePlayer(string o_kbid, Kes_Bolt n_kesbolt)
+        public void UpdateKes_Bolt(string o_kbid, Kes_Bolt n_kesbolt)
         {
             KesBoltRepo.Update(o_kbid, n_kesbolt);
         }
