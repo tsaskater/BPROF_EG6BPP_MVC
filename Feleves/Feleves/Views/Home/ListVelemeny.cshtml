@@ -4,50 +4,63 @@
     ViewData["Title"] = "ListVelemeny";
 }
 
-<h1>ListVelemeny</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Velemeny_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Szerzo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Elegedettseg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VelemenySzovege)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Velemeny_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Szerzo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Elegedettseg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VelemenySzovege)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+
+@if (Model.Count() != 0)
+{
+    <h1>Vélemények</h1>
+    <a href="/Home/BackToKesek?id=@Model.First().Gyartasi_Cikkszam">Vissza a termékekhez</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Velemeny_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Szerzo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Elegedettseg)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VelemenySzovege)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Velemeny_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Szerzo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Elegedettseg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VelemenySzovege)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
 }
-    </tbody>
-</table>
+else
+{
+    <p>A listája üres hamarosan átírányítjuk a főoldalra</p>
+    <script type="text/javascript">
+        setTimeout(myFunction, 3500)
+
+        function myFunction() {
+            window.location.href = "/";
+        }
+    </script>
+}

@@ -5,73 +5,85 @@
 }
 
 <h1>ListKes</h1>
+@if (Model.Count() != 0)
+{
+    <a href="/Home/AddKes?id=@Model.First().Raktar_Id">Kés hozzáadása ehhez a bolthoz</a> //ezt valószínüleg meg lehet oldani szebben
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gyarto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modell_nev)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Markolat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bevont_Penge)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Penge_Hossz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Acel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ar)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gyarto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modell_nev)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Markolat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bevont_Penge)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Penge_Hossz) mm
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Acel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ar) Ft
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a href="/Home/DeleteKes?id=@item.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
+                            <li><a href="/Home/AddVelemeny?id=@item.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
+                            <li><a href="/Home/ListVelemeny?id=@item.Gyartasi_Cikkszam">Vélemények megtekintése</a></li>
+                            <li><a href="/Home/ListKesBolt">Vissza a boltokhoz</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<p>
-    @if (Model.Count() != 0)
-    {
-        <a href="/Home/AddKes?id=@Model.First().Raktar_Id">Kés hozzáadása ehhez a bolthoz</a> //ezt valószínüleg meg lehet oldani szebben
-    }
-
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Gyarto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modell_nev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Markolat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bevont_Penge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Penge_Hossz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Acel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ar)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gyarto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modell_nev)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Markolat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bevont_Penge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Penge_Hossz) mm
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Acel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ar) Ft
-            </td>
-            <td>
-                <ul>
-                    <li><a href="/Home/DeleteKes?id=@item.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
-                    <li><a href="/Home/AddVelemeny?id=@item.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
-                    <li><a href="/Home/ListKesBolt">Vissza a boltokhoz</a></li>
-                </ul>
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
+else
+{
+    <p>A listája üres hamarosan átírányítjuk a főoldalra</p>
+    <script type="text/javascript">
+        setTimeout(myFunction, 3500)
+
+        function myFunction() {
+            window.location.href = "/";
+        }
+    </script>
+}
+
+
