@@ -36,7 +36,7 @@ namespace Feleves
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
             app.UseRouting();
         }

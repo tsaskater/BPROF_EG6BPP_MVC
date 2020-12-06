@@ -39,10 +39,24 @@ namespace Feleves.Controllers.Home
             return RedirectToAction(nameof(ListKesBolt));
         }
         //KesBOLT Listazasok
+        [HttpGet]
         public IActionResult ListKesBolt()
         {
             return View(KnifeStoreLogic.GetAllKes_Bolt());
 
+        }
+        //KesBolt Szerkesztése
+        [HttpGet]
+        public IActionResult EditKesBolt(string id)
+        {
+            Kes_Bolt kb = KnifeStoreLogic.GetKes_Bolt(id);
+            return View(kb);
+        }
+       [HttpPost]
+        public IActionResult EditKesBolt(Kes_Bolt kb)
+        {
+            KnifeStoreLogic.UpdateKes_Bolt(kb.Raktar_Id, kb);
+            return RedirectToAction(nameof(ListKesBolt));
         }
         //KesBolt Törlés
         public IActionResult DeleteKesBolt(string id)
@@ -69,7 +83,7 @@ namespace Feleves.Controllers.Home
             return View(KnifeStoreLogic.GetKesek(id));
 
         }
-        //Delete Kés    TODO:(Cascade deletere szükség lesz a foregin key miatt)
+        //Delete Kés    TODO:(Cascade deletere szükség lesz a foregin key miatt) megoldva:)
         [HttpGet]
         public IActionResult DeleteKes(string id)
         {
@@ -79,7 +93,7 @@ namespace Feleves.Controllers.Home
         }
 
 
-        //Velemeny hozzáadás    TODO: A elégedettség értékét "csillagokban" lehessen megadni legkevesebb fél csillag legnagyobb 5
+        //Velemeny hozzáadás    TODO: A elégedettség értékét "csillagokban" lehessen megadni legkevesebb fél csillag legnagyobb 5 megoldva:)
         [HttpGet]
         public IActionResult AddVelemeny(string id)
         {

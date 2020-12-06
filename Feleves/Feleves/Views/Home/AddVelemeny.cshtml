@@ -1,5 +1,8 @@
 ﻿@model string
-
+<head>
+    <link href="~/Css/Csillagok.css" rel="stylesheet" />
+    
+</head>
 <h1>Vélemény hozzáadása</h1>
 
 <h4>Velemeny</h4>
@@ -8,13 +11,24 @@
     Adja meg az Ön nevét:<br />
     <input name="Szerzo" type="text" minlength="2" maxlength="30" /><br />
     Válassza ki mennyire volt elégedett:<br />
-    <input type="number" name="Elegedettseg" min="1" max="10"><br />
+    <fieldset class="rating">
+        <input type="radio" id="star5" name="Elegedettseg" value="10" /><label class="full" for="star5" title="5 csillag"></label>
+        <input type="radio" id="star4half" name="Elegedettseg" value="9" /><label class="half" for="star4half" title="4 és fél csillag"></label>
+        <input type="radio" id="star4" name="Elegedettseg" value="8" /><label class="full" for="star4" title="4 csillag"></label>
+        <input type="radio" id="star3half" name="Elegedettseg" value="7 " /><label class="half" for="star3half" title="3 és fél csillag"></label>
+        <input type="radio" id="star3" name="Elegedettseg" value="6" /><label class="full" for="star3" title="3 csillag"></label>
+        <input type="radio" id="star2half" name="Elegedettseg" value="5" /><label class="half" for="star2half" title="2 és fél csillag"></label>
+        <input type="radio" id="star2" name="Elegedettseg" value="4" /><label class="full" for="star2" title="2 csillag"></label>
+        <input type="radio" id="star1half" name="Elegedettseg" value="3" /><label class="half" for="star1half" title="1 és fél csillag"></label>
+        <input type="radio" id="star1" name="Elegedettseg" value="2" /><label class="full" for="star1" title="1 csillag"></label>
+        <input type="radio" id="starhalf" name="Elegedettseg" value="1" /><label class="half" for="starhalf" title="fél csillag"></label>
+    </fieldset>
     <input type="hidden" name="Gyartasi_Cikkszam" value="@Model" /><br />
+    Fejtse ki a véleményét (Nem kötelező):<br />
     <textarea name="VelemenySzovege"></textarea><br />
     <input type="submit" value="Vélemény hozzáadás" form="addvelemeny" class="btn btn-primary" />
 </form>
-        Fejtse ki a véleményét (Nem kötelező):
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+

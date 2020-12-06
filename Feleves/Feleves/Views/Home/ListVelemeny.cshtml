@@ -5,7 +5,10 @@
 }
 
 
-
+<head>
+    <link href="~/Css/Csillagokdisabled.css" rel="stylesheet" />
+        
+</head>
 @if (Model.Count() != 0)
 {
     <h1>Vélemények</h1>
@@ -39,7 +42,86 @@
                         @Html.DisplayFor(modelItem => item.Szerzo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Elegedettseg)
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="Elegedettseg" value="10" /><label class="full" for="star5" title="5 csillag"></label>
+                            <input type="radio" id="star4half" name="Elegedettseg" value="9" /><label class="half" for="star4half" title="4 és fél csillag"></label>
+                            <input type="radio" id="star4" name="Elegedettseg" value="8" /><label class="full" for="star4" title="4 csillag"></label>
+                            <input type="radio" id="star3half" name="Elegedettseg" value="7 " /><label class="half" for="star3half" title="3 és fél csillag"></label>
+                            <input type="radio" id="star3" name="Elegedettseg" value="6" /><label class="full" for="star3" title="3 csillag"></label>
+                            <input type="radio" id="star2half" name="Elegedettseg" value="5" /><label class="half" for="star2half" title="2 és fél csillag"></label>
+                            <input type="radio" id="star2" name="Elegedettseg" value="4" /><label class="full" for="star2" title="2 csillag"></label>
+                            <input type="radio" id="star1half" name="Elegedettseg" value="3" /><label class="half" for="star1half" title="1 és fél csillag"></label>
+                            <input type="radio" id="star1" name="Elegedettseg" value="2" /><label class="full" for="star1" title="1 csillag"></label>
+                            <input type="radio" id="starhalf" name="Elegedettseg" value="1" /><label class="half" for="starhalf" title="fél csillag"></label>
+                        </fieldset>
+                        <script>
+                                document.getElementById("star5").disabled = true;
+                            document.getElementById("star4half").disabled = true;
+                            document.getElementById("star4").disabled = true;
+                                document.getElementById("star3half").disabled = true;
+                            document.getElementById("star3").disabled = true;
+                                document.getElementById("star2half").disabled = true;
+                            document.getElementById("star2").disabled = true;
+                                document.getElementById("star1half").disabled = true;
+                                document.getElementById("star1").disabled = true;
+                            document.getElementById("starhalf").disabled = true;
+
+                        </script>
+                        @switch (item.Elegedettseg)
+                        {
+                            case 10:
+                                <script>
+                                    document.getElementById("star5").checked = true;
+                                </script>
+                                break;
+                            case 9:
+                                <script>
+                                    document.getElementById("star4half").checked = true;
+                                </script>
+                                break;
+                            case 8:
+                                <script>
+                                    document.getElementById("star4").checked = true;
+                                </script>
+                                break;
+                            case 7:
+                                <script>
+                                    document.getElementById("star3half").checked = true;
+                                </script>
+                                break;
+                            case 6:
+                                <script>
+                                    document.getElementById("star3").checked = true;
+                                </script>
+                                break;
+                            case 5:
+                                <script>
+                                    document.getElementById("star2half").checked = true;
+                                </script>
+                                break;
+                            case 4:
+                                <script>
+                                    document.getElementById("star2").checked = true;
+                                </script>
+                                break;
+                            case 3:
+                                <script>
+                                    document.getElementById("star1half").checked = true;
+                                </script>
+                                break;
+                            case 2:
+                                <script>
+                                    document.getElementById("star1").checked = true;
+                                </script>
+                                break;
+                            case 1:
+                                <script>
+                                    document.getElementById("starhalf").checked = true;
+                                </script>
+                                break;
+                            default:
+                                break;
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.VelemenySzovege)
@@ -54,13 +136,13 @@
 
 }
 else
-{
+    {
     <p>A listája üres hamarosan átírányítjuk a főoldalra</p>
     <script type="text/javascript">
         setTimeout(myFunction, 3500)
-
+                        
         function myFunction() {
-            window.location.href = "/";
-        }
+                                window.location.href = "/";
+    }
     </script>
 }
