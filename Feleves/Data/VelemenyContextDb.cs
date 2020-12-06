@@ -39,14 +39,16 @@ namespace Data
                 entity
                 .HasOne(Velemeny => Velemeny.Kes_Termek)
                 .WithMany(Kes => Kes.Velemenyek)
-                .HasForeignKey(Velemeny => Velemeny.Gyartasi_Cikkszam);
+                .HasForeignKey(Velemeny => Velemeny.Gyartasi_Cikkszam)
+                .OnDelete(DeleteBehavior.Cascade);
             });
             modelbuilder.Entity<Kes>(entity =>
             {
                 entity
                 .HasOne(Kes => Kes.Kes_Bolt_Keszlet_Info)
                 .WithMany(Kes_Bolt_Keszlet_Info => Kes_Bolt_Keszlet_Info.Kesek)
-                .HasForeignKey(Kes => Kes.Raktar_Id);
+                .HasForeignKey(Kes => Kes.Raktar_Id)
+                .OnDelete(DeleteBehavior.Cascade); 
             });
         }
 

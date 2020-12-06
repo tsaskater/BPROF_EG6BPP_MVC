@@ -44,6 +44,12 @@ namespace Feleves.Controllers.Home
             return View(KnifeStoreLogic.GetAllKes_Bolt());
 
         }
+        //KesBolt Törlés
+        public IActionResult DeleteKesBolt(string id)
+        {
+            KnifeStoreLogic.DeleteKesBolt(id);
+            return RedirectToAction(nameof(Index));
+        }
         [HttpGet]
         public IActionResult AddKes(string id)
         {
@@ -100,26 +106,12 @@ namespace Feleves.Controllers.Home
             Kes k = KnifeLogic.GetKes(id);
             return View(nameof(ListKes), KnifeStoreLogic.GetKesek(k.Raktar_Id));
         }
-
+        
 
         //Adat Generátor    TODO:felhasználó barátabbá tétel MSGboxos kérdéssel, hogy véletlen ne töltsük fel kétszer ugyanazzal az adattal
         [HttpGet]
         public  IActionResult GenerateData()
         {
-            /*---------------------------------------------------*/
-            /*Kes_Bolt Kb = new Kes_Bolt{Raktar_Id = Guid.NewGuid().ToString(),
-                Bolt_Nev = "Blade Hq",
-                Cim = "564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
-                Weboldal = "https://www.bladehq.com/"};
-            KnifeStoreLogic.AddKesBolt(Kb);
-            Kes k = new Kes{Gyartasi_Cikkszam = Guid.NewGuid().ToString(),Gyarto = "Benchmade",
-                Modell_nev = "Griptilian",Markolat = "FRN",Bevont_Penge = false,Penge_Hossz = 88,
-                Acel = "CPM-S30V",Ar = 42290,Raktar_Id = Kb.Raktar_Id};
-            KnifeLogic.AddKes(k); //TODO: Vélemények szöveg megírása
-            Velemeny v = new Velemeny{Velemeny_Id = Guid.NewGuid().ToString(),Szerzo = "Nick Shabazz",
-                Elegedettseg = 5,VelemenySzovege = "lorem ipsum",Gyartasi_Cikkszam = k.Gyartasi_Cikkszam};
-            ReviewLogic.AddVelemeny(v);*/
-            /*---------------------------------------------------*/
             Generator(
                 /*Bolt Név:*/"Blade Hq",
                 /*Bolt Cím:*/"564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
@@ -128,8 +120,24 @@ namespace Feleves.Controllers.Home
                 /*Bevont penge*/false,/*Kés pengehossz*/88,/*Kés acél*/"CPM-S30V",/*Kés gyártó*/42290,
                 /*Vélemény szerző*/"Nick Shabazz",/*Vélemény értékelés*/ 5,
                 /*Vélemény szöveg*/ "lorem ipsum");
-
-            
+            /*--------------------------------------*/
+            Generator(
+                /*Bolt Név:*/"Blade Shop",
+                /*Bolt Cím:*/"Budapest, Vendel u. 15 - 17, 1096, Magyarország",
+                /*Bolt Weboldal:*/"https://www.bladeshop.hu/",
+                /*Kés gyártó*/"Spyderco", /*Kés modell*/"Delica",/*Kés Markolat anyaga*/ "FRN",
+                /*Bevont penge*/true,/*Kés pengehossz*/76,/*Kés acél*/"VG-10",/*Kés gyártó*/32000,
+                /*Vélemény szerző*/"Cutlerylover",/*Vélemény értékelés*/ 8,
+                /*Vélemény szöveg*/ "lorem ipsum");
+            /*--------------------------------------*/
+            Generator(
+                /*Bolt Név:*/"Extrametál Kés (üzlethálózat)",
+                /*Bolt Cím:*/"Extrametál,Magyaország",
+                /*Bolt Weboldal:*/"https://extrametal.hu/",
+                /*Kés gyártó*/"Bestech", /*Kés modell*/"Paladin",/*Kés Markolat anyaga*/ "G10",
+                /*Bevont penge*/false,/*Kés pengehossz*/92,/*Kés acél*/"D2",/*Kés gyártó*/19990,
+                /*Vélemény szerző*/"Slicey Dicey",/*Vélemény értékelés*/ 6,
+                /*Vélemény szöveg*/ "lorem ipsum");
             return RedirectToAction(nameof(Index));
         }
         private void Generator(string boltnev,string boltcim,string bolturl,
