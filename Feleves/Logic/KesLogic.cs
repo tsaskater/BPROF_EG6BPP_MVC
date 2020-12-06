@@ -44,6 +44,10 @@ namespace Logic
         {
             KesRepo.Update(o_kid, n_kes);
         }
+        public IQueryable<Velemeny> GetVelemenyek(string gyartasiCikkszam)
+        {
+            return KesRepo.Read(gyartasiCikkszam).Velemenyek.AsQueryable();
+        }
 
     }
 }

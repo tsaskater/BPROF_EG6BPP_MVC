@@ -1,0 +1,20 @@
+﻿@model string
+
+<h1>Vélemény hozzáadása</h1>
+
+<h4>Velemeny</h4>
+<hr />
+<form action="/Home/AddVelemeny" method="post">
+    Adja meg az Ön nevét:<br />
+    <input name="Szerzo" type="text" minlength="2" maxlength="30" /><br />
+    Válassza ki mennyire volt elégedett:<br />
+    <input type="number" name="Elegedettseg" min="1" max="10"><br />
+    <input type="hidden" name="Gyartasi_Cikkszam" value="@Model" /><br />
+    <textarea name="VelemenySzovege"></textarea><br />
+    <input type="submit" value="Vélemény hozzáadás" form="addvelemeny" class="btn btn-primary" />
+</form>
+        Fejtse ki a véleményét (Nem kötelező):
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

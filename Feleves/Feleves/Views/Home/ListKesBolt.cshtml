@@ -4,11 +4,13 @@
     ViewData["Title"] = "ListKesBolt";
 }
 
-<h1>ListKesBolt</h1>
+<h1>Kés Boltok Listázása</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a href="/Home/AddKesBolt">Új Kés bolt hozzáadása</a> <br />
+    <a href="/">Vissza a főoldalra</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,13 +33,18 @@
                 @Html.DisplayFor(modelItem => item.Bolt_Nev)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cim)
+                <!--Html.DisplayFor(modelItem => item.Cim) -->
+                @item.Cim 
+                <a href="https://www.google.hu/maps/search/'@item.Cim.Replace(' ','+')'" target="_blank">*földgömb icon*</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Weboldal)
+                <a href="@item.Weboldal">@item.Weboldal</a>
             </td>
             <td>
-                <a href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a>
+                <ul>
+                    <li><a href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a></li>
+                    <li><a href="/Home/ListKes?id=@item.Raktar_Id">Felvett termékek listázása</a></li>
+                </ul>
             </td>
         </tr>
 }
