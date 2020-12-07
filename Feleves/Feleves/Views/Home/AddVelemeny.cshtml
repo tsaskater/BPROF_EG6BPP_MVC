@@ -7,7 +7,7 @@
 
 <h4>Velemeny</h4>
 <hr />
-<form action="/Home/AddVelemeny" method="post">
+<form id="addvelemeny" action="/Home/AddVelemeny" method="post">
     Adja meg az Ön nevét:<br />
     <input name="Szerzo" type="text" minlength="2" maxlength="30" /><br />
     Válassza ki mennyire volt elégedett:<br />
@@ -25,7 +25,7 @@
     </fieldset>
     <input type="hidden" name="Gyartasi_Cikkszam" value="@Model" /><br />
     Fejtse ki a véleményét (Nem kötelező):<br />
-    <textarea name="VelemenySzovege"></textarea><br />
+    <textarea name="VelemenySzovege" maxlength="1024" placeholder="Ide írhatja az Ön véleményét" form="addvelemeny"></textarea><br />
     <input type="submit" value="Vélemény hozzáadás" form="addvelemeny" class="btn btn-primary" />
 </form>
 

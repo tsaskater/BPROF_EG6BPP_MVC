@@ -54,7 +54,7 @@ namespace Feleves.Controllers.Home
         }
        [HttpPost]
         public IActionResult EditKesBolt(Kes_Bolt kb)
-        {
+        { 
             KnifeStoreLogic.UpdateKes_Bolt(kb.Raktar_Id, kb);
             return RedirectToAction(nameof(ListKesBolt));
         }
@@ -64,6 +64,7 @@ namespace Feleves.Controllers.Home
             KnifeStoreLogic.DeleteKesBolt(id);
             return RedirectToAction(nameof(Index));
         }
+        //Kes Hozzadas
         [HttpGet]
         public IActionResult AddKes(string id)
         {
@@ -82,6 +83,20 @@ namespace Feleves.Controllers.Home
         {
             return View(KnifeStoreLogic.GetKesek(id));
 
+        }
+
+        //Kes szerkesztes
+        [HttpGet]
+        public IActionResult EditKes(string id)
+        {
+            Kes k = KnifeLogic.GetKes(id);
+            return View(k);
+        }
+        [HttpPost]
+        public IActionResult EditKes(Kes k)
+        {
+            KnifeLogic.UpdateKes(k.Gyartasi_Cikkszam, k);
+            return RedirectToAction(nameof(ListKes), new { id = k.Raktar_Id });
         }
         //Delete Kés    TODO:(Cascade deletere szükség lesz a foregin key miatt) megoldva:)
         [HttpGet]
@@ -113,8 +128,22 @@ namespace Feleves.Controllers.Home
             return View(KnifeLogic.GetVelemenyek(id));
 
         }
-        //Vissza lépés a véleményektől
+
+        //Vélemény szerkesztés
         [HttpGet]
+        public IActionResult EditVelemeny(string id)
+        {
+            Velemeny v = ReviewLogic.GetVelemeny(id);
+            return View(v);
+        }
+        [HttpPost]
+        public IActionResult EditVelemeny(Velemeny v)
+        {
+            ReviewLogic.UpdateVelemeny(v.Velemeny_Id, v);
+            return RedirectToAction(nameof(ListVelemeny), new { id = v.Gyartasi_Cikkszam } );
+        }
+            //Vissza lépés a véleményektől
+            [HttpGet]
         public IActionResult BackToKesek(string id)//id itt Gyartasi_Cikkszam
         {
             Kes k = KnifeLogic.GetKes(id);

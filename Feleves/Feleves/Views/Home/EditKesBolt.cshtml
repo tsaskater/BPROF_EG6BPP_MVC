@@ -9,11 +9,14 @@
 <h4>Kés Bolt</h4>
 <hr />
 <form action="/Home/EditKesBolt" method="post">
-        <input type="text" name="Bolt_Nev" class="form-control" value="@Model.Bolt_Nev" />
-        <input type="text" name="Cim" class="form-control" value="@Model.Cim" />
-        <input type="text" name="Weboldal" class="form-control" value="@Model.Weboldal"/>
-        <input type="hidden" name="Raktar_Id" value="@Model.Raktar_Id"/>
-        <input type="submit" value="Szerkesztés" class="btn btn-primary"/>
+    Bolt Név:<br />
+    <input type="text" name="Bolt_Nev" class="form-control" value="@Model.Bolt_Nev" /><br />
+    Cím:<br />
+    <input type="text" name="Cim" class="form-control" value="@Model.Cim" /><br />
+    Weboldal:<br />
+    <input type="text" name="Weboldal" class="form-control" value="@Model.Weboldal" /><br />
+    <input type="hidden" name="Raktar_Id" value="@Model.Raktar_Id" /><br />
+    <input type="submit" value="Szerkesztés" class="btn btn-primary" /><br />
 </form>
 
 <div>

@@ -1,0 +1,40 @@
+﻿@model Models.Kes
+
+@{
+    ViewData["Title"] = "EditKes";
+}
+
+<h1>EditKes</h1>
+
+<h4>Kes</h4>
+<hr />
+<form href="/Home/EditKes" method="post">
+    Gyartó: <br />
+    <input type="text" minlength="2" maxlength="50" name="Gyarto" value="@Model.Gyarto" /><br />
+    Modell Név: <br />
+    <input type="text" minlength="2" maxlength="50" name="Modell_nev" value="@Model.Modell_nev" /><br />
+    Markolat: <br />
+    <input type="text" minlength="2" maxlength="50" name="Markolat" value="@Model.Markolat" /><br />
+    Bevont Penge: <br />
+    @if (Model.Bevont_Penge)
+    {
+        <input type="checkbox" class="form-check-input" name="Bevont_Penge" checked /><br />
+    }
+    else
+    {
+        <input type="checkbox" class="form-check-input" name="Bevont_Penge" /><br />
+    }
+    Penge Hossz: <br />
+    <input type="number" min="0" max="500" name="Penge_Hossz" value="@Model.Penge_Hossz" /><br />
+    Acél: <br />
+    <input type="text" minlength="2" maxlength="15" name="Acel" value="@Model.Acel" /><br />
+    Ár: <br />
+    <input type="number" min="0" max="2000000" name="Ar" value="@Model.Ar" /><br />
+    <input type="hidden" name="Gyartasi_Cikkszam" value="@Model.Gyartasi_Cikkszam" />
+    <input type="hidden" value="@Model.Raktar_Id" name="Raktar_Id" /><br />
+    <input type="submit" value="Szerkesztés" /><br />
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

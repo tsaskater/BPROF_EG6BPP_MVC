@@ -2,25 +2,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <title>Kés hozzáadás</title>
 </head>
 <body>
     <h1>Adjon hozzá egy kést</h1>
     <form action="/Home/AddKes" method="post">
-        <p>Gyarto: </p>
-        <input type="text" minlength="2" maxlength="50" name="Gyarto" /> <br />
-        <p>Modell nev: </p>
-        <input type="text" minlength="2" maxlength="50" name="Modell_nev" /> <br />
+        <p>Gyárto: </p>
+        <input type="text" minlength="2" maxlength="50" name="Gyarto" placeholder="Gyárto neve"/> <br />
+        <p>Modell név: </p>
+        <input type="text" minlength="2" maxlength="50" name="Modell_nev" placeholder="Modell neve" /> <br />
         <p>Markolat: </p>
-        <input type="text" minlength="2" maxlength="50" name="Markolat" /> <br />
+        <input type="text" minlength="2" maxlength="50" name="Markolat" placeholder="Markolat anyaga"/> <br />
         <p>Bevont penge: </p>
-        <input type="checkbox" name="Bevont_Penge" value="true" /> <br />
+        <input type="checkbox" name="Bevont_Penge" value="true"  /> <br />
         <p>Penge hossz: </p>
-        <input type="number" min="0" max="500" name="Penge_Hossz" /> <br />
+        <input type="number" min="0" max="500" name="Penge_Hossz" placeholder="Miliméterben (0-500)" /> <br />
         <p>Acél: </p>
-        <input type="text" minlength="2" maxlength="15" name="Acel" /> <br />
+        <input type="text" minlength="2" maxlength="15" name="Acel" placeholder="Acél Neve"/> <br />
         <p>Ár: </p>
-        <input type="number" min="0" max="2000000" name="Ar" /> <br />
+        <input type="number" min="0" max="2000000" name="Ar" placeholder="Forintban áfával"/> <br />
         <input type="hidden" value="@Model" name="Raktar_Id" />
         <input type="submit" value="Hozzáadás" />
     </form>

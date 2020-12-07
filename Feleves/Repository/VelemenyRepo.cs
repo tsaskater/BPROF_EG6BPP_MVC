@@ -46,10 +46,10 @@ namespace Repository
         public void Update(string o_Vid, Velemeny N_review)
         {
             var Old_Velemeny = Read(o_Vid);
-
+            
             Old_Velemeny.Szerzo = N_review.Szerzo;
             Old_Velemeny.Elegedettseg = N_review.Elegedettseg;
-
+            Old_Velemeny.VelemenySzovege = N_review.VelemenySzovege;
             SaveAll();
         }
     }
