@@ -34,7 +34,7 @@ namespace Feleves.Controllers.Home
         [HttpPost]
         public IActionResult AddKesBolt(Kes_Bolt kesbolt)
         {
-            kesbolt.Raktar_Id= Guid.NewGuid().ToString();
+            kesbolt.Raktar_Id = Guid.NewGuid().ToString();
             KnifeStoreLogic.AddKesBolt(kesbolt);
             return RedirectToAction(nameof(ListKesBolt));
         }
@@ -52,9 +52,9 @@ namespace Feleves.Controllers.Home
             Kes_Bolt kb = KnifeStoreLogic.GetKes_Bolt(id);
             return View(kb);
         }
-       [HttpPost]
+        [HttpPost]
         public IActionResult EditKesBolt(Kes_Bolt kb)
-        { 
+        {
             KnifeStoreLogic.UpdateKes_Bolt(kb.Raktar_Id, kb);
             return RedirectToAction(nameof(ListKesBolt));
         }
@@ -68,12 +68,12 @@ namespace Feleves.Controllers.Home
         [HttpGet]
         public IActionResult AddKes(string id)
         {
-            return View(nameof(AddKes),id);
+            return View(nameof(AddKes), id);
         }
         [HttpPost]
         public IActionResult AddKes(Kes kes)
         {
-            kes.Gyartasi_Cikkszam= Guid.NewGuid().ToString();
+            kes.Gyartasi_Cikkszam = Guid.NewGuid().ToString();
             KnifeLogic.AddKes(kes);
             return View(nameof(ListKes), KnifeStoreLogic.GetKesek(kes.Raktar_Id));
         }
@@ -140,53 +140,56 @@ namespace Feleves.Controllers.Home
         public IActionResult EditVelemeny(Velemeny v)
         {
             ReviewLogic.UpdateVelemeny(v.Velemeny_Id, v);
-            return RedirectToAction(nameof(ListVelemeny), new { id = v.Gyartasi_Cikkszam } );
+            return RedirectToAction(nameof(ListVelemeny), new { id = v.Gyartasi_Cikkszam });
         }
-            //Vissza lépés a véleményektől
-            [HttpGet]
+        //Vissza lépés a véleményektől
+        [HttpGet]
         public IActionResult BackToKesek(string id)//id itt Gyartasi_Cikkszam
         {
             Kes k = KnifeLogic.GetKes(id);
             return View(nameof(ListKes), KnifeStoreLogic.GetKesek(k.Raktar_Id));
         }
-        
+
 
         //Adat Generátor    TODO:felhasználó barátabbá tétel MSGboxos kérdéssel, hogy véletlen ne töltsük fel kétszer ugyanazzal az adattal
         [HttpGet]
-        public  IActionResult GenerateData()
+        public IActionResult GenerateData()
         {
+            /*Generator(
+                *//*Bolt Név:*//*"Blade Hq",
+                *//*Bolt Cím:*//*"564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
+                *//*Bolt Weboldal:*//*"https://www.bladehq.com/",
+                *//*Kés gyártó*//*"Benchmade", *//*Kés modell*//*"Griptilian",*//*Kés Markolat anyaga*//* "FRN",
+                *//*Bevont penge*//*false,*//*Kés pengehossz*//*88,*//*Kés acél*//*"CPM-S30V",*//*Kés ár*//*42290,
+                *//*Vélemény szerző*//*"Nick Shabazz",*//*Vélemény értékelés*//* 5,
+                *//*Vélemény szöveg*//* "lorem ipsum");
+            *//*--------------------------------------*//*
             Generator(
-                /*Bolt Név:*/"Blade Hq",
-                /*Bolt Cím:*/"564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
-                /*Bolt Weboldal:*/"https://www.bladehq.com/",
-                /*Kés gyártó*/"Benchmade", /*Kés modell*/"Griptilian",/*Kés Markolat anyaga*/ "FRN",
-                /*Bevont penge*/false,/*Kés pengehossz*/88,/*Kés acél*/"CPM-S30V",/*Kés gyártó*/42290,
-                /*Vélemény szerző*/"Nick Shabazz",/*Vélemény értékelés*/ 5,
-                /*Vélemény szöveg*/ "lorem ipsum");
-            /*--------------------------------------*/
+                *//*Bolt Név:*//*"Blade Shop",
+                *//*Bolt Cím:*//*"Budapest, Vendel u. 15 - 17, 1096, Magyarország",
+                *//*Bolt Weboldal:*//*"https://www.bladeshop.hu/",
+                *//*Kés gyártó*//*"Spyderco", *//*Kés modell*//*"Delica",*//*Kés Markolat anyaga*//* "FRN",
+                *//*Bevont penge*//*true,*//*Kés pengehossz*//*76,*//*Kés acél*//*"VG-10",*//*Kés ár*//*32000,
+                *//*Vélemény szerző*//*"Cutlerylover",*//*Vélemény értékelés*//* 8,
+                *//*Vélemény szöveg*//* "lorem ipsum");
+            *//*--------------------------------------*//*
             Generator(
-                /*Bolt Név:*/"Blade Shop",
-                /*Bolt Cím:*/"Budapest, Vendel u. 15 - 17, 1096, Magyarország",
-                /*Bolt Weboldal:*/"https://www.bladeshop.hu/",
-                /*Kés gyártó*/"Spyderco", /*Kés modell*/"Delica",/*Kés Markolat anyaga*/ "FRN",
-                /*Bevont penge*/true,/*Kés pengehossz*/76,/*Kés acél*/"VG-10",/*Kés gyártó*/32000,
-                /*Vélemény szerző*/"Cutlerylover",/*Vélemény értékelés*/ 8,
-                /*Vélemény szöveg*/ "lorem ipsum");
-            /*--------------------------------------*/
-            Generator(
-                /*Bolt Név:*/"Extrametál Kés (üzlethálózat)",
-                /*Bolt Cím:*/"Extrametál,Magyaország",
-                /*Bolt Weboldal:*/"https://extrametal.hu/",
-                /*Kés gyártó*/"Bestech", /*Kés modell*/"Paladin",/*Kés Markolat anyaga*/ "G10",
-                /*Bevont penge*/false,/*Kés pengehossz*/92,/*Kés acél*/"D2",/*Kés gyártó*/19990,
-                /*Vélemény szerző*/"Slicey Dicey",/*Vélemény értékelés*/ 6,
-                /*Vélemény szöveg*/ "lorem ipsum");
+                *//*Bolt Név:*//*"Extrametál Kés (üzlethálózat)",
+                *//*Bolt Cím:*//*"Extrametál,Magyaország",
+                *//*Bolt Weboldal:*//*"https://extrametal.hu/",
+                *//*Kés gyártó*//*"Bestech", *//*Kés modell*//*"Paladin",*//*Kés Markolat anyaga*//* "G10",
+                *//*Bevont penge*//*false,*//*Kés pengehossz*//*92,*//*Kés acél*//*"D2",*//*Kés ár*//*19990,
+                *//*Vélemény szerző*//*"Slicey Dicey",*//*Vélemény értékelés*//* 6,
+                *//*Vélemény szöveg*//* "lorem ipsum");*/
+            KnifeStoreLogic.GenerateData();
+
+
             return RedirectToAction(nameof(Index));
         }
-        private void Generator(string boltnev,string boltcim,string bolturl,
-            string kesgyarto,string kesmodell,string kesmarkolat,bool bevont,
-            int kespengehossz,string kesacel,int ar,string velemenyszerzonev,
-            int velmenyertekeles,string velmenyszoveg)
+        private void Generator(string boltnev, string boltcim, string bolturl,
+            string kesgyarto, string kesmodell, string kesmarkolat, bool bevont,
+            int kespengehossz, string kesacel, int ar, string velemenyszerzonev,
+            int velmenyertekeles, string velmenyszoveg)
         {
             Kes_Bolt Kb = new Kes_Bolt
             {
