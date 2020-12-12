@@ -175,10 +175,10 @@ namespace Feleves.Controllers.Home
             return View(NonCrudLogic.Legalis());
             //return View(nameof(ListLegalis),q1);
         }
-        /*public IActionResult ListLegalis(IQueryable q1)
+        public IActionResult ListLegjobbanErtekelt()
         {
-            return View(q1);
-        }*/
+            return View(NonCrudLogic.LegjobbanErtekelt());
+        }
 
 
         //Statikusan előre megírt függvény az adatgeneráláshoz

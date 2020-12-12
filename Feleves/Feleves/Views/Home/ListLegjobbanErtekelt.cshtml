@@ -1,0 +1,62 @@
+﻿@model Models.Kes
+<h1>Jelenlegi legjobban értékelt termék:</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Gyarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modell_nev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Markolat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bevont_Penge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Penge_Hossz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Gyarto)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Modell_nev)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Markolat)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Bevont_Penge)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Penge_Hossz) mm
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Acel)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Ar) Ft
+                </td>
+                <td>
+                    <ul>
+                        <li><a href="/Home/DeleteKes?id=@Model.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
+                        <li><a href="/Home/EditKes?id=@Model.Gyartasi_Cikkszam">Kés adatainak szerkesztése</a><br /></li>
+                        <li><a href="/Home/AddVelemeny?id=@Model.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
+                        <li><a href="/Home/ListVelemeny?id=@Model.Gyartasi_Cikkszam">Vélemények megtekintése</a></li>
+                    </ul>
+                </td>
+            </tr>
+    </tbody>
+</table>

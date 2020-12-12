@@ -20,6 +20,7 @@ namespace Logic
             this.KesRepo = KesRepo;
             this.VelemenyRepo = VelemenyRepo;
         }
+        //Listázzuk ki a magyarországon hordható késeket és boltjaikat (penge hossz 80 miliméter alatt)
         public IQueryable<Legalis> Legalis()
         {
             /*List<Kes_Bolt> kesboltok = KesBoltRepo.Read().ToList();
@@ -31,5 +32,16 @@ namespace Logic
                  select new Legalis { Termek = y, Bolt = x });
             return q1.AsQueryable();
         }
+        //Válasszuk ki azt a kést amivel a legelégedettebbek voltak a vásárlók
+        public Kes LegjobbanErtekelt()
+        {
+            var q2 =
+                (from x in KesRepo.Read().ToList()
+                 join y in VelemenyRepo.Read().ToList() on x.Gyartasi_Cikkszam equals y.Gyartasi_Cikkszam
+                 orderby y.Elegedettseg descending
+                 select x).FirstOrDefault();
+            return q2;
+        }
+
     }
 }

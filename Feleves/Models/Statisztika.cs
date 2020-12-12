@@ -10,7 +10,6 @@ namespace Models
         {
             public Kes_Bolt Bolt { get; set;}
             public Kes Termek { get; set; }
-
         }
         //public Legalis LegalisanHordhatoKes { get; set; }
         /*-----*/
