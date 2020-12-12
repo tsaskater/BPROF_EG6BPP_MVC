@@ -14,12 +14,14 @@ namespace Feleves.Controllers.Home
         VelemenyLogic ReviewLogic;
         KesLogic KnifeLogic;
         KesBoltLogic KnifeStoreLogic;
+        NemCRUDLogic NonCrudLogic;
 
-        public HomeController(VelemenyLogic Velemenylogic, KesLogic Keslogic, KesBoltLogic KesBoltlogic)
+        public HomeController(VelemenyLogic Velemenylogic, KesLogic Keslogic, KesBoltLogic KesBoltlogic, NemCRUDLogic NonCrudLogic)
         {
             this.ReviewLogic = Velemenylogic;
             this.KnifeLogic = Keslogic;
             this.KnifeStoreLogic = KesBoltlogic;
+            this.NonCrudLogic = NonCrudLogic;
         }
 
         public IActionResult Index()
@@ -162,15 +164,15 @@ namespace Feleves.Controllers.Home
         [HttpGet]
         public IActionResult ListLegalis()
         {
-            List<Kes_Bolt> kesboltok = KnifeStoreLogic.GetAllKes_Bolt().ToList();
+            /*List<Kes_Bolt> kesboltok = KnifeStoreLogic.GetAllKes_Bolt().ToList();
             List<Kes> kesek = KnifeLogic.GetAllKes().ToList();
             var q1 =
                 (from x in kesboltok
                  join y in kesek on x.Raktar_Id equals y.Raktar_Id into g
                 from Kesek in g
                 where Kesek.Penge_Hossz <= 80
-                select new Legalis { Termek= Kesek, Bolt=x});
-            return View(q1);
+                select new Legalis { Termek= Kesek, Bolt=x});*/
+            return View(NonCrudLogic.Legalis());
             //return View(nameof(ListLegalis),q1);
         }
         /*public IActionResult ListLegalis(IQueryable q1)

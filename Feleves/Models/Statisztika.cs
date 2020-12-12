@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    public class Statisztika
+    public abstract class Statisztika 
     {
         public class Legalis
         {
@@ -12,7 +12,7 @@ namespace Models
             public Kes Termek { get; set; }
 
         }
-        public Legalis LegalisanHordhatoKes { get; set; }
+        //public Legalis LegalisanHordhatoKes { get; set; }
         /*-----*/
 
     }

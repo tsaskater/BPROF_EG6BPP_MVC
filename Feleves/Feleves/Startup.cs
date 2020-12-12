@@ -23,6 +23,7 @@ namespace Feleves
             services.AddTransient<VelemenyLogic, VelemenyLogic>();
             services.AddTransient<KesLogic, KesLogic>();
             services.AddTransient<KesBoltLogic, KesBoltLogic>();
+            services.AddTransient<NemCRUDLogic, NemCRUDLogic>();
             services.AddTransient<IRepository<Velemeny>, VelemenyRepo>();
             services.AddTransient<IRepository<Kes>, KesRepo>();
             services.AddTransient<IRepository<Kes_Bolt>, KesBoltRepo>();
