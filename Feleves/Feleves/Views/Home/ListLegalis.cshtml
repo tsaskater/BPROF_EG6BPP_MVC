@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Models.Statisztika.Legalis>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bolt.Bolt_Nev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Termek.Gyarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Termek.Modell_nev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Termek.Penge_Hossz)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @item.Bolt.Bolt_Nev
+            </td>
+            <td>
+                @item.Termek.Gyarto
+            </td>
+            <td>
+                @item.Termek.Modell_nev
+            </td>
+            <td>
+                @item.Termek.Penge_Hossz
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<h2><a href="i">Vissza a főoldalra</a></h2>

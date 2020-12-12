@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Logic;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using static Models.Statisztika;
 
 namespace Feleves.Controllers.Home
 {
@@ -62,7 +63,7 @@ namespace Feleves.Controllers.Home
         public IActionResult DeleteKesBolt(string id)
         {
             KnifeStoreLogic.DeleteKesBolt(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListKesBolt));
         }
         //Kes Hozzadas
         [HttpGet]
@@ -126,7 +127,6 @@ namespace Feleves.Controllers.Home
         public IActionResult ListVelemeny(string id)
         {
             return View(KnifeLogic.GetVelemenyek(id));
-
         }
 
         //Vélemény szerkesztés
@@ -155,37 +155,29 @@ namespace Feleves.Controllers.Home
         [HttpGet]
         public IActionResult GenerateData()
         {
-            /*Generator(
-                *//*Bolt Név:*//*"Blade Hq",
-                *//*Bolt Cím:*//*"564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
-                *//*Bolt Weboldal:*//*"https://www.bladehq.com/",
-                *//*Kés gyártó*//*"Benchmade", *//*Kés modell*//*"Griptilian",*//*Kés Markolat anyaga*//* "FRN",
-                *//*Bevont penge*//*false,*//*Kés pengehossz*//*88,*//*Kés acél*//*"CPM-S30V",*//*Kés ár*//*42290,
-                *//*Vélemény szerző*//*"Nick Shabazz",*//*Vélemény értékelés*//* 5,
-                *//*Vélemény szöveg*//* "lorem ipsum");
-            *//*--------------------------------------*//*
-            Generator(
-                *//*Bolt Név:*//*"Blade Shop",
-                *//*Bolt Cím:*//*"Budapest, Vendel u. 15 - 17, 1096, Magyarország",
-                *//*Bolt Weboldal:*//*"https://www.bladeshop.hu/",
-                *//*Kés gyártó*//*"Spyderco", *//*Kés modell*//*"Delica",*//*Kés Markolat anyaga*//* "FRN",
-                *//*Bevont penge*//*true,*//*Kés pengehossz*//*76,*//*Kés acél*//*"VG-10",*//*Kés ár*//*32000,
-                *//*Vélemény szerző*//*"Cutlerylover",*//*Vélemény értékelés*//* 8,
-                *//*Vélemény szöveg*//* "lorem ipsum");
-            *//*--------------------------------------*//*
-            Generator(
-                *//*Bolt Név:*//*"Extrametál Kés (üzlethálózat)",
-                *//*Bolt Cím:*//*"Extrametál,Magyaország",
-                *//*Bolt Weboldal:*//*"https://extrametal.hu/",
-                *//*Kés gyártó*//*"Bestech", *//*Kés modell*//*"Paladin",*//*Kés Markolat anyaga*//* "G10",
-                *//*Bevont penge*//*false,*//*Kés pengehossz*//*92,*//*Kés acél*//*"D2",*//*Kés ár*//*19990,
-                *//*Vélemény szerző*//*"Slicey Dicey",*//*Vélemény értékelés*//* 6,
-                *//*Vélemény szöveg*//* "lorem ipsum");*/
             GenerateSampleData();
-
-
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult ListLegalis()
+        {
+            List<Kes_Bolt> kesboltok = KnifeStoreLogic.GetAllKes_Bolt().ToList();
+            List<Kes> kesek = KnifeLogic.GetAllKes().ToList();
+            var q1 =
+                (from x in kesboltok
+                 join y in kesek on x.Raktar_Id equals y.Raktar_Id into g
+                from Kesek in g
+                where Kesek.Penge_Hossz <= 80
+                select new Legalis { Termek= Kesek, Bolt=x});
+            return View(q1);
+            //return View(nameof(ListLegalis),q1);
+        }
+        /*public IActionResult ListLegalis(IQueryable q1)
+        {
+            return View(q1);
+        }*/
+
 
         //Statikusan előre megírt függvény az adatgeneráláshoz
         public void GenerateSampleData()
@@ -470,42 +462,6 @@ namespace Feleves.Controllers.Home
                 ReviewLogic.AddVelemeny(item);
             }
 
-        }
-        private void Generator(string boltnev, string boltcim, string bolturl,
-            string kesgyarto, string kesmodell, string kesmarkolat, bool bevont,
-            int kespengehossz, string kesacel, int ar, string velemenyszerzonev,
-            int velmenyertekeles, string velmenyszoveg)
-        {
-            Kes_Bolt Kb = new Kes_Bolt
-            {
-                Raktar_Id = Guid.NewGuid().ToString(),
-                Bolt_Nev = boltnev,
-                Cim = boltcim,
-                Weboldal = bolturl
-            };
-            KnifeStoreLogic.AddKesBolt(Kb);
-            Kes k = new Kes
-            {
-                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
-                Gyarto = kesgyarto,
-                Modell_nev = kesmodell,
-                Markolat = kesmarkolat,
-                Bevont_Penge = bevont,
-                Penge_Hossz = kespengehossz,
-                Acel = kesacel,
-                Ar = ar,
-                Raktar_Id = Kb.Raktar_Id
-            };
-            KnifeLogic.AddKes(k); //TODO: Vélemények szöveg megírása
-            Velemeny v = new Velemeny
-            {
-                Velemeny_Id = Guid.NewGuid().ToString(),
-                Szerzo = velemenyszerzonev,
-                Elegedettseg = velmenyertekeles,
-                VelemenySzovege = velmenyszoveg,
-                Gyartasi_Cikkszam = k.Gyartasi_Cikkszam
-            };
-            ReviewLogic.AddVelemeny(v);
         }
 
     }
