@@ -18,11 +18,11 @@
     Bevont Penge: <br />
     @if (Model.Bevont_Penge)
     {
-        <input type="checkbox" class="form-check-input" name="Bevont_Penge" checked /><br />
+        <input type="checkbox" class="form-check-input" value="true" name="Bevont_Penge" checked /><br />
     }
     else
     {
-        <input type="checkbox" class="form-check-input" name="Bevont_Penge" /><br />
+        <input type="checkbox" class="form-check-input" value="true" name="Bevont_Penge" /><br />
     }
     Penge Hossz: <br />
     <input type="number" min="0" max="500" name="Penge_Hossz" value="@Model.Penge_Hossz" /><br />
