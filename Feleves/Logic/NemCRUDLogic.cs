@@ -43,5 +43,18 @@ namespace Logic
             return q2;
         }
 
+        //Listázzuk ki az összes olyan boltot ahol tartanak CPM-S30V acéltípusú kést
+        public IQueryable<Kes_Bolt> Boltokcpms30()
+        {
+            /*List<Kes_Bolt> kesboltok = KesBoltRepo.Read().ToList();
+            List<Kes> kesek = KesRepo.Read().ToList();*/
+            var q3 =
+                (from x in KesBoltRepo.Read().ToList()
+                 join y in KesRepo.Read().ToList() on x.Raktar_Id equals y.Raktar_Id
+                 where y.Acel== "CPM-S30V"
+                 select x);
+            return q3.AsQueryable();
+        }
+
     }
 }

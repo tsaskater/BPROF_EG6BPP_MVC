@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Models.Kes_Bolt>
+
+@{
+    ViewData["Title"] = "ListKesBolt";
+}
+
+<h1>Kés boltok melyek tartanak CPM-S30V acéllal kést</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bolt_Nev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weboldal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bolt_Nev)
+                </td>
+                <td>
+                    <!--Html.DisplayFor(modelItem => item.Cim) -->
+                    @item.Cim
+                    <a href="https://www.google.hu/maps/search/@item.Cim.Replace(' ','+')" target="_blank">*földgömb icon*</a>
+                </td>
+                <td>
+                    <a href="@item.Weboldal">@item.Weboldal</a>
+                </td>
+                <td>
+                    <ul>
+                        <li><a href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a></li>
+                        <li><a href="/Home/ListKes?id=@item.Raktar_Id">Felvett termékek listázása</a></li>
+                        <li><a href="/Home/EditkesBolt?id=@item.Raktar_Id">Bolt adatainak szerkesztése</a></li>
+                        <li><a href="/Home/DeleteKesBolt?id=@item.Raktar_Id">Bolt Törlése</a></li>
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

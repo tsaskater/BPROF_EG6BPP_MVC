@@ -179,6 +179,10 @@ namespace Feleves.Controllers.Home
         {
             return View(NonCrudLogic.LegjobbanErtekelt());
         }
+        public IActionResult ListBoltokcpms30()
+        {
+            return View(NonCrudLogic.Boltokcpms30());
+        }
 
 
         //Statikusan előre megírt függvény az adatgeneráláshoz
