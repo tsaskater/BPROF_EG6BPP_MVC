@@ -172,16 +172,15 @@ namespace Feleves.Controllers.Home
                 from Kesek in g
                 where Kesek.Penge_Hossz <= 80
                 select new Legalis { Termek= Kesek, Bolt=x});*/
-            return View(NonCrudLogic.Legalis());
-            //return View(nameof(ListLegalis),q1);
+            return View(NonCrudLogic.Legalis(KnifeStoreLogic.GetAllKes_Bolt().ToList(),KnifeLogic.GetAllKes().ToList()));
         }
         public IActionResult ListLegjobbanErtekelt()
         {
-            return View(NonCrudLogic.LegjobbanErtekelt());
+            return View(NonCrudLogic.LegjobbanErtekelt(KnifeLogic.GetAllKes().ToList(),ReviewLogic.GetAllVelemeny().ToList()));
         }
         public IActionResult ListBoltokcpms30()
         {
-            return View(NonCrudLogic.Boltokcpms30());
+            return View(NonCrudLogic.Boltokcpms30(KnifeStoreLogic.GetAllKes_Bolt().ToList(), KnifeLogic.GetAllKes().ToList()));
         }
 
 
