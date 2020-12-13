@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feleves", "Feleves\Feleves.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{4FE40D7D-7E29-453E-8C9E-08A8088AE47C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{F5339633-E0AA-4EB8-9619-BAD4A16EFA66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{F5339633-E0AA-4EB8-9619-BAD4A16EFA66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{A30247CB-950F-4D2B-B8D3-FCFA9A00BD5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{A30247CB-950F-4D2B-B8D3-FCFA9A00BD5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{2AD9BFBB-4131-4C8E-8333-4781748F2291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{2AD9BFBB-4131-4C8E-8333-4781748F2291}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teszteles", "Teszteles\Teszteles.csproj", "{2AC84881-F214-4ADC-97E7-078A418EE0FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2AD9BFBB-4131-4C8E-8333-4781748F2291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AD9BFBB-4131-4C8E-8333-4781748F2291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AD9BFBB-4131-4C8E-8333-4781748F2291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
