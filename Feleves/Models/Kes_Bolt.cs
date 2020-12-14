@@ -16,5 +16,26 @@ namespace Models
         [StringLength(100)]
         public string Weboldal { get; set; }
         public virtual ICollection<Kes> Kesek { get; set; }
+        public override bool Equals(object obj)
+        {
+            if (obj is Kes_Bolt)
+            {
+                Kes_Bolt kb = obj as Kes_Bolt;
+                return this.Raktar_Id == kb.Raktar_Id &&
+                    this.Bolt_Nev == kb.Bolt_Nev &&
+                    this.Cim == kb.Cim &&
+                    this.Weboldal == kb.Weboldal &&
+                    this.Kesek == kb.Kesek;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
+    
 }

@@ -186,18 +186,6 @@ namespace Teszteles
                 Ar = 183690,
                 Raktar_Id = KesBoltLista[1].Raktar_Id
             });
-            List<Legalis> LegalisLista = new List<Legalis>();
-            LegalisLista.Add(new Statisztika.Legalis()
-            {
-                Bolt = KesBoltLista[0],
-                Termek = KesLista[0]
-            });
-            LegalisLista.Add( new Statisztika.Legalis()
-            {
-                Bolt = KesBoltLista[1],
-                Termek = KesLista[2]
-
-            });
 
 
             List<Legalis> ElvartLegalisLista = new List<Legalis>();
@@ -211,6 +199,7 @@ namespace Teszteles
                 Bolt = KesBoltLista[1],
                 Termek = KesLista[2]
             });
+
             /*---------*/
             MockoltKesBoltRepo.Setup(x => x.Read()).Returns(KesBoltLista.AsQueryable());
             for (int i = 0; i < KesBoltLista.Count; i++)
@@ -219,8 +208,8 @@ namespace Teszteles
             }
             NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesBoltRepo.Object, MockoltKesRepo.Object);
             var kimenet = nemCRUDLogic.Legalis(KesBoltLista,KesLista);
+            Assert.That(kimenet, Is.EquivalentTo(ElvartLegalisLista));
             Assert.That(kimenet.Count, Is.EqualTo(ElvartLegalisLista.Count));
-
         }
 
     }

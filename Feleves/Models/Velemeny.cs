@@ -19,5 +19,26 @@ namespace Models
         [NotMapped]
         public virtual Kes Kes_Termek { get; set; }
         public string Gyartasi_Cikkszam { get; set; }
+        public override bool Equals(object obj)
+        {
+            if (obj is Velemeny)
+            {
+                Velemeny v = obj as Velemeny;
+                return this.Velemeny_Id == v.Velemeny_Id &&
+                    this.Szerzo == v.Szerzo &&
+                    this.Elegedettseg == v.Elegedettseg &&
+                    this.VelemenySzovege == v.VelemenySzovege &&
+                    this.Kes_Termek == v.Kes_Termek &&
+                    this.Gyartasi_Cikkszam == v.Gyartasi_Cikkszam;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
 }
