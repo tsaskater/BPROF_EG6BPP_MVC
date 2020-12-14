@@ -13,6 +13,12 @@ namespace Logic
         IRepository<Kes_Bolt> KesBoltRepo;
         IRepository<Kes> KesRepo;
         IRepository<Velemeny> VelemenyRepo;
+        public NemCRUDLogic(IRepository<Kes_Bolt> KesBoltRepo, IRepository<Kes> KesRepo, IRepository<Velemeny> VelemenyRepo)
+        {
+            this.KesBoltRepo = KesBoltRepo;
+            this.KesRepo = KesRepo;
+             this.VelemenyRepo = VelemenyRepo;
+        }
         public NemCRUDLogic(IRepository<Kes_Bolt> KesBoltRepo, IRepository<Kes> KesRepo)
         {
             this.KesBoltRepo = KesBoltRepo;
