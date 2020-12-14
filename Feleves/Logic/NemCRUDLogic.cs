@@ -10,6 +10,15 @@ namespace Logic
 {
     public class NemCRUDLogic
     {
+        IRepository<Kes_Bolt> KesBoltRepo;
+        IRepository<Kes> KesRepo;
+        public NemCRUDLogic(IRepository<Kes_Bolt> KesBoltRepo, IRepository<Kes> KesRepo)
+        {
+            this.KesBoltRepo = KesBoltRepo;
+            this.KesRepo = KesRepo;
+        }
+
+
         //Listázzuk ki a magyarországon hordható késeket és boltjaikat (penge hossz 80 miliméter alatt)
         public IQueryable<Legalis> Legalis(List<Kes_Bolt> kesboltlista,List<Kes> keslista)
         {
