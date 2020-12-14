@@ -209,7 +209,7 @@ namespace Feleves.Controllers.Home
                 Bolt_Nev = "Blade Shop",
                 Cim = "Budapest, Vendel u. 15 - 17, 1096, Magyarország",
                 Weboldal = "https://www.bladeshop.hu/"
-            });//
+            });
             KesBoltLista.Add(new Kes_Bolt()
             {
                 Raktar_Id = Guid.NewGuid().ToString(),

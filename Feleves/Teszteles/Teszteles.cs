@@ -214,7 +214,6 @@ namespace Teszteles
             Mock<IRepository<Kes>> MockoltKesRepo = new Mock<IRepository<Kes>>(MockBehavior.Loose);
             Mock<IRepository<Velemeny>> MockoltVelemenyRepo = new Mock<IRepository<Velemeny>>(MockBehavior.Loose);
             List<Kes> KesLista = new List<Kes>();
-            /*ELSO BOLTBA-----------*/
             KesLista.Add(new Kes()
             {
                 Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
@@ -293,7 +292,121 @@ namespace Teszteles
             var kimenet = nemCRUDLogic.LegjobbanErtekelt(KesLista, VelemenyLista);
             Assert.That(kimenet, Is.EqualTo(ElvartKes));
         }
-        
+        [Test]
+        public void Boltokcpms30()
+        {
+            Mock<IRepository<Kes_Bolt>> MockoltKesBoltRepo = new Mock<IRepository<Kes_Bolt>>(MockBehavior.Loose);
+            Mock<IRepository<Kes>> MockoltKesRepo = new Mock<IRepository<Kes>>(MockBehavior.Loose);
+            List<Kes_Bolt> KesBoltLista = new List<Kes_Bolt>();
+            KesBoltLista.Add(new Kes_Bolt()
+            {
+                Raktar_Id = Guid.NewGuid().ToString(),
+                Bolt_Nev = "Blade Hq",
+                Cim = "564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
+                Weboldal = "https://www.bladehq.com/"
+            });
+            KesBoltLista.Add(new Kes_Bolt()
+            {
+                Raktar_Id = Guid.NewGuid().ToString(),
+                Bolt_Nev = "Extrametál Kés (üzlethálózat)",
+                Cim = "Extrametál,Magyaország",
+                Weboldal = "https://extrametal.hu/"
+            });
+            KesBoltLista.Add(new Kes_Bolt()
+            {
+                Raktar_Id = Guid.NewGuid().ToString(),
+                Bolt_Nev = "Blade Shop",
+                Cim = "Budapest, Vendel u. 15 - 17, 1096, Magyarország",
+                Weboldal = "https://www.bladeshop.hu/"
+            });
+            List<Kes> KesLista = new List<Kes>();
+            /*Elso Boltba---*/
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Spyderco",
+                Modell_nev = "Chaparral",
+                Markolat = "FRN",
+                Bevont_Penge = false,
+                Penge_Hossz = 71,
+                Acel = "CTS-XHP",
+                Ar = 40790,
+                Raktar_Id=KesBoltLista[0].Raktar_Id
+            });
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Spyderco",
+                Modell_nev = "Delica",
+                Markolat = "FRN",
+                Bevont_Penge = false,
+                Penge_Hossz = 73,
+                Acel = "VG-10",
+                Ar = 35490,
+                Raktar_Id = KesBoltLista[0].Raktar_Id
+            });
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Benchmade",
+                Modell_nev = "Mini Griptilian 556",
+                Markolat = "Noryl GTX",
+                Bevont_Penge = true,
+                Penge_Hossz = 74,
+                Acel = "CPM-154",
+                Ar = 38990,
+                Raktar_Id = KesBoltLista[0].Raktar_Id
+            });
+            /*Masodik Boltba---*/
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Benchmade",
+                Modell_nev = "Anthem 781",
+                Markolat = "Titanium",
+                Bevont_Penge = false,
+                Penge_Hossz = 89,
+                Acel = "CPM-S30V",
+                Ar = 183690,
+                Raktar_Id = KesBoltLista[1].Raktar_Id
+            });
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Benchmade",
+                Modell_nev = "Bugout 535-2001 Limited Edition",
+                Markolat = "Grivory",
+                Bevont_Penge = false,
+                Penge_Hossz = 82,
+                Acel = "CPM-S30V",
+                Ar = 54190,
+                Raktar_Id = KesBoltLista[1].Raktar_Id
+            });
+            /*Harmadik Boltba---*/
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Spyderco",
+                Modell_nev = "Para Military 2",
+                Markolat = "G10",
+                Bevont_Penge = false,
+                Penge_Hossz = 87,
+                Acel = "CPM-S30V",
+                Ar = 63790,
+                Raktar_Id = KesBoltLista[2].Raktar_Id
+            });
+
+            List<Kes_Bolt> ElvartKesBoltLista = new List<Kes_Bolt>()
+            {
+                KesBoltLista[1],
+                KesBoltLista[2]
+            };
+            MockoltKesBoltRepo.Setup(x => x.Read()).Returns(KesBoltLista.AsQueryable());
+            MockoltKesRepo.Setup(x => x.Read()).Returns(KesLista.AsQueryable());
+            NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesBoltRepo.Object, MockoltKesRepo.Object);
+            var kimenet = nemCRUDLogic.Boltokcpms30(KesBoltLista, KesLista);
+            Assert.That(kimenet, Is.EquivalentTo(ElvartKesBoltLista));
+        }
 
     }
 }
