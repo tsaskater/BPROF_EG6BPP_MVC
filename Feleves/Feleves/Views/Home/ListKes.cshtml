@@ -3,88 +3,120 @@
 @{
     ViewData["Title"] = "ListKes";
 }
-
-<h1>ListKes</h1>
-@if (Model.Count() != 0)
-{
-    <a href="/Home/AddKes?id=@Model.First().Raktar_Id">Kés hozzáadása ehhez a bolthoz</a> //ezt valószínüleg meg lehet oldani szebben
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Gyarto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Modell_nev)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Markolat)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Bevont_Penge)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Penge_Hossz)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Acel)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ar)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/List.css" rel="stylesheet" />
+    <title>Kések listázása</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li class="active"><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
+    @if (Model.Count() != 0)
+    {
+<p><a class="topright" href="/Home/AddKes?id=@Model.First().Raktar_Id">Kés hozzáadása ehhez a bolthoz</a></p> 
+        <table class="table table-bordered table-dark center">
+            <thead class="trheading">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gyarto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Modell_nev)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Markolat)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Bevont_Penge)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Penge_Hossz) mm
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Acel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ar) Ft
-                    </td>
-                    <td>
-                        <ul>
-                            <li><a href="/Home/DeleteKes?id=@item.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
-                            <li><a href="/Home/EditKes?id=@item.Gyartasi_Cikkszam">Kés adatainak szerkesztése</a><br /></li>
-                            <li><a href="/Home/AddVelemeny?id=@item.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
-                            <li><a href="/Home/ListVelemeny?id=@item.Gyartasi_Cikkszam">Vélemények megtekintése</a></li>
-                        </ul>
-                    </td>
+                    <th>
+                        Gyártó
+                    </th>
+                    <th>
+                        Modell név
+                    </th>
+                    <th>
+                        Markolat
+                    </th>
+                    <th>
+                        Bevont Penge 
+                    </th>
+                    <th>
+                        Penge hossz
+                    </th>
+                    <th>
+                        Acél típus
+                    </th>
+                    <th>
+                        Ár
+                    </th>
+                    <th>
+                        Műveletek
+                    </th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="trbody">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gyarto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Modell_nev)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Markolat)
+                        </td>
+                        <td>
+                            @if (item.Bevont_Penge)
+                            {
+                                <span>A penge bevont</span>
+                            }
+                            else
+                            {
+                                <span>A pengén nincs bevonat</span>
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Penge_Hossz) mm
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Acel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ar) Ft
+                        </td>
+                        <td>
+                            <ul>
+                                <li><a class="torles" href="/Home/DeleteKes?id=@item.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
+                                <li><a class="hozzad" href="/Home/EditKes?id=@item.Gyartasi_Cikkszam">Kés adatainak szerkesztése</a><br /></li>
+                                <li><a  class="hozzad" href="/Home/AddVelemeny?id=@item.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
+                                <li><a href="/Home/ListVelemeny?id=@item.Gyartasi_Cikkszam">Vélemények megtekintése</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p class="hibauzenet center">A listája üres hamarosan átírányítjuk a főoldalra</p>
+        <script type="text/javascript">
+            setTimeout(myFunction, 3500)
+
+            function myFunction() {
+                window.location.href = "/";
             }
-        </tbody>
-    </table>
-
-}
-else
-{
-    <p>A listája üres hamarosan átírányítjuk a főoldalra</p>
-    <script type="text/javascript">
-        setTimeout(myFunction, 3500)
-
-        function myFunction() {
-            window.location.href = "/";
-        }
-    </script>
-}
-<h2><a href="/Home/ListKesBolt">Vissza a boltokhoz</a></h2>
+        </script>
+    }
+    <p><a class="bottomright"href="/Home/ListKesBolt">Vissza a boltokhoz</a></p>
 
 
+</body>
+</html>

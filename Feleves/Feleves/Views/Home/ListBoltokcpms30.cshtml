@@ -3,47 +3,74 @@
 @{
     ViewData["Title"] = "ListKesBolt";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/Csillagokdisabled.css" rel="stylesheet" />
+    <link href="~/Css/List.css" rel="stylesheet" />
+    <title>Boltok CPM-S30V késekkel</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
+    <p></p><br />
+           <table class="table table-bordered table-dark center">
 
-<h1>Kés boltok melyek tartanak CPM-S30V acéllal kést</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Bolt_Nev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weboldal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bolt_Nev)
-                </td>
-                <td>
-                    <!--Html.DisplayFor(modelItem => item.Cim) -->
-                    @item.Cim
-                    <a href="https://www.google.hu/maps/search/@item.Cim.Replace(' ','+')" target="_blank">*földgömb icon*</a>
-                </td>
-                <td>
-                    <a href="@item.Weboldal">@item.Weboldal</a>
-                </td>
-                <td>
-                    <ul>
-                        <li><a href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a></li>
-                        <li><a href="/Home/ListKes?id=@item.Raktar_Id">Felvett termékek listázása</a></li>
-                        <li><a href="/Home/EditkesBolt?id=@item.Raktar_Id">Bolt adatainak szerkesztése</a></li>
-                        <li><a href="/Home/DeleteKesBolt?id=@item.Raktar_Id">Bolt Törlése</a></li>
-                    </ul>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+               <thead>
+                   <tr class="trheading">
+                       <th scope="col">
+                           Bolt név
+                       </th>
+                       <th scope="col">
+                           Cím
+                       </th>
+                       <th>
+                           Weboldal
+                       </th>
+                       <th>
+                           Műveletek
+                       </th>
+                   </tr>
+               </thead>
+               <tbody>
+                   @foreach (var item in Model)
+                   {
+                       <tr class="trbody">
+                           <td>
+                               @Html.DisplayFor(modelItem => item.Bolt_Nev)
+                           </td>
+                           <td>
+                               <!--Html.DisplayFor(modelItem => item.Cim) -->
+                               @item.Cim
+                               <a href="https://www.google.hu/maps/search/@item.Cim.Replace(' ','+')" target="_blank"><img class="foldgomb" src="https://lh3.googleusercontent.com/proxy/P_OR0Jy4bPSNYmZV3iwZSHd89xj9-YROipgubWs5ot48D0NELoOaHpWwE2y74-yew0FmmhRey_mAzlksYEbammjyn8-or7lSwgSzhZAQ0K6s7i-kmwUSgDzNoFKWUzfS6jneY9gYLrtzui0IZ9I"></a>
+                           </td>
+                           <td>
+                               <a href="@item.Weboldal">@item.Weboldal</a>
+                           </td>
+                           <td>
+                               <ul>
+                                   <li><a class="hozzaad" href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a></li>
+                                   <li><a href="/Home/ListKes?id=@item.Raktar_Id">Termékek listázása</a></li>
+                                   <li><a href="/Home/EditkesBolt?id=@item.Raktar_Id">Bolt szerkesztése</a></li>
+                                   <li><a class="torles" href="/Home/DeleteKesBolt?id=@item.Raktar_Id">Bolt Törlése</a></li>
+                               </ul>
+                           </td>
+                       </tr>
+                   }
+               </tbody>
+           </table>
+</body>
+</html>

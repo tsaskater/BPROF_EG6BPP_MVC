@@ -1,21 +1,90 @@
-﻿ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-li {
-    float: left;
-}        
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+﻿body {
+    background-color: #3f3f40;
+    font-family: 'Raleway',sans-serif;
+    background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4faaa3b-ec50-4d66-9ee5-8bce29d513bb/d9b27x5-41e069a8-ace3-435e-8171-54357e3acd34.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvZjRmYWFhM2ItZWM1MC00ZDY2LTllZTUtOGJjZTI5ZDUxM2JiXC9kOWIyN3g1LTQxZTA2OWE4LWFjZTMtNDM1ZS04MTcxLTU0MzU3ZTNhY2QzNC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.nwDZxW0DrzdhcbqDue-QtL3Mml3FFJTIWzv_pAv2NHQ");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-position: center;
 }
 
-li a:hover {
-    background-color: #111;
+.navbar-nav, .navbar-inverse {
+    background-color: rgba(102, 102, 105, 0.55);
+}
+
+.active {
+    background-color: #404040;
+}
+
+.navbar-inverse .navbar-nav > li > a, td {
+    color: #abebff;
+    font-size: 20px;
+    font-family: Verdana, sans-serif;
+    transition: 0.3s;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        font-size: 20px;
+        font-family: Verdana, sans-serif;
+        background-color: rgba(50, 50, 255, 0.55);
+        cursor: pointer;
+    }
+
+    .navbar-inverse .navbar-nav > li > a:active {
+        font-size: 20px;
+        font-family: Verdana, sans-serif;
+        background-color: rgba(0, 0, 66, 0.7);
+    }
+
+.top {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 18px;
+}
+
+.center {
+    height: 5px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+img {
+    border: solid 5px #265f70;
+    border-radius: 50px 50px;
+    border-collapse: separate;
+    border-spacing: 30px;
+    padding: 30px;
+    background-color: rgba(52, 108, 146, 0.55);
+    transition: 0.3s;
+}
+
+    img:hover {
+        border: solid 5px #265f70;
+        border-radius: 10px 10px;
+        border-collapse: separate;
+        border-spacing: 30px;
+        padding: 30px;
+        background-color: rgba(50, 50, 255, 0.55);
+        cursor: pointer;
+    }
+
+    img:active {
+        border: solid 5px #265f70;
+        border-radius: 10px 10px;
+        border-collapse: separate;
+        border-spacing: 30px;
+        padding: 30px;
+        background-color: rgba(0, 0, 66, 0.7);
+    }
+
+td {
+    padding: 5px;
+}
+
+p {
+    text-shadow: -2px -2px 0.75rem #000, 2px -2px 0.75rem #000, -2px 2px 0.75rem #000, 2px 2px 0.75rem #000;
 }

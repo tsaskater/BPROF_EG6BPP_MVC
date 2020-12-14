@@ -1,0 +1,126 @@
+﻿body {
+    background-color: #3f3f40;
+    font-family: 'Raleway',sans-serif;
+    background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4faaa3b-ec50-4d66-9ee5-8bce29d513bb/d9b27x5-41e069a8-ace3-435e-8171-54357e3acd34.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvZjRmYWFhM2ItZWM1MC00ZDY2LTllZTUtOGJjZTI5ZDUxM2JiXC9kOWIyN3g1LTQxZTA2OWE4LWFjZTMtNDM1ZS04MTcxLTU0MzU3ZTNhY2QzNC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.nwDZxW0DrzdhcbqDue-QtL3Mml3FFJTIWzv_pAv2NHQ");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.navbar-nav, .navbar-inverse {
+    background-color: rgba(102, 102, 105, 0.55);
+}
+
+.active {
+    background-color: #404040;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #abebff;
+    font-size: 20px;
+    font-family: Verdana, sans-serif;
+    transition: 0.3s;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        font-size: 20px;
+        font-family: Verdana, sans-serif;
+        background-color: rgba(50, 50, 255, 0.55);
+    }
+
+    .navbar-inverse .navbar-nav > li > a:active {
+        font-size: 20px;
+        font-family: Verdana, sans-serif;
+        background-color: rgba(0, 0, 66, 0.7);
+    }
+
+.top {
+    position: fixed;
+    top: 8px;
+    left: 16px;
+    font-size: 18px;
+}
+
+.center {
+    text-align: center;
+}
+
+.bottomright {
+    position: fixed;
+    bottom: 8px;
+    right: 16px;
+    font-size: 50px;
+}
+
+.topright {
+    position: fixed;
+    top: 8px;
+    right: 16px;
+    font-size: 50px;
+}
+
+p {
+    margin-top: 10%;
+    text-shadow: -2px -2px 0.75rem #000, 2px -2px 0.75rem #000, -2px 2px 0.75rem #000, 2px 2px 0.75rem #000;
+}
+
+.table {
+    font-size: 18px;
+}
+
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+    border: 10px solid #abebff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.trheading {
+    border: 10px solid #abebff;
+    background-Color: rgba(0, 0, 66, 0.7);
+    color: white;
+}
+
+.trbody {
+    background-Color: rgba(50, 50, 255, 0.55);
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+    a:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+.torles:hover {
+    color: red;
+}
+
+.hozzaad:hover {
+    color: green;
+}
+
+.foldgomb {
+    width: 5%;
+    height: auto;
+}
+.kiemelt {
+    background-color: rgba(0, 224, 18, 0.72);
+}
+    .kiemelt:hover {
+        background-color: rgba(61, 255, 77, 0.86);
+    }
+.hibauzenet {
+    font-size: 35px;
+    color: white;
+}

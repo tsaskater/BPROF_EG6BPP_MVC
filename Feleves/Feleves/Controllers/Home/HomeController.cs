@@ -144,6 +144,13 @@ namespace Feleves.Controllers.Home
             ReviewLogic.UpdateVelemeny(v.Velemeny_Id, v);
             return RedirectToAction(nameof(ListVelemeny), new { id = v.Gyartasi_Cikkszam });
         }
+        [HttpGet]
+        public IActionResult DeleteVelemeny(string id)
+        {
+            Velemeny v = ReviewLogic.GetVelemeny(id);
+            ReviewLogic.DeleteVelemeny(id);
+            return View(nameof(ListVelemeny), KnifeLogic.GetVelemenyek(v.Gyartasi_Cikkszam));
+        }
         //Vissza lépés a véleményektől
         [HttpGet]
         public IActionResult BackToKesek(string id)//id itt Gyartasi_Cikkszam

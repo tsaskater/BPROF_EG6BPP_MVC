@@ -3,18 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <link href="~/Css/Index.css" rel="stylesheet" />
-    <title>Main Page</title>
+    <title>Peti Nagyker</title>
 </head>
-<body>
-    <br />
-    <ul>
-        <li><a href="/Home/GenerateData"><h1>Adatok Generálása</h1></a></li>
-        <li><a href="/Home/AddKesBolt"><h2>Hozzáadás Kés bolt</h2></a></li>
-        <li><a href="/Home/ListKesBolt"><h2>Kés boltok listázása</h2></a></li>
-        <li><a href="/Home/ListLegalis"><h2>Legálisan hordható kések</h2></a></li>
-        <li><a href="/Home/ListLegjobbanErtekelt"><h2>Az Önök kedvence</h2></a></li>
-        <li><a href="/Home/ListBoltokcpms30"><h2>Boltok CPM-S30V acéllal</h2></a></li>
-    </ul>
+ <body>
+<nav class="navbar navbar-inverse top">
+    <div class="container-fluid">
+        <!--<div class="navbar-header">
+          <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>-->
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Főoldal</a></li>
+            <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+            <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+            <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+
+
+        </ul>
+    </div>
+</nav>
+
+<table class="center">
+    <tr>
+        <td>
+            <div>
+                <img src="http://farm6.static.flickr.com/5224/5658667829_2bb7d42a9c_m.jpg" onclick="location.href='/Home/ListLegalis'">
+            </div>
+        </td>
+        <td>
+            <div>
+                <img src="http://farm6.static.flickr.com/5230/5638093881_a791e4f819_m.jpg"  onclick="location.href='/Home/ListLegjobbanErtekelt'">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><p><a href="/Home/ListLegalis">Legálisan hordható kések</a></p></td>
+        <td><p><a href="/Home/ListLegjobbanErtekelt">Az Önök kedvence</a></p></td>
+    <tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                <img src="http://farm6.static.flickr.com/5230/5638093881_a791e4f819_m.jpg" onclick="location.href='/Home/ListBoltokcpms30'">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div>
+                <p><a href="/Home/ListBoltokcpms30">Boltok CPM-S30V acéllal</a></p>
+            </div>
+        </td>
+    </tr>
+ </table>
 </body>
 </html>

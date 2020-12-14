@@ -1,62 +1,98 @@
 ﻿@model Models.Kes
-<h1>Jelenlegi legjobban értékelt termék:</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Gyarto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modell_nev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Markolat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bevont_Penge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Penge_Hossz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Acel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ar)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.Gyarto)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Modell_nev)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Markolat)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Bevont_Penge)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Penge_Hossz) mm
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Acel)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Ar) Ft
-                </td>
-                <td>
-                    <ul>
-                        <li><a href="/Home/DeleteKes?id=@Model.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
-                        <li><a href="/Home/EditKes?id=@Model.Gyartasi_Cikkszam">Kés adatainak szerkesztése</a><br /></li>
-                        <li><a href="/Home/AddVelemeny?id=@Model.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
-                        <li><a href="/Home/ListVelemeny?id=@Model.Gyartasi_Cikkszam">Vélemények megtekintése</a></li>
-                    </ul>
-                </td>
-            </tr>
-    </tbody>
-</table>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link href="~/Css/List.css" rel="stylesheet" />
+        <title>Legjobban értékelt kés</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Peti Nagyker</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                    <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                    <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p class="bottomright hozzaad">Ez a jelenlegi legjobban értékelt termék!</p>
+        <p></p><br />
+        <table class="table table-bordered table-dark center">
+            <thead>
+                <tr class="trheading">
+                    <th>
+                        Gyártó
+                    </th>
+                    <th>
+                        Modell név
+                    </th>
+                    <th>
+                        Markolat
+                    </th>
+                    <th>
+                        Bevont Penge
+                    </th>
+                    <th>
+                        Penge hossz
+                    </th>
+                    <th>
+                        Acél típus
+                    </th>
+                    <th>
+                        Ár
+                    </th>
+                    <th>
+                        Műveletek
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="trbody">
+                    <td>
+                        @Html.DisplayFor(model => model.Gyarto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Modell_nev)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Markolat)
+                    </td>
+                    <td>
+                        @if (Model.Bevont_Penge)
+                        {
+                            <span>A penge bevont</span>
+                        }
+                        else
+                        {
+                            <span>A pengén nincs bevonat</span>
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Penge_Hossz) mm
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Acel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Ar) Ft
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a class="torles" href="/Home/DeleteKes?id=@Model.Gyartasi_Cikkszam">Kés Törlés</a><br /></li>
+                            <li><a class="hozzaad" href="/Home/EditKes?id=@Model.Gyartasi_Cikkszam">Kés adatainak szerkesztése</a><br /></li>
+                            <li><a class="hozzaad" href="/Home/AddVelemeny?id=@Model.Gyartasi_Cikkszam">Vélemény hozzádása</a></li>
+                            <li><a href="/Home/ListVelemeny?id=@Model.Gyartasi_Cikkszam">Vélemények megtekintése</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

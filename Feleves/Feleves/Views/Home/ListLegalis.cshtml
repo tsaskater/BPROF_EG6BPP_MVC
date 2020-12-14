@@ -1,40 +1,65 @@
 ﻿@model IEnumerable<Models.Statisztika.Legalis>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Bolt.Bolt_Nev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Termek.Gyarto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Termek.Modell_nev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Termek.Penge_Hossz)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                <a href="@item.Bolt.Weboldal">@item.Bolt.Bolt_Nev</a>
-            </td>
-            <td>
-                @item.Termek.Gyarto
-            </td>
-            <td>
-                @item.Termek.Modell_nev
-            </td>
-            <td>
-                @item.Termek.Penge_Hossz
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-<h2><a href="/">Vissza a főoldalra</a></h2>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link href="~/Css/List.css" rel="stylesheet" />
+        <title>Legális kések listázása</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Peti Nagyker</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                    <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                    <li class="active"><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>
+             <br />
+        </p>
+        <table class="table table-bordered table-dark center">
+            <thead>
+                <tr class="trheading">
+                    <th>
+                        Botl név
+                    </th>
+                    <th>
+                        Gyártó
+                    </th>
+                    <th>
+                        Modell név
+                    </th>
+                    <th>
+                        Penge hossz
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="trbody">
+                        <td>
+                            <a href="@item.Bolt.Weboldal">@item.Bolt.Bolt_Nev</a>
+                        </td>
+                        <td>
+                            @item.Termek.Gyarto
+                        </td>
+                        <td>
+                            @item.Termek.Modell_nev
+                        </td>
+                        <td class="kiemelt">
+                            @item.Termek.Penge_Hossz
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+</html>
