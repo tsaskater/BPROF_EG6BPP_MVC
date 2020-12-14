@@ -202,15 +202,98 @@ namespace Teszteles
 
             /*---------*/
             MockoltKesBoltRepo.Setup(x => x.Read()).Returns(KesBoltLista.AsQueryable());
-            for (int i = 0; i < KesBoltLista.Count; i++)
-            {
-                MockoltKesRepo.Setup(x => x.Read()).Returns(KesLista.AsQueryable());
-            }
+            MockoltKesRepo.Setup(x => x.Read()).Returns(KesLista.AsQueryable());
             NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesBoltRepo.Object, MockoltKesRepo.Object);
             var kimenet = nemCRUDLogic.Legalis(KesBoltLista,KesLista);
             Assert.That(kimenet, Is.EquivalentTo(ElvartLegalisLista));
             Assert.That(kimenet.Count, Is.EqualTo(ElvartLegalisLista.Count));
         }
+        [Test]
+        public void LegjobbanErtekelt()
+        {
+            Mock<IRepository<Kes>> MockoltKesRepo = new Mock<IRepository<Kes>>(MockBehavior.Loose);
+            Mock<IRepository<Velemeny>> MockoltVelemenyRepo = new Mock<IRepository<Velemeny>>(MockBehavior.Loose);
+            List<Kes> KesLista = new List<Kes>();
+            /*ELSO BOLTBA-----------*/
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Spyderco",
+                Modell_nev = "Chaparral",
+                Markolat = "FRN",
+                Bevont_Penge = false,
+                Penge_Hossz = 71,
+                Acel = "CTS-XHP",
+                Ar = 40790,
+            });
+            KesLista.Add(new Kes()
+            {
+                Gyartasi_Cikkszam = Guid.NewGuid().ToString(),
+                Gyarto = "Spyderco",
+                Modell_nev = "Delica",
+                Markolat = "FRN",
+                Bevont_Penge = false,
+                Penge_Hossz = 73,
+                Acel = "VG-10",
+                Ar = 35490,
+            });          
+            List<Velemeny> VelemenyLista = new List<Velemeny>();
+            VelemenyLista.Add(new Velemeny()
+            {
+                Velemeny_Id = Guid.NewGuid().ToString(),
+                Szerzo = "Nick Shabazz",
+                Elegedettseg = 8,
+                VelemenySzovege = "I'd reccomend this product" +
+                "You can check out my review here:" +
+                "https://www.youtube.com/watch?v=N-0ERB3tBOU",
+                Gyartasi_Cikkszam = KesLista[1].Gyartasi_Cikkszam
+            });
+            VelemenyLista.Add(new Velemeny()
+            {
+                Velemeny_Id = Guid.NewGuid().ToString(),
+                Szerzo = "Cutlerylover",
+                Elegedettseg = 10,
+                VelemenySzovege = "I have the version with the wave " +
+                "feature. I'm pleased with it! You can see my review " +
+                "here: https://www.youtube.com/watch?v=XfnyMcUJip4",
+                Gyartasi_Cikkszam = KesLista[1].Gyartasi_Cikkszam
+            });
+            VelemenyLista.Add(new Velemeny()
+            {
+                Velemeny_Id = Guid.NewGuid().ToString(),
+                Szerzo = "Slicey Dicey",
+                Elegedettseg = 6,
+                VelemenySzovege = "Just a well known good piece to have " +
+                "in your collection. I made a video about it you can see it " +
+                "here: https://www.youtube.com/watch?v=eWWO9KMEIZI",
+                Gyartasi_Cikkszam = KesLista[1].Gyartasi_Cikkszam
+            });
+            /*-------*/
+            VelemenyLista.Add(new Velemeny()
+            {
+                Velemeny_Id = Guid.NewGuid().ToString(),
+                Szerzo = "Slicey Dicey",
+                Elegedettseg = 1,
+                VelemenySzovege = "Very thin blade it's fragile",
+                Gyartasi_Cikkszam = KesLista[0].Gyartasi_Cikkszam
+            });
+            VelemenyLista.Add(new Velemeny()
+            {
+                Velemeny_Id = Guid.NewGuid().ToString(),
+                Szerzo = "Nick Shabazz",
+                Elegedettseg = 10,
+                VelemenySzovege = "It's one of my favourite spyderco-s ever",
+                Gyartasi_Cikkszam = KesLista[0].Gyartasi_Cikkszam
+            });
+
+            Kes ElvartKes = KesLista[1];
+            MockoltKesRepo.Setup(x => x.Read()).Returns(KesLista.AsQueryable());
+            MockoltVelemenyRepo.Setup(x => x.Read()).Returns(VelemenyLista.AsQueryable());
+            NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesRepo.Object,MockoltVelemenyRepo.Object);
+            var kimenet = nemCRUDLogic.LegjobbanErtekelt(KesLista, VelemenyLista);
+            Assert.That(kimenet, Is.EqualTo(ElvartKes));
+        }
+        
 
     }
 }

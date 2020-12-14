@@ -12,10 +12,16 @@ namespace Logic
     {
         IRepository<Kes_Bolt> KesBoltRepo;
         IRepository<Kes> KesRepo;
+        IRepository<Velemeny> VelemenyRepo;
         public NemCRUDLogic(IRepository<Kes_Bolt> KesBoltRepo, IRepository<Kes> KesRepo)
         {
             this.KesBoltRepo = KesBoltRepo;
             this.KesRepo = KesRepo;
+        }
+        public NemCRUDLogic(IRepository<Kes> KesRepo, IRepository<Velemeny> VelemenyRepo)
+        {
+            this.KesRepo = KesRepo;
+            this.VelemenyRepo = VelemenyRepo;
         }
 
 
@@ -34,13 +40,6 @@ namespace Logic
         //Válasszuk ki azt a kést amivel a legelégedettebbek voltak a vásárlók
         public Kes LegjobbanErtekelt(List<Kes> keslista,List<Velemeny> velemenylista)
         {
-            /*var q2 =
-                (from x in keslista
-                 join y in velemenylista on x.Gyartasi_Cikkszam equals y.Gyartasi_Cikkszam
-                 group y by y.Gyartasi_Cikkszam into g
-                 orderby g.Sum(x => x.Elegedettseg) descending
-                 select g).FirstOrDefault();
-            Kes k = keslista.Find(x => x.Gyartasi_Cikkszam == q2.First().Gyartasi_Cikkszam);*/
             var q2 =
                 (from y in velemenylista
                  group y by y.Gyartasi_Cikkszam into g
