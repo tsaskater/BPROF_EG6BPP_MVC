@@ -99,7 +99,7 @@ a {
     a:hover {
         color: white;
         text-decoration: none;
-        font-weight: bold;
+        
     }
 
 .torles:hover {
@@ -123,4 +123,8 @@ a {
 .hibauzenet {
     font-size: 35px;
     color: white;
+}
+.fixwidth{
+
+    width:5px;
 }
