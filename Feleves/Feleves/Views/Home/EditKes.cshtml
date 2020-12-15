@@ -3,38 +3,71 @@
 @{
     ViewData["Title"] = "EditKes";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/Add.css" rel="stylesheet" />
+    <title>Kés szerkesztése</title>
+</head>
+<body>
 
-<h1>EditKes</h1>
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<h4>Kes</h4>
-<hr />
-<form href="/Home/EditKes" method="post">
-    Gyartó: <br />
-    <input type="text" minlength="2" maxlength="50" name="Gyarto" value="@Model.Gyarto" /><br />
-    Modell Név: <br />
-    <input type="text" minlength="2" maxlength="50" name="Modell_nev" value="@Model.Modell_nev" /><br />
-    Markolat: <br />
-    <input type="text" minlength="2" maxlength="50" name="Markolat" value="@Model.Markolat" /><br />
-    Bevont Penge: <br />
-    @if (Model.Bevont_Penge)
-    {
-        <input type="checkbox" class="form-check-input" value="true" name="Bevont_Penge" checked /><br />
-    }
-    else
-    {
-        <input type="checkbox" class="form-check-input" value="true" name="Bevont_Penge" /><br />
-    }
-    Penge Hossz: <br />
-    <input type="number" min="0" max="500" name="Penge_Hossz" value="@Model.Penge_Hossz" /><br />
-    Acél: <br />
-    <input type="text" minlength="2" maxlength="15" name="Acel" value="@Model.Acel" /><br />
-    Ár: <br />
-    <input type="number" min="0" max="2000000" name="Ar" value="@Model.Ar" /><br />
-    <input type="hidden" name="Gyartasi_Cikkszam" value="@Model.Gyartasi_Cikkszam" />
-    <input type="hidden" value="@Model.Raktar_Id" name="Raktar_Id" /><br />
-    <input type="submit" value="Szerkesztés" /><br />
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="center">
+        <form href="/Home/EditKes" method="post">
+            <p class="inputcim">Gyártó: </p><br />
+            <input class="form-control" type="text" minlength="2" maxlength="50" name="Gyarto" value="@Model.Gyarto" /><br />
+            <p class="inputcim">Modell Név: </p><br />
+            <input class="form-control" type="text" minlength="2" maxlength="50" name="Modell_nev" value="@Model.Modell_nev" /><br />
+            <p class="inputcim">Markolat: </p><br />
+            <input class="form-control" type="text" minlength="2" maxlength="50" name="Markolat" value="@Model.Markolat" /><br />
+            @if (Model.Bevont_Penge)
+            {
+                <div class="form-row">
+                    <p class="inputcim">Bevont penge: </p>
+                    <label class="switch">
+                        <input type="checkbox" name="Bevont_Penge" value="true" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            }
+            else
+            {
+                <div class="form-row">
+                    <p class="inputcim">Bevont penge: </p>
+                    <label class="switch">
+                        <input type="checkbox" name="Bevont_Penge" value="true">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            }
+            <p class="inputcim">Penge Hossz: </p><br />
+            <input class="form-control" type="number" min="0" max="500" name="Penge_Hossz" value="@Model.Penge_Hossz" /><br />
+            <p class="inputcim">Acél: </p> <br />
+            <input class="form-control" type="text" minlength="2" maxlength="15" name="Acel" value="@Model.Acel" /><br />
+            <p class="inputcim">Ár: </p><br />
+            <input class="form-control" type="number" min="0" max="2000000" name="Ar" value="@Model.Ar" /><br />
+            <input type="hidden" name="Gyartasi_Cikkszam" value="@Model.Gyartasi_Cikkszam" />
+            <input type="hidden" value="@Model.Raktar_Id" name="Raktar_Id" /><br />
+            <input type="submit" class="btn btn-primary" value="Szerkesztés" /><br />
+        </form>
+    </div>
+    <div>
+        <p><a class="bottomright torles" href="/Home/ListKes?id=@Model.Raktar_Id">Mégsem</a></p>
+    </div>
+</body>
+</html>

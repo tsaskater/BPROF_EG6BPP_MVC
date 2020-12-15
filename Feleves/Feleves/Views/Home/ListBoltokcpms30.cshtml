@@ -27,50 +27,51 @@
         </div>
     </nav>
     <p></p><br />
-           <table class="table table-bordered table-dark center">
+    <table class="table table-bordered table-dark center">
 
-               <thead>
-                   <tr class="trheading">
-                       <th scope="col">
-                           Bolt név
-                       </th>
-                       <th scope="col">
-                           Cím
-                       </th>
-                       <th>
-                           Weboldal
-                       </th>
-                       <th>
-                           Műveletek
-                       </th>
-                   </tr>
-               </thead>
-               <tbody>
-                   @foreach (var item in Model)
-                   {
-                       <tr class="trbody">
-                           <td>
-                               @Html.DisplayFor(modelItem => item.Bolt_Nev)
-                           </td>
-                           <td>
-                               <!--Html.DisplayFor(modelItem => item.Cim) -->
-                               @item.Cim
-                               <a href="https://www.google.hu/maps/search/@item.Cim.Replace(' ','+')" target="_blank"><img class="foldgomb" src="https://lh3.googleusercontent.com/proxy/P_OR0Jy4bPSNYmZV3iwZSHd89xj9-YROipgubWs5ot48D0NELoOaHpWwE2y74-yew0FmmhRey_mAzlksYEbammjyn8-or7lSwgSzhZAQ0K6s7i-kmwUSgDzNoFKWUzfS6jneY9gYLrtzui0IZ9I"></a>
-                           </td>
-                           <td>
-                               <a href="@item.Weboldal">@item.Weboldal</a>
-                           </td>
-                           <td>
-                               <ul>
-                                   <li><a class="hozzaad" href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a></li>
-                                   <li><a href="/Home/ListKes?id=@item.Raktar_Id">Termékek listázása</a></li>
-                                   <li><a href="/Home/EditkesBolt?id=@item.Raktar_Id">Bolt szerkesztése</a></li>
-                                   <li><a class="torles" href="/Home/DeleteKesBolt?id=@item.Raktar_Id">Bolt Törlése</a></li>
-                               </ul>
-                           </td>
-                       </tr>
-                   }
-               </tbody>
-           </table>
+        <thead>
+            <tr class="trheading">
+                <th scope="col">
+                    Bolt név
+                </th>
+                <th scope="col">
+                    Cím
+                </th>
+                <th>
+                    Weboldal
+                </th>
+                <th>
+                    Műveletek
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="trbody">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bolt_Nev)
+                    </td>
+                    <td>
+                        <!--Html.DisplayFor(modelItem => item.Cim) -->
+                        @item.Cim
+                        <a href="https://www.google.hu/maps/search/@item.Cim.Replace(' ','+')" target="_blank"><img class="foldgomb" src="https://pngimg.com/uploads/globe/globe_PNG63.png"></a>
+                    </td>
+                    <td>
+                        <a href="@item.Weboldal">@item.Weboldal</a>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a class="hozzaad" href="/Home/AddKes?id=@item.Raktar_Id">Kés hozzáadása</a></li>
+                            <li><a href="/Home/ListKes?id=@item.Raktar_Id">Termékek listázása</a></li>
+                            <li><a href="/Home/EditkesBolt?id=@item.Raktar_Id">Bolt szerkesztése</a></li>
+                            <li><a class="torles" href="/Home/DeleteKesBolt?id=@item.Raktar_Id">Bolt Törlése</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p></p><br />
 </body>
 </html>

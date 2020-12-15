@@ -24,7 +24,7 @@ namespace Teszteles
                 new Velemeny(){ Szerzo = "Nagy Gábor" ,Elegedettseg = 2},
                 new Velemeny(){ Szerzo = "Kss Ferenc" ,Elegedettseg = 3}
             };
-            List<Velemeny> ElvartKimenet= new List<Velemeny>()
+            List<Velemeny> ElvartKimenet = new List<Velemeny>()
             {
                 VelemenyTesztLista[0],
                 VelemenyTesztLista[1],
@@ -45,11 +45,11 @@ namespace Teszteles
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Extrametál Kés (üzlethálózat)",
-                Cim = "Extrametál,Magyaország",
+                Cim = "Extrametál,Magyarország",
                 Weboldal = "https://extrametal.hu/"
             };
             Kes_Bolt ElvartKesBolt = TesztKesBolt;
-            MockoltKesBoltRepo.Setup(x=>x.Read(TesztKesBolt.Raktar_Id)).Returns(TesztKesBolt);
+            MockoltKesBoltRepo.Setup(x => x.Read(TesztKesBolt.Raktar_Id)).Returns(TesztKesBolt);
             KesBoltLogic kesBoltLogic = new KesBoltLogic(MockoltKesBoltRepo.Object);
             var Kimenet = kesBoltLogic.GetKes_Bolt(TesztKesBolt.Raktar_Id);
             Assert.That(Kimenet, Is.EqualTo(ElvartKesBolt));
@@ -89,9 +89,9 @@ namespace Teszteles
                 Acel = "VG-10",
                 Ar = 35490
             };
-            MockoltKesRepo.Setup(x => x.Update(k.Gyartasi_Cikkszam,It.IsAny<Kes>()));
+            MockoltKesRepo.Setup(x => x.Update(k.Gyartasi_Cikkszam, It.IsAny<Kes>()));
             KesLogic kesLogic = new KesLogic(MockoltKesRepo.Object);
-            kesLogic.UpdateKes(k.Gyartasi_Cikkszam,k);
+            kesLogic.UpdateKes(k.Gyartasi_Cikkszam, k);
             MockoltKesRepo.Verify(x => x.Update(k.Gyartasi_Cikkszam, k), Times.Once);
         }
         [Test]
@@ -131,7 +131,7 @@ namespace Teszteles
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Extrametál Kés (üzlethálózat)",
-                Cim = "Extrametál,Magyaország",
+                Cim = "Extrametál,Magyarország",
                 Weboldal = "https://extrametal.hu/"
             });
             /*KESEK:-----------*/
@@ -191,8 +191,8 @@ namespace Teszteles
             List<Legalis> ElvartLegalisLista = new List<Legalis>();
             ElvartLegalisLista.Add(new Statisztika.Legalis()
             {
-                Bolt= KesBoltLista[0],
-                Termek= KesLista[0]
+                Bolt = KesBoltLista[0],
+                Termek = KesLista[0]
             });
             ElvartLegalisLista.Add(new Statisztika.Legalis()
             {
@@ -204,7 +204,7 @@ namespace Teszteles
             MockoltKesBoltRepo.Setup(x => x.Read()).Returns(KesBoltLista.AsQueryable());
             MockoltKesRepo.Setup(x => x.Read()).Returns(KesLista.AsQueryable());
             NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesBoltRepo.Object, MockoltKesRepo.Object);
-            var kimenet = nemCRUDLogic.Legalis(KesBoltLista,KesLista);
+            var kimenet = nemCRUDLogic.Legalis(KesBoltLista, KesLista);
             Assert.That(kimenet, Is.EquivalentTo(ElvartLegalisLista));
             Assert.That(kimenet.Count, Is.EqualTo(ElvartLegalisLista.Count));
         }
@@ -235,7 +235,7 @@ namespace Teszteles
                 Penge_Hossz = 73,
                 Acel = "VG-10",
                 Ar = 35490,
-            });          
+            });
             List<Velemeny> VelemenyLista = new List<Velemeny>();
             VelemenyLista.Add(new Velemeny()
             {
@@ -288,7 +288,7 @@ namespace Teszteles
             Kes ElvartKes = KesLista[1];
             MockoltKesRepo.Setup(x => x.Read()).Returns(KesLista.AsQueryable());
             MockoltVelemenyRepo.Setup(x => x.Read()).Returns(VelemenyLista.AsQueryable());
-            NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesRepo.Object,MockoltVelemenyRepo.Object);
+            NemCRUDLogic nemCRUDLogic = new NemCRUDLogic(MockoltKesRepo.Object, MockoltVelemenyRepo.Object);
             var kimenet = nemCRUDLogic.LegjobbanErtekelt(KesLista, VelemenyLista);
             Assert.That(kimenet, Is.EqualTo(ElvartKes));
         }
@@ -309,7 +309,7 @@ namespace Teszteles
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Extrametál Kés (üzlethálózat)",
-                Cim = "Extrametál,Magyaország",
+                Cim = "Extrametál,Magyarország",
                 Weboldal = "https://extrametal.hu/"
             });
             KesBoltLista.Add(new Kes_Bolt()
@@ -331,7 +331,7 @@ namespace Teszteles
                 Penge_Hossz = 71,
                 Acel = "CTS-XHP",
                 Ar = 40790,
-                Raktar_Id=KesBoltLista[0].Raktar_Id
+                Raktar_Id = KesBoltLista[0].Raktar_Id
             });
             KesLista.Add(new Kes()
             {

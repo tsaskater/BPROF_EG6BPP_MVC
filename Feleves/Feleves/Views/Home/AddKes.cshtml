@@ -1,29 +1,66 @@
-﻿@model string 
+﻿@model string
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/Add.css" rel="stylesheet" />
     <title>Kés hozzáadás</title>
 </head>
+
 <body>
-    <h1>Adjon hozzá egy kést</h1>
-    <form action="/Home/AddKes" method="post">
-        <p>Gyárto: </p>
-        <input type="text" minlength="2" maxlength="50" name="Gyarto" placeholder="Gyárto neve"/> <br />
-        <p>Modell név: </p>
-        <input type="text" minlength="2" maxlength="50" name="Modell_nev" placeholder="Modell neve" /> <br />
-        <p>Markolat: </p>
-        <input type="text" minlength="2" maxlength="50" name="Markolat" placeholder="Markolat anyaga"/> <br />
-        <p>Bevont penge: </p>
-        <input type="checkbox" name="Bevont_Penge" value="true"  /> <br />
-        <p>Penge hossz: </p>
-        <input type="number" min="0" max="500" name="Penge_Hossz" placeholder="Miliméterben (0-500)" /> <br />
-        <p>Acél: </p>
-        <input type="text" minlength="2" maxlength="15" name="Acel" placeholder="Acél Neve"/> <br />
-        <p>Ár: </p>
-        <input type="number" min="0" max="2000000" name="Ar" placeholder="Forintban áfával"/> <br />
-        <input type="hidden" value="@Model" name="Raktar_Id" />
-        <input type="submit" value="Hozzáadás" />
-    </form>
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="center">
+        <form action="/Home/AddKes" method="post">
+            <div class="form-row">
+                <p class="inputcim">Gyártó: </p>
+                <input class="form-control" type="text" minlength="2" maxlength="50" name="Gyarto" placeholder="Gyárto neve" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Modell név: </p>
+                <input class="form-control" type="text" minlength="2" maxlength="50" name="Modell_nev" placeholder="Modell neve" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Markolat: </p>
+                <input class="form-control" type="text" minlength="2" maxlength="50" name="Markolat" placeholder="Markolat anyaga" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Bevont penge: </p>
+                <label class="switch">
+                    <input type="checkbox" name="Bevont_Penge" value="true">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Penge hossz: </p>
+                <input class="form-control" type="number" min="0" max="500" name="Penge_Hossz" placeholder="Miliméterben (0-500)" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Acél: </p>
+                <input class="form-control" type="text" minlength="2" maxlength="15" name="Acel" placeholder="Acél Neve" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Ár: </p>
+                <input class="form-control" type="number" min="0" max="2000000" name="Ar" placeholder="Forintban áfával" /> <br />
+                <input class="form-control" type="hidden" value="@Model" name="Raktar_Id" />
+                <input type="submit" class="btn btn-primary" value="Hozzáadás" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <p><a class="bottomright torles" href="/Home/ListKesBolt">Mégsem</a></p>
+    </div>
 </body>
 </html>

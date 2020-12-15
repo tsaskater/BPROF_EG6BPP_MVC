@@ -1,18 +1,44 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/Add.css" rel="stylesheet" />
     <title>Kés bolt hozzáadás</title>
 </head>
 <body>
-    <h1>Adjon hozzá egy kés boltot</h1>
-    <form action="/Home/AddKesBolt" method="post">
-        <p>Bolt Név: </p>
-        <input type="text" minlength="5" maxlength="100" name="Bolt_Nev" /> <br />
-        <p>Cím: </p>
-        <input type="text" minlength="5" maxlength="100" name="Cim" /> <br />
-        <p>Weboldal: </p>
-        <input type="text" minlength="5" maxlength="100" name="Weboldal" /> <br />
-        <input type="submit" value="Hozzáadás" />
-    </form>
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li class="active"><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="center">
+        <form action="/Home/AddKesBolt" method="post">
+            <div class="form-row">
+                <p class="inputcim">Bolt Név: </p>
+                <input class="form-control" type="text" minlength="5" maxlength="100" name="Bolt_Nev" placeholder="Bolt név" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Cím: </p>
+                <input class="form-control" type="text" minlength="5" maxlength="100" name="Cim" placeholder="Cím" /> <br />
+            </div>
+            <div class="form-row">
+                <p class="inputcim">Weboldal: </p>
+                <input class="form-control" type="text" minlength="5" maxlength="100" name="Weboldal" placeholder="Weboldal" /> <br />
+                <input type="submit" class="btn btn-primary" value="Hozzáadás" />
+            </div>
+</form>
+</div>
+    <div>
+        <p><a class="bottomright torles" href="/Home/ListKesBolt">Mégsem</a></p>
+    </div>
 </body>
 </html>

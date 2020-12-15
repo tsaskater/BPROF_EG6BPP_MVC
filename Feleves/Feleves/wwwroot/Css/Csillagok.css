@@ -5,9 +5,7 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #43423e;
-}
+
 
 a {
     text-decoration: none;
@@ -168,6 +166,7 @@ fieldset, label {
 .rating {
     border: none;
     float: left;
+    margin-left: 40%;
 }
 
     .rating > input {
@@ -177,7 +176,7 @@ fieldset, label {
     .rating > label:before {
         margin: 5px;
         margin-top: 0;
-        font-size: 1em;
+        font-size: 5em;
         font-family: FontAwesome;
         display: inline-block;
         content: "\f005";
@@ -253,3 +252,11 @@ a[data-tooltip] {
         left: 20px;
         margin-bottom: 4px;
     }
+.central {
+    text-align: center;
+    padding: 0%;
+}
+.center {
+    text-align: center;
+    padding: 10%;
+}

@@ -34,13 +34,13 @@
             <thead>
                 <tr class="trheading">
                     <th>
-                        @Html.DisplayNameFor(model => model.Szerzo)
+                        Szerző
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Elegedettseg)
+                        Elégedettség
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.VelemenySzovege)
+                        Vélemény szövege
                     </th>
                     <th></th>
                 </tr>
@@ -48,27 +48,27 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr class="trbody">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Szerzo)
-                    </td>
-                    <td>
-                        @item.Elegedettseg/10
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VelemenySzovege)
-                    </td>
-                    <td>
-                        <ul>
-                            <li><a class="hozzaad" href="/Home/EditVelemeny?id=@item.Velemeny_Id">Vélemény szerkesztése</a></li>
-                            <li><a class="torles" href="/Home/DeleteVelemeny?id=@item.Velemeny_Id">Vélemény törlése</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                    <tr class="trbody">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Szerzo)
+                        </td>
+                        <td>
+                            @item.Elegedettseg/10
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VelemenySzovege)
+                        </td>
+                        <td>
+                            <ul>
+                                <li><a class="hozzaad" href="/Home/EditVelemeny?id=@item.Velemeny_Id">Vélemény szerkesztése</a></li>
+                                <li><a class="torles" href="/Home/DeleteVelemeny?id=@item.Velemeny_Id">Vélemény törlése</a></li>
+                            </ul>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
-
+        <p></p><br />
 
     }
     else

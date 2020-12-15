@@ -3,92 +3,111 @@
 @{
     ViewData["Title"] = "EditVelemeny";
 }
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/Add.css" rel="stylesheet" />
     <link href="~/Css/Csillagok.css" rel="stylesheet" />
+    <title>Vélemény szerkesztése</title>
 </head>
-<h1>véleményének szerkesztése</h1>
+<body>
 
-<h4>Vélemény:</h4>
-<hr />
-<form id="editvelemeny" action="/Home/EditVelemeny" method="post">
-    Szerző:<br />
-    <input type="text" name="Szerzo" minlength="2" maxlength="30" value="@Model.Szerzo" /><br />
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="center">
+        <form id="editvelemeny" action="/Home/EditVelemeny" method="post">
+            <p class="inputcim">Szerző:</p><br />
+                <input class="form-control" type="text" name="Szerzo" minlength="2" maxlength="30" value="@Model.Szerzo" /><br />
 
-    <fieldset class="rating">
-        <input type="radio" id="star5" name="Elegedettseg" value="10" /><label class="full" for="star5" title="5 csillag"></label>
-        <input type="radio" id="star4half" name="Elegedettseg" value="9" /><label class="half" for="star4half" title="4 és fél csillag"></label>
-        <input type="radio" id="star4" name="Elegedettseg" value="8" /><label class="full" for="star4" title="4 csillag"></label>
-        <input type="radio" id="star3half" name="Elegedettseg" value="7 " /><label class="half" for="star3half" title="3 és fél csillag"></label>
-        <input type="radio" id="star3" name="Elegedettseg" value="6" /><label class="full" for="star3" title="3 csillag"></label>
-        <input type="radio" id="star2half" name="Elegedettseg" value="5" /><label class="half" for="star2half" title="2 és fél csillag"></label>
-        <input type="radio" id="star2" name="Elegedettseg" value="4" /><label class="full" for="star2" title="2 csillag"></label>
-        <input type="radio" id="star1half" name="Elegedettseg" value="3" /><label class="half" for="star1half" title="1 és fél csillag"></label>
-        <input type="radio" id="star1" name="Elegedettseg" value="2" /><label class="full" for="star1" title="1 csillag"></label>
-        <input type="radio" id="starhalf" name="Elegedettseg" value="1" /><label class="half" for="starhalf" title="fél csillag"></label>
-    </fieldset><br />
-    @switch (Model.Elegedettseg)
-    {
-        case 10:
-            <script>
-                document.getElementById("star5").checked = true;
-            </script>
-            break;
-        case 9:
-            <script>
-                document.getElementById("star4half").checked = true;
-            </script>
-            break;
-        case 8:
-            <script>
-                document.getElementById("star4").checked = true;
-            </script>
-            break;
-        case 7:
-            <script>
-                document.getElementById("star3half").checked = true;
-            </script>
-            break;
-        case 6:
-            <script>
-                document.getElementById("star3").checked = true;
-            </script>
-            break;
-        case 5:
-            <script>
-                document.getElementById("star2half").checked = true;
-            </script>
-            break;
-        case 4:
-            <script>
-                document.getElementById("star2").checked = true;
-            </script>
-            break;
-        case 3:
-            <script>
-                document.getElementById("star1half").checked = true;
-            </script>
-            break;
-        case 2:
-            <script>
-                document.getElementById("star1").checked = true;
-            </script>
-            break;
-        case 1:
-            <script>
-                document.getElementById("starhalf").checked = true;
-            </script>
-            break;
-        default:
-            break;
-    }
-    Vélemény szövege: <br />
-                      <textarea name="VelemenySzovege" maxlength="1024" placeholder="Ide írhatja az Ön véleményét" form="editvelemeny">@Model.VelemenySzovege</textarea><br />
-    <input type="hidden" name="Velemeny_Id" value="@Model.Velemeny_Id" />
-    <input type="hidden" name="Gyartasi_Cikkszam" value="@Model.Gyartasi_Cikkszam" />
-    <input type="submit" value="Szerkesztés" class="btn btn-primary" />
-</form>
+                <fieldset class="rating">
+                    <input type="radio" id="star5" name="Elegedettseg" value="10" /><label class="full" for="star5" title="5 csillag"></label>
+                    <input type="radio" id="star4half" name="Elegedettseg" value="9" /><label class="half" for="star4half" title="4 és fél csillag"></label>
+                    <input type="radio" id="star4" name="Elegedettseg" value="8" /><label class="full" for="star4" title="4 csillag"></label>
+                    <input type="radio" id="star3half" name="Elegedettseg" value="7 " /><label class="half" for="star3half" title="3 és fél csillag"></label>
+                    <input type="radio" id="star3" name="Elegedettseg" value="6" /><label class="full" for="star3" title="3 csillag"></label>
+                    <input type="radio" id="star2half" name="Elegedettseg" value="5" /><label class="half" for="star2half" title="2 és fél csillag"></label>
+                    <input type="radio" id="star2" name="Elegedettseg" value="4" /><label class="full" for="star2" title="2 csillag"></label>
+                    <input type="radio" id="star1half" name="Elegedettseg" value="3" /><label class="half" for="star1half" title="1 és fél csillag"></label>
+                    <input type="radio" id="star1" name="Elegedettseg" value="2" /><label class="full" for="star1" title="1 csillag"></label>
+                    <input type="radio" id="starhalf" name="Elegedettseg" value="1" /><label class="half" for="starhalf" title="fél csillag"></label>
+                </fieldset><br />
+                @switch (Model.Elegedettseg)
+                {
+                    case 10:
+                        <script>
+                            document.getElementById("star5").checked = true;
+                        </script>
+                        break;
+                    case 9:
+                        <script>
+                            document.getElementById("star4half").checked = true;
+                        </script>
+                        break;
+                    case 8:
+                        <script>
+                            document.getElementById("star4").checked = true;
+                        </script>
+                        break;
+                    case 7:
+                        <script>
+                            document.getElementById("star3half").checked = true;
+                        </script>
+                        break;
+                    case 6:
+                        <script>
+                            document.getElementById("star3").checked = true;
+                        </script>
+                        break;
+                    case 5:
+                        <script>
+                            document.getElementById("star2half").checked = true;
+                        </script>
+                        break;
+                    case 4:
+                        <script>
+                            document.getElementById("star2").checked = true;
+                        </script>
+                        break;
+                    case 3:
+                        <script>
+                            document.getElementById("star1half").checked = true;
+                        </script>
+                        break;
+                    case 2:
+                        <script>
+                            document.getElementById("star1").checked = true;
+                        </script>
+                        break;
+                    case 1:
+                        <script>
+                            document.getElementById("starhalf").checked = true;
+                        </script>
+                        break;
+                    default:
+                        break;
+                }
+            <textarea class="form-control" name="VelemenySzovege" maxlength="1024" placeholder="Ide írhatja az Ön véleményét" form="editvelemeny">@Model.VelemenySzovege</textarea><br />
+            <input class="form-control" type="hidden" name="Velemeny_Id" value="@Model.Velemeny_Id" />
+            <input type="hidden" name="Gyartasi_Cikkszam" value="@Model.Gyartasi_Cikkszam" />
+            <input  type="submit" value="Szerkesztés" class="btn btn-primary" />
+        </form>
+        </div>
+        <div>
+            <p><a class="bottomright torles" href="/Home/ListVelemeny?id=@Model.Gyartasi_Cikkszam">Mégsem</a></p>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+</body>
+</html>

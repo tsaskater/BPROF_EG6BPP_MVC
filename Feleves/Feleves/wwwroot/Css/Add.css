@@ -1,0 +1,157 @@
+﻿body {
+    background-color: #3f3f40;
+    font-family: 'Raleway',sans-serif;
+    background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4faaa3b-ec50-4d66-9ee5-8bce29d513bb/d9b27x5-41e069a8-ace3-435e-8171-54357e3acd34.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvZjRmYWFhM2ItZWM1MC00ZDY2LTllZTUtOGJjZTI5ZDUxM2JiXC9kOWIyN3g1LTQxZTA2OWE4LWFjZTMtNDM1ZS04MTcxLTU0MzU3ZTNhY2QzNC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.nwDZxW0DrzdhcbqDue-QtL3Mml3FFJTIWzv_pAv2NHQ");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.navbar-nav, .navbar-inverse {
+    background-color: rgba(102, 102, 105, 0.55);
+}
+
+.active {
+    background-color: #404040;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #abebff;
+    font-size: 20px;
+    font-family: Verdana, sans-serif;
+    transition: 0.3s;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        font-size: 20px;
+        font-family: Verdana, sans-serif;
+        background-color: rgba(50, 50, 255, 0.55);
+    }
+
+    .navbar-inverse .navbar-nav > li > a:active {
+        font-size: 20px;
+        font-family: Verdana, sans-serif;
+        background-color: rgba(0, 0, 66, 0.7);
+    }
+
+.top {
+    position: fixed;
+    top: 8px;
+    left: 16px;
+    font-size: 18px;
+}
+
+.center {
+    text-align: center;
+    padding: 5%;
+}
+
+.bottomright {
+    position: fixed;
+    bottom: 8px;
+    right: 20px;
+    font-size: 50px;
+}
+
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 50px;
+}
+
+.form-control {
+    margin-left: 25%;
+    width: 50%;
+    font-size: 25px;
+    background-color: rgba(21, 107, 192, 0.77);
+    border: solid 1px rgba(7, 89, 171, 0.90);
+    color: white;
+    vertical-align: central;
+}
+
+    .form-control::-webkit-input-placeholder {
+        color: rgba(112, 183, 254, 0.72);
+        
+    }
+
+.inputcim {
+    font-size: 30px;
+    font-family: cursive;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: -1.5px -1.5px 0rem #000, 1.5px -1.5px 0rem #000, -1.5px 1.5px 0rem #000, 1.5px 1.5px 0rem #000;
+}
+.torles:hover {
+    color: red;
+}
+
+.hozzaad:hover {
+    color: green;
+}
+
+
+/*----*/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }

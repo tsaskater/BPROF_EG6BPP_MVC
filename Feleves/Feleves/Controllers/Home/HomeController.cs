@@ -207,7 +207,7 @@ namespace Feleves.Controllers.Home
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Extrametál Kés (üzlethálózat)",
-                Cim = "Extrametál,Magyaország",
+                Cim = "Extrametál,Magyarország",
                 Weboldal = "https://extrametal.hu/"
             });
             KesBoltLista.Add(new Kes_Bolt()

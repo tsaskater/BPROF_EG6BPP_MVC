@@ -4,21 +4,43 @@
     ViewData["Title"] = "EditKesBolt";
 }
 
-<h1>Kés bolt szrekesztése</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link href="~/Css/Add.css" rel="stylesheet" />
+    <title>Kés bolt szerkesztése</title>
+</head>
+<body>
 
-<h4>Kés Bolt</h4>
-<hr />
-<form action="/Home/EditKesBolt" method="post">
-    Bolt Név:<br />
-    <input type="text" name="Bolt_Nev" class="form-control" value="@Model.Bolt_Nev" /><br />
-    Cím:<br />
-    <input type="text" name="Cim" class="form-control" value="@Model.Cim" /><br />
-    Weboldal:<br />
-    <input type="text" name="Weboldal" class="form-control" value="@Model.Weboldal" /><br />
-    <input type="hidden" name="Raktar_Id" value="@Model.Raktar_Id" /><br />
-    <input type="submit" value="Szerkesztés" class="btn btn-primary" /><br />
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <nav class="navbar navbar-inverse top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Peti Nagyker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/GenerateData">Adatok generálása</a></li>
+                <li><a href="/Home/AddKesBolt">Kés bolt felvétele</a></li>
+                <li><a href="/Home/ListKesBolt">Jelenlegi kés boltok listázása</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="center">
+        <form action="/Home/EditKesBolt" method="post">
+            <p class="inputcim">Bolt Név:</p><br />
+            <input type="text" name="Bolt_Nev" class="form-control" value="@Model.Bolt_Nev" /><br />
+            <p class="inputcim">Cím:</p><br />
+            <input type="text" name="Cim" class="form-control" value="@Model.Cim" /><br />
+            <p class="inputcim">Weboldal:</p><br />
+            <input class="form-control" type="text" name="Weboldal" value="@Model.Weboldal" /><br />
+            <input class="form-control" type="hidden" name="Raktar_Id" value="@Model.Raktar_Id" /><br />
+            <input type="submit" value="Szerkesztés" class="btn btn-primary" /><br />
+        </form>
+    </div>
+    <div>
+        <p><a class="bottomright torles" href="/Home/ListKesBolt">Mégsem</a></p>
+    </div>
+</body>
+</html>
