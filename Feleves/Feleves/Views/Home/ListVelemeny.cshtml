@@ -48,14 +48,14 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="trbody">
+                    <tr class="trbody fixwidth">
                         <td>
                             @Html.DisplayFor(modelItem => item.Szerzo)
                         </td>
                         <td>
                             @item.Elegedettseg/10
                         </td>
-                        <td class="fixwidth">
+                        <td >
                             @Html.DisplayFor(modelItem => item.VelemenySzovege)
                         </td>
                         <td>

@@ -125,6 +125,9 @@ a {
     color: white;
 }
 .fixwidth{
-
     width:5px;
 }
+td {
+    word-break: break-all;
+    width:10px;
+} 
