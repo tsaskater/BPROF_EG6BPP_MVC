@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{2AD9BFBB-4131-4C8E-8333-4781748F2291}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teszteles", "Teszteles\Teszteles.csproj", "{2AC84881-F214-4ADC-97E7-078A418EE0FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teszteles", "Teszteles\Teszteles.csproj", "{2AC84881-F214-4ADC-97E7-078A418EE0FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnifeStoreWpf", "KnifeStoreWpf\KnifeStoreWpf.csproj", "{34AAF958-D2D7-4605-BD5B-FAD6F60A6DBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AC84881-F214-4ADC-97E7-078A418EE0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34AAF958-D2D7-4605-BD5B-FAD6F60A6DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34AAF958-D2D7-4605-BD5B-FAD6F60A6DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34AAF958-D2D7-4605-BD5B-FAD6F60A6DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34AAF958-D2D7-4605-BD5B-FAD6F60A6DBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

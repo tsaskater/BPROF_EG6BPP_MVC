@@ -57,11 +57,25 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [HttpPut("{id}")]
+        public IActionResult UpdateKnifeStore(string id,[FromBody] Kes_Bolt newKnifeStore)
+        {
+            try
+            {
+                knifeStoreLogic.UpdateKes_Bolt(id, newKnifeStore);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"Bad request error: {ex}");
+            }
+        }
         [HttpPost]
         public IActionResult AddKnifeStore([FromBody] Kes_Bolt k)
         {
             try
             {
+                k.Raktar_Id = Guid.NewGuid().ToString();
                 knifeStoreLogic.AddKesBolt(k);
                 return Ok();
             }

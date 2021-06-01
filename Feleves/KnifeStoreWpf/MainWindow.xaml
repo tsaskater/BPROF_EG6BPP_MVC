@@ -1,0 +1,63 @@
+﻿<Window x:Class="KnifeStoreWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnifeStoreWpf"
+        xmlns:ui="clr-namespace:KnifeStoreWpf.UI"
+        xmlns:vm="clr-namespace:KnifeStoreWpf.VM"
+        xmlns:data="clr-namespace:KnifeStoreWpf.Data"
+        mc:Ignorable="d"
+        Title="Peti Nagyker" Height="443" Width="830"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    
+    <Window.Resources>
+        <vm:MainViewModel x:Key="VM" />
+        <ui:BoolToStringConverter x:Key="BoolToStringConverter" />
+        <ui:WebsiteToBrushConverter x:Key="WebsiteToBrushConverter"/>
+
+        <DataTemplate x:Key="knifeStoreTemplate" DataType="{x:Type data:KnifeStore}">
+            <StackPanel Background="{Binding Path=Website , Converter={StaticResource WebsiteToBrushConverter}}">
+                <TextBlock Text="{Binding Path=Name, StringFormat=Bolt név: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
+                <TextBlock Text="{Binding Path=Address, StringFormat=Cím: {0}}" TextWrapping="Wrap" MaxWidth="200" />
+                <TextBlock Text="{Binding Path=Website, StringFormat=Weboldal: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="knifeTemplate" DataType="{x:Type data:Knife}">
+            <StackPanel Background="Cornsilk">
+                <TextBlock Text="{Binding Path=Maker, StringFormat=Gyártó: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
+                <TextBlock Text="{Binding Path=Model, StringFormat=Modell: {0}}" TextWrapping="Wrap" MaxWidth="200" />
+                <TextBlock Text="{Binding Path=Coated,Converter={StaticResource BoolToStringConverter},
+                                       ConverterParameter='Bevont Penge: Bevont;Bevont Penge: Nem Bevont'}" TextWrapping="Wrap" MaxWidth="200"/>
+                <TextBlock Text="{Binding Path=BladeLength, StringFormat=Penge Hossz: {0}mm}" TextWrapping="Wrap" MaxWidth="200"/>
+                <TextBlock Text="{Binding Path=Steel, StringFormat=Acél: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
+                <TextBlock Text="{Binding Path=Price, StringFormat=Ár: {0}Ft}" TextWrapping="Wrap" MaxWidth="200"/>
+                <TextBlock Text="{Binding Path=Handle, StringFormat=Markolat: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource VM}">
+        <ListBox ItemTemplate="{StaticResource knifeStoreTemplate}" ItemsSource="{Binding Path=KnifeStores}" SelectedItem="{Binding Path=SelectedKnifeStore}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="303" Margin="10,10,0,0" VerticalAlignment="Top" Width="246" />
+        <Button Command="{Binding Path=AddKnifeStoreCmd}" Content="ADD" HorizontalAlignment="Left"
+                Margin="10,318,0,0" VerticalAlignment="Top" Width="50" />
+        <Button Command="{Binding Path=ModKnifeStoreCmd}" Content="MOD" HorizontalAlignment="Left"
+                Margin="99,318,0,0" VerticalAlignment="Top" Width="50" />
+        <Button Command="{Binding Path=DelKnifeStoreCmd}" Content="DEL" HorizontalAlignment="Left"
+                Margin="206,318,0,0" VerticalAlignment="Top" Width="50" />
+        <Button Command="{Binding Path=UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
+            Margin="10,371,0,0" VerticalAlignment="Top" Width="100" />
+
+        <ListBox ItemTemplate="{StaticResource knifeTemplate}" ItemsSource="{Binding Knives}" SelectedItem="{Binding SelectedKnife}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="303" Margin="320,10,0,0" VerticalAlignment="Top" Width="246" />
+        <Button Command="{Binding AddCmd}" Content="ADD" HorizontalAlignment="Left"
+            Margin="320,318,0,0" VerticalAlignment="Top" Width="50" />
+        <Button Command="{Binding ModCmd}" Content="MOD" HorizontalAlignment="Left"
+            Margin="408,318,0,0" VerticalAlignment="Top" Width="50" />
+        <Button Command="{Binding DelCmd}" Content="DEL" HorizontalAlignment="Left"
+            Margin="516,318,0,0" VerticalAlignment="Top" Width="50" />
+
+        <Button Command="{Binding Path=GetKnives}" Content=">>" HorizontalAlignment="Left"
+            Margin="275,152,0,0" VerticalAlignment="Top" Width="25" />
+    </Grid>
+</Window>

@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KnifeStoreWpf</name>
+    </assembly>
+    <members>
+        <member name="T:KnifeStoreWpf.App">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.App.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.App"/> class.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:KnifeStoreWpf.BL.IEditorService">
+            <summary>
+            Editor service must implement certain methods.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.IEditorService.EditKnifeStore(KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Checks if KnifeStore entity was edited.
+            </summary>
+            <param name="k">Entity where edit occured.</param>
+            <returns>Entity was editer or not.</returns>
+        </member>
+        <member name="T:KnifeStoreWpf.BL.IKnifeStoreLogic">
+            <summary>
+            Requires the logic methods for entity KnifeStore.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.AddKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore})">
+            <summary>
+            Defines the method for creating an instance with the type of KnifeStore.
+            </summary>
+            <param name="list">The list where the entity will be added.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.ModKnifeStore(KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Defines the method for modifying an instance with the type of KnifeStore.
+            </summary>
+            <param name="knifeStoreToModify">Entity which is intended to modify.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.DelKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Defines the method for deleting an instance with the type of KnifeStore.
+            </summary>
+            <param name="list">List where the entity is deleted from.</param>
+            <param name="knifeStore">Entity which is intended to deleted.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.GetAllKnifeStore">
+            <summary>
+            Gets all the entities from the database which and converts them into List of KnifeStore-s.
+            </summary>
+            <returns>KnifeStore List from database.</returns>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.BL.KnifeStoreLogic"/> class.
+            Initialize the components which are needed.
+            </summary>
+            <param name="editorService">Editor service component.</param>
+            <param name="messengerService">Messenger service component.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.AddKnife(System.Collections.Generic.IList{KnifeStoreWpf.Data.Knife},System.String)">
+            <summary>
+            Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
+            </summary>
+            <param name="list">The entity list where the entity should be added.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.DelKnife(System.Collections.Generic.IList{KnifeStoreWpf.Data.Knife},KnifeStoreWpf.Data.Knife)">
+            <summary>
+            Deletes a Knife from it's list and calls the database operation to syncronhize them.
+            </summary>
+            <param name="list">The entity list where the entity should be deleted from.</param>
+            <param name="knife">The entity which is intended to delete.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.ModKnifeStore(KnifeStoreWpf.Data.Knife)">
+            <summary>
+            Modifies an element of the knifeStore list as intended.
+            </summary>
+            <param name="knifeToModify">The KnifeStore entity which should be modified.</param>
+        </member>
+        <member name="T:KnifeStoreWpf.BL.KnifeStoreLogic">
+            <summary>
+            Logic Portion for the frontend methods which are required such as cruds.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.BL.KnifeStoreLogic"/> class.
+            Initialize the components which are needed.
+            </summary>
+            <param name="editorService">Editor service component.</param>
+            <param name="messengerService">Messenger service component.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.AddKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore})">
+            <summary>
+            Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
+            </summary>
+            <param name="list">The entity list where the entity should be added.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.DelKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Deletes a KnifeStore from it's list and calls the database operation to syncronhize them.
+            </summary>
+            <param name="list">The entity list where the entity should be deleted from.</param>
+            <param name="knifeStore">The entity which is intended to delete.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.ModKnifeStore(KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Modifies an element of the knifeStore list as intended.
+            </summary>
+            <param name="knifeStoreToModify">The KnifeStore entity which should be modified.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.GetAllKnifeStore">
+            <summary>
+            Gets all the KesBolt elements from the database converts it to KnifeStore objects.
+            </summary>
+            <returns>All the KnifeStore entities from the database.</returns>
+        </member>
+        <member name="M:KnifeStoreWpf.Data.Knife.CopyFrom(KnifeStoreWpf.Data.Knife)">
+            <summary>
+            Copies an object for which is a temporary element.
+            </summary>
+            <param name="other">The other element where copy is intended.</param>
+        </member>
+        <member name="T:KnifeStoreWpf.Data.KnifeStore">
+            <summary>
+            KnifeStore entity.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.Data.KnifeStore.StorageId">
+            <summary>
+            Gets or sets creates object reference which throws param when modified for StorageId.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.Data.KnifeStore.Name">
+            <summary>
+            Gets or sets creates object reference which throws param when modified for Name.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.Data.KnifeStore.Address">
+            <summary>
+            Gets or sets creates object reference which throws param when modified for Address.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.Data.KnifeStore.Website">
+            <summary>
+            Gets or sets creates object reference which throws param when modified for Website.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.Data.KnifeStore.CopyFrom(KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Copies an object for which is a temporary element.
+            </summary>
+            <param name="other">The other element where copy is intended.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.Data.Review.CopyFrom(KnifeStoreWpf.Data.Review)">
+            <summary>
+            Copies an object for which is a temporary element.
+            </summary>
+            <param name="other">The other element where copy is intended.</param>
+        </member>
+        <member name="T:KnifeStoreWpf.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml .
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.MainWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.MainWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:KnifeStoreWpf.MyIoc">
+            <summary>
+            Interaction logic for App.xaml .
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.MyIoc.Instance">
+            <summary>
+            Gets creates a static Instence of an Ioc objact.
+            </summary>
+        </member>
+        <member name="T:KnifeStoreWpf.UI.EditorServiceViaWindow">
+            <summary>
+            UI communication between the editor window.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.EditorServiceViaWindow.EditKnifeStore(KnifeStoreWpf.Data.KnifeStore)">
+            <inheritdoc/>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.EditorServiceViaWindow.EditKnife(KnifeStoreWpf.Data.Knife)">
+            <inheritdoc/>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.EditorServiceViaWindow.EditReview(KnifeStoreWpf.Data.Review)">
+            <inheritdoc/>
+        </member>
+        <member name="T:KnifeStoreWpf.UI.KnifeStoreEditorWindow">
+            <summary>
+            Interaction logic for EditorWindow.xaml .
+            </summary>
+            <summary>
+            KnifeStoreEditorWindow
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.KnifeStoreEditorWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.UI.KnifeStoreEditorWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.KnifeStoreEditorWindow.#ctor(KnifeStoreWpf.Data.KnifeStore)">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.UI.KnifeStoreEditorWindow"/> class.
+            Constructor needed to edit elements.
+            </summary>
+            <param name="oldKnifeStore">The item which is edited.</param>
+        </member>
+        <member name="P:KnifeStoreWpf.UI.KnifeStoreEditorWindow.KnifeStore">
+            <summary>
+            Gets KnifeStore.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.KnifeStoreEditorWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:KnifeStoreWpf.UI.WebsiteToBrushConverter">
+            <summary>
+            Converter for website from link to brush.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.WebsiteToBrushConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.WebsiteToBrushConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:KnifeStoreWpf.VM.EditorViewModel">
+            <summary>
+            View Model for the window Edit.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.VM.EditorViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.VM.EditorViewModel"/> class.
+            Constructor which sets up a new entity fills it in designer mode.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.VM.EditorViewModel.KnifeStore">
+            <summary>
+            Gets or sets knifestore.
+            </summary>
+        </member>
+        <member name="T:KnifeStoreWpf.VM.MainViewModel">
+            <summary>
+            View Model for main window.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.VM.MainViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.VM.MainViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.VM.MainViewModel.KnifeStores">
+            <summary>
+            Gets ts the property of KnifeStore collection.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.VM.MainViewModel.SelectedKnifeStore">
+            <summary>
+            Gets or sets the KnifeStore which is currently selected from the frontend list.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>
