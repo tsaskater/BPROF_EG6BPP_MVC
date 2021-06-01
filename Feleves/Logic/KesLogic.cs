@@ -49,5 +49,10 @@ namespace Logic
             return KesRepo.Read(gyartasiCikkszam).Velemenyek.AsQueryable();
         }
 
+        public IQueryable<Kes> GetAllKesForKesbolt(string v_id)
+        {
+            return KesRepo.Read().Where(x => x.Raktar_Id == v_id);
+        }
+
     }
 }

@@ -17,6 +17,8 @@ namespace Models
         [StringLength(1024)]
         public string VelemenySzovege { get; set; }
         [NotMapped]
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual Kes Kes_Termek { get; set; }
         public string Gyartasi_Cikkszam { get; set; }
         public override bool Equals(object obj)

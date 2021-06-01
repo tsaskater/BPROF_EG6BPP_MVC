@@ -26,6 +26,8 @@ namespace Models
         public string Raktar_Id { get; set; }
 
         [NotMapped]
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual Kes_Bolt Kes_Bolt_Keszlet_Info { get; set; }
         public override bool Equals(object obj)
         {

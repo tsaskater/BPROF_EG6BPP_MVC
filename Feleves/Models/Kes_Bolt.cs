@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Models
@@ -15,6 +16,10 @@ namespace Models
         public string Cim { get; set; }
         [StringLength(100)]
         public string Weboldal { get; set; }
+
+        [NotMapped]
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<Kes> Kesek { get; set; }
         public override bool Equals(object obj)
         {

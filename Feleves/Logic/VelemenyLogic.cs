@@ -43,5 +43,9 @@ namespace Logic
             VelemenyRepo.Update(o_vid, n_review);
         }
 
+        public IQueryable<Velemeny> GetAllVelemenyForKes(string k_id)
+        {
+            return VelemenyRepo.Read().Where(x => x.Gyartasi_Cikkszam == k_id);
+        }
     }
 }
