@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:KnifeStoreWpf.UI"
         xmlns:vm="clr-namespace:KnifeStoreWpf.VM"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="ReviewEditorWindow" Height="450" Width="500" Background="#FFC1B4B4">
     <Window.Resources>
         <vm:EditorViewModel x:Key="VM"/>

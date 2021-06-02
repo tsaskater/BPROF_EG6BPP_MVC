@@ -5,6 +5,7 @@
 namespace KnifeStoreWpf.VM
 {
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Net;
     using System.Windows;
     using System.Windows.Input;
@@ -28,6 +29,7 @@ namespace KnifeStoreWpf.VM
         private ObservableCollection<KnifeStore> knifeStores;
         private ObservableCollection<Knife> knives;
         private ObservableCollection<Review> reviews;
+        private string token;
 
         public MainViewModel(IKnifeStoreLogic knifeStoreLogic, IKnifeLogic knifeLogic, IReviewLogic reviewLogic)
         {
@@ -37,7 +39,14 @@ namespace KnifeStoreWpf.VM
 
             if (!this.IsInDesignMode)
             {
-                this.KnifeStores = new ObservableCollection<KnifeStore>();
+                try
+                {
+                    RefreshKnifeStores();
+                }
+                catch
+                {
+                    MessageBox.Show("The client could not find the api endpoint...");
+                }
             }
             else
             {
@@ -79,6 +88,7 @@ namespace KnifeStoreWpf.VM
             this.UpdateCmd = new RelayCommand(() => RefreshKnifeStores(), true);
             this.GetKnives = new RelayCommand(() => { RefreshKnives(); Reviews = new ObservableCollection<Review>(); selectedReview = null; },true);
             this.GetReviews = new RelayCommand(() => RefreshReview(), true);
+            this.UpdateToken = new RelayCommand(() => SetToken(), true);
         }
 
         private void GenerateSample()
@@ -106,6 +116,11 @@ namespace KnifeStoreWpf.VM
             }
         }
 
+        private void SetToken()
+        {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            token = window.Resources["token"] as string;
+        }
         private void RefreshKnifeStores()
         {
             this.KnifeStores = new ObservableCollection<KnifeStore>(knifeStoreLogic.GetAllKnifeStore());
@@ -197,5 +212,7 @@ namespace KnifeStoreWpf.VM
         public ICommand GetKnives { get; private set; }
 
         public ICommand GetReviews { get; private set; }
+
+        public ICommand UpdateToken { get; private set; }
     }
 }

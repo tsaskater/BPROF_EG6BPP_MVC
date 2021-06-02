@@ -4,8 +4,11 @@
 
 namespace KnifeStoreWpf
 {
+    using System.ComponentModel;
     using System.Windows;
+    using System.Windows.Input;
     using GalaSoft.MvvmLight.Messaging;
+    using KnifeStoreWpf.Data;
     using KnifeStoreWpf.VM;
 
     /// <summary>
@@ -14,18 +17,32 @@ namespace KnifeStoreWpf
     public partial class MainWindow : Window
     {
         private MainViewModel vM;
-
+        private string token;
+        private User user;
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
-        public MainWindow()
+        public MainWindow(string token,User u)
         {
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.Resources.Add("username", "CurrentUser");
+            }
+            else
+            {
+                this.token = token;
+                this.Resources.Add("token", token);
+                this.user = u;
+                this.Resources.Add("username", user.ValidationName);
+            }
             this.InitializeComponent();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.vM = this.FindResource("VM") as MainViewModel;
+            this.vM.UpdateToken.Execute(this);
             Messenger.Default.Register<string>(this, "LogicResult", msg =>
             {
                 MessageBox.Show(msg);

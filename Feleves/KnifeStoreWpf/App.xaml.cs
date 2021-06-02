@@ -9,7 +9,6 @@ namespace KnifeStoreWpf
     using GalaSoft.MvvmLight.Messaging;
     using KnifeStoreWpf.BL;
     using KnifeStoreWpf.UI;
-    using Logic;
     using Models;
     using Repository;
 
@@ -30,6 +29,7 @@ namespace KnifeStoreWpf
             MyIoc.Instance.Register<IKnifeStoreLogic, KnifeStoreLogic>();
             MyIoc.Instance.Register<IKnifeLogic, KnifeLogic>();
             MyIoc.Instance.Register<IReviewLogic, ReviewLogic>();
+            MyIoc.Instance.Register<IAuthLogic, AuthLogic>();
         }
     }
 }

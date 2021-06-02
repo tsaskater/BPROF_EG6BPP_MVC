@@ -204,6 +204,24 @@
             </summary>
             <param name="other">The other element where copy is intended.</param>
         </member>
+        <member name="T:KnifeStoreWpf.Login">
+            <summary>
+            Interaction logic for Login.xaml
+            </summary>
+            <summary>
+            Login
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.Login.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.MainWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.Login.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:KnifeStoreWpf.MainWindow">
             <summary>
             Interaction logic for MainWindow.xaml .
@@ -212,7 +230,7 @@
             MainWindow
             </summary>
         </member>
-        <member name="M:KnifeStoreWpf.MainWindow.#ctor">
+        <member name="M:KnifeStoreWpf.MainWindow.#ctor(System.String,KnifeStoreWpf.Data.User)">
             <summary>
             Initializes a new instance of the <see cref="T:KnifeStoreWpf.MainWindow"/> class.
             </summary>

@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         Title="Peti Nagyker" Height="500" Width="900"
         Loaded="Window_Loaded"
+        ResizeMode="NoResize"
         Closing="Window_Closing" Background="#FFC1B4B4">
 
     <Window.Resources>
@@ -48,7 +49,9 @@
         
     </Window.Resources>
     <Grid DataContext="{StaticResource VM}">
-        <TextBlock Text="Kés Boltok" Margin="10,15,644,426" TextAlignment="Center"/>
+        <TextBlock Text="Kés Boltok" Margin="10,5,644,426" FontSize="20" TextAlignment="Center"/>
+        <TextBlock Text="Termékek" Margin="320,5,334,426" FontSize="20" TextAlignment="Center"/>
+        <TextBlock Text="Vélemények" Margin="630,5,24,426" FontSize="20" TextAlignment="Center"/>
         <ListBox ItemTemplate="{StaticResource knifeStoreTemplate}" ItemsSource="{Binding Path=KnifeStores}" SelectedItem="{Binding Path=SelectedKnifeStore}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="302" Margin="10,58,0,0" VerticalAlignment="Top" Width="246" />
         <Button Command="{Binding Path=AddKnifeStoreCmd}" Content="ADD" HorizontalAlignment="Left"
                 Margin="10,366,0,0" VerticalAlignment="Top" Width="50" />
@@ -78,19 +81,12 @@
             Margin="826,366,0,0" VerticalAlignment="Top" Width="50" />
         <Button Command="{Binding GetReviews}" Content="&gt;&gt;" HorizontalAlignment="Left"
             Margin="585,200,0,0" VerticalAlignment="Top" Width="25" />
-        <TextBlock Text="Termékek" Margin="320,15,334,431" TextAlignment="Center"/>
-        <TextBlock Text="Vélemények" Margin="630,15,24,431" TextAlignment="Center"/>
-        <Button Command="{Binding UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
-            Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
-        <Button Command="{Binding UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
-            Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
-        <Button Command="{Binding UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
-            Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
-        <Button Command="{Binding UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
-            Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
+        
         <Button Command="{Binding UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
             Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
         <Button Command="{Binding GenerateCmd}" Content="GENERATE" HorizontalAlignment="Left"
             Margin="156,418,0,0" VerticalAlignment="Top" Width="100" />
+        <TextBlock Text="Bejelentkezve mint:" Margin="615,405,39,16" TextAlignment="Center"/>
+        <TextBlock Text="{StaticResource ResourceKey=username}" Margin="615,425,39,16" TextAlignment="Center"/>
     </Grid>
 </Window>
