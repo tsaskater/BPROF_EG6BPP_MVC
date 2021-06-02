@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace KnifeStoreWpf.BL
 {
-    internal class KnifeLogic:IKnifeLogic
+    internal class ReviewLogic:IReviewLogic
     {
         const string url = "http://localhost:5000/";
         private IEditorService editorService;
@@ -24,7 +24,7 @@ namespace KnifeStoreWpf.BL
         /// </summary>
         /// <param name="editorService">Editor service component.</param>
         /// <param name="messengerService">Messenger service component.</param>
-        public KnifeLogic(IEditorService editorService, IMessenger messengerService)
+        public ReviewLogic(IEditorService editorService, IMessenger messengerService)
         {
             this.editorService = editorService;
             this.messengerService = messengerService;
@@ -34,53 +34,41 @@ namespace KnifeStoreWpf.BL
         /// Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
         /// </summary>
         /// <param name="list">The entity list where the entity should be added.</param>
-        public void AddKnife(IList<Knife> list,string selectedKnifeStoreId)
+        public void AddReview(IList<Review> list, string selectedKnifeId)
         {
-            Knife newKnife = new Knife();
-            if ((selectedKnifeStoreId != null && selectedKnifeStoreId != string.Empty) && this.editorService.EditKnife(newKnife) == true)
+            Review newReview = new Review();
+            if ((selectedKnifeId != null && selectedKnifeId != string.Empty) && this.editorService.EditReview(newReview) == true)
             {
-                Kes kb = new Kes()
+                Velemeny kb = new Velemeny()
                 {
-                    Gyartasi_Cikkszam = string.Empty,
-                    Raktar_Id = selectedKnifeStoreId,
-                    Gyarto = newKnife.Maker == null ? string.Empty : newKnife.Maker,
-                    Bevont_Penge = newKnife.Coated,
-                    Acel = newKnife.Steel == null ? string.Empty : newKnife.Steel,
-                    Penge_Hossz = newKnife.BladeLength,
-                    Ar = newKnife.Price,
-                    Markolat = newKnife.Handle == null ? string.Empty : newKnife.Handle,
-                    Modell_nev= newKnife.Model == null ? string.Empty : newKnife.Model,
+                    Velemeny_Id = string.Empty,
+                    VelemenySzovege = newReview.ReviewText == null ? string.Empty : newReview.ReviewText,
+                    Elegedettseg = newReview.Rating,
+                    Szerzo = newReview.Author == null ? string.Empty : newReview.Author,
+                    Gyartasi_Cikkszam = selectedKnifeId,
                 };
-                string api = url + $"Knife";
+                string api = url + $"Review";
                 WebClient wc = new WebClient();
                 var json = JsonConvert.SerializeObject(kb);
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-                try
-                {
-                    wc.UploadString(api, "POST", json);
-                }
-                catch (Exception ex)
-                {
-                    this.messengerService.Send($"{ex}", "LogicResult");
-                    return;
-                }
+                wc.UploadString(api, "POST", json);
                 this.messengerService.Send("ADD OK", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("ADD FAILED", "LogicResult");
+            this.messengerService.Send("ADD CANCEL", "LogicResult");
         }
 
         /// <summary>
-        /// Deletes a Knife from it's list and calls the database operation to syncronhize them.
+        /// Deletes a Review from it's list and calls the database operation to syncronhize them.
         /// </summary>
         /// <param name="list">The entity list where the entity should be deleted from.</param>
-        /// <param name="knife">The entity which is intended to delete.</param>
-        public void DelKnife(IList<Knife> list, Knife knife)
+        /// <param name="review">The entity which is intended to delete.</param>
+        public void DelReview(IList<Review> list, Review review)
         {
-            if (knife != null)
+            if (review != null)
             {
-                string api = url + $"Knife" + $"/{knife.SerialNumber}";
+                string api = url + $"Review" + $"/{review.ReviewId}";
                 WebRequest request = WebRequest.Create(api);
                 request.Method = "DELETE";
                 try
@@ -92,7 +80,7 @@ namespace KnifeStoreWpf.BL
                     this.messengerService.Send(ex.ToString(), "LogicResult");
                     return;
                 }
-                list.Remove(knife);
+                list.Remove(review);
                 this.messengerService.Send("DELETE OK", "LogicResult");
                 return;
             }
@@ -103,35 +91,31 @@ namespace KnifeStoreWpf.BL
         /// <summary>
         /// Modifies an element of the knifeStore list as intended.
         /// </summary>
-        /// <param name="knifeToModify">The KnifeStore entity which should be modified.</param>
-        public void ModKnife(Knife knifeToModify)
+        /// <param name="reviewToModify">The Reveiew entity which should be modified.</param>
+        public void ModReview(Review reviewToModify)
         {
-            if (knifeToModify == null)
+            if (reviewToModify == null)
             {
                 this.messengerService.Send("EDIT FAILED", "LogicResult");
                 return;
             }
 
-            Knife clone = new Knife();
-            clone.CopyFrom(knifeToModify);
-            if (this.editorService.EditKnife(clone) == true)
+            Review clone = new Review();
+            clone.CopyFrom(reviewToModify);
+            if (this.editorService.EditReview(clone) == true)
             {
-                knifeToModify.CopyFrom(clone);
-                 Kes kb = new Kes()
-                 {
+                reviewToModify.CopyFrom(clone);
+                Velemeny kb = new Velemeny()
+                {
+                    Velemeny_Id = string.Empty,
+                    VelemenySzovege = clone.ReviewText == null ? string.Empty : clone.ReviewText,
+                    Elegedettseg = clone.Rating,
+                    Szerzo = clone.Author == null ? string.Empty : clone.Author,
                     Gyartasi_Cikkszam = clone.SerialNumber,
-                    Raktar_Id = clone.StorageId,
-                    Gyarto = clone.Maker == null ? string.Empty : clone.Maker,
-                    Bevont_Penge = clone.Coated,
-                    Acel = clone.Steel == null ? string.Empty : clone.Steel,
-                    Penge_Hossz = clone.BladeLength,
-                    Ar = clone.Price,
-                    Markolat = clone.Handle == null ? string.Empty : clone.Handle,
-                    Modell_nev = clone.Model == null ? string.Empty : clone.Model,
-                 };
+                };
 
 
-                string api = url + $"Knife" + $"/{knifeToModify.SerialNumber}";
+                string api = url + $"Review" + $"/{reviewToModify.ReviewId}";
                 try
                 {
                     WebClient wc = new WebClient();
@@ -152,39 +136,34 @@ namespace KnifeStoreWpf.BL
             this.messengerService.Send("MODIFY CANCEL", "LogicResult");
         }
 
-        public IList<Knife> GetAllKnivesForStore(string knifeStoreId)
+        public IList<Review> GetAllReviewsForKnife(string knifeId)
         {
-            string api = url + $"Knife/AllKnifesForKnifeStore/{knifeStoreId}";
+            string api = url + $"Review/GetAllReviewsForKnife/{knifeId}";
             WebClient wc = new WebClient();
             string jsonContent = wc.DownloadString(api);
-            IQueryable<Kes> ks = JsonConvert.DeserializeObject<List<Kes>>(jsonContent).AsQueryable();
+            IQueryable<Velemeny> ks = JsonConvert.DeserializeObject<List<Velemeny>>(jsonContent).AsQueryable();
 
             //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
-            ObservableCollection<Knife> knifeStores = new ObservableCollection<Knife>();
+            ObservableCollection<Review> reviews = new ObservableCollection<Review>();
             if (ks == null)
             {
-                return knifeStores;
+                return reviews;
             }
 
             foreach (var item in ks)
             {
-                Knife k = new Knife()
+                Review k = new Review()
                 {
-                    StorageId = item.Raktar_Id,
-                    Maker = item.Gyarto,
-                    Steel = item.Acel,
-                    BladeLength = item.Penge_Hossz,
-                    SerialNumber = item.Gyartasi_Cikkszam,
-                    Coated=item.Bevont_Penge,
-                    Handle=item.Markolat,
-                    Model=item.Modell_nev,
-                    Price=item.Ar
-                    
+                    ReviewId=item.Velemeny_Id,
+                    ReviewText=item.VelemenySzovege,
+                    Rating=item.Elegedettseg,
+                    Author=item.Szerzo,
+                    SerialNumber=item.Gyartasi_Cikkszam,
                 };
-                knifeStores.Add(k);
+                reviews.Add(k);
             }
 
-            return knifeStores;
+            return reviews;
         }
     }
 }

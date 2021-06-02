@@ -29,6 +29,7 @@ namespace KnifeStoreWpf
             MyIoc.Instance.Register<IMessenger>(() => Messenger.Default);
             MyIoc.Instance.Register<IKnifeStoreLogic, KnifeStoreLogic>();
             MyIoc.Instance.Register<IKnifeLogic, KnifeLogic>();
+            MyIoc.Instance.Register<IReviewLogic, ReviewLogic>();
         }
     }
 }

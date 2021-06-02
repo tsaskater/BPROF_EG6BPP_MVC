@@ -13,11 +13,11 @@ namespace Feleves.Controllers
     [ApiController]
     public class KnifeController : ControllerBase
     {
-        KesLogic knfieLogic;
+        KesLogic knifeLogic;
 
         public KnifeController(KesLogic knfieLogic)
         {
-            this.knfieLogic = knfieLogic;
+            this.knifeLogic = knfieLogic;
         }
 
         [HttpDelete("{id}")]
@@ -25,7 +25,7 @@ namespace Feleves.Controllers
         {
             try
             {
-                knfieLogic.DeleteKes(id);
+                knifeLogic.DeleteKes(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -38,7 +38,7 @@ namespace Feleves.Controllers
         {
             try
             {
-                return Ok(knfieLogic.GetKes(id));
+                return Ok(knifeLogic.GetKes(id));
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace Feleves.Controllers
         {
             try
             {
-                return Ok(knfieLogic.GetAllKes());
+                return Ok(knifeLogic.GetAllKes());
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace Feleves.Controllers
         {
             try
             {
-                return Ok(knfieLogic.GetAllKesForKesbolt(id));
+                return Ok(knifeLogic.GetAllKesForKesbolt(id));
             }
             catch (Exception ex)
             {
@@ -74,12 +74,26 @@ namespace Feleves.Controllers
         {
             try
             {
-                knfieLogic.AddKes(k);
+                k.Gyartasi_Cikkszam = Guid.NewGuid().ToString();
+                knifeLogic.AddKes(k);
                 return Ok();
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateKnife(string id, [FromBody] Kes newKnife)
+        {
+            try
+            {
+                knifeLogic.UpdateKes(id, newKnife);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"Bad request error: {ex}");
             }
         }
     }

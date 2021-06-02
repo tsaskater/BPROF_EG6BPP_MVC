@@ -74,12 +74,26 @@ namespace Feleves.Controllers
         {
             try
             {
+                v.Velemeny_Id = Guid.NewGuid().ToString();
                 reviewLogic.AddVelemeny(v);
                 return Ok();
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateReview(string id, [FromBody] Velemeny newVelmeny)
+        {
+            try
+            {
+                reviewLogic.UpdateVelemeny(id, newVelmeny);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, $"Bad request error: {ex}");
             }
         }
     }

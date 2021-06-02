@@ -5,6 +5,8 @@
 namespace KnifeStoreWpf.VM
 {
     using System.Collections.ObjectModel;
+    using System.Net;
+    using System.Windows;
     using System.Windows.Input;
     using CommonServiceLocator;
     using GalaSoft.MvvmLight;
@@ -19,15 +21,19 @@ namespace KnifeStoreWpf.VM
     {
         private IKnifeStoreLogic knifeStoreLogic;
         private IKnifeLogic knifeLogic;
+        private IReviewLogic reviewLogic;
         private KnifeStore selectedKnifeStore;
         private Knife selectedKnife;
+        private Review selectedReview;
         private ObservableCollection<KnifeStore> knifeStores;
         private ObservableCollection<Knife> knives;
+        private ObservableCollection<Review> reviews;
 
-        public MainViewModel(IKnifeStoreLogic knifeStoreLogic, IKnifeLogic knifeLogic)
+        public MainViewModel(IKnifeStoreLogic knifeStoreLogic, IKnifeLogic knifeLogic, IReviewLogic reviewLogic)
         {
             this.knifeStoreLogic = knifeStoreLogic;
             this.knifeLogic = knifeLogic;
+            this.reviewLogic = reviewLogic;
 
             if (!this.IsInDesignMode)
             {
@@ -54,10 +60,50 @@ namespace KnifeStoreWpf.VM
             }, true);
             this.ModKnifeStoreCmd = new RelayCommand(() => this.knifeStoreLogic.ModKnifeStore(this.SelectedKnifeStore), true);
             this.DelKnifeStoreCmd = new RelayCommand(() => this.knifeStoreLogic.DelKnifeStore(this.KnifeStores, this.SelectedKnifeStore), true);
+
+            this.AddKnifeCmd = new RelayCommand(() => {
+                    this.knifeLogic.AddKnife(this.Knives,selectedKnifeStore == null ? string.Empty : selectedKnifeStore.StorageId);
+                    RefreshKnives();
+            }, true);
+            this.ModKnifeCmd = new RelayCommand(() => this.knifeLogic.ModKnife(SelectedKnife), true);
+            this.DelKnifeCmd = new RelayCommand(() => this.knifeLogic.DelKnife(Knives,SelectedKnife), true);
+
+            this.AddReviewCmd = new RelayCommand(() => {
+                    this.reviewLogic.AddReview(this.Reviews,selectedKnife == null ? string.Empty : SelectedKnife.SerialNumber);
+                    RefreshReview();
+            }, true);
+            this.ModReviewCmd = new RelayCommand(() => this.reviewLogic.ModReview(SelectedReview), true);
+            this.DelReviewCmd = new RelayCommand(() => this.reviewLogic.DelReview(Reviews, SelectedReview), true);
+
+            this.GenerateCmd = new RelayCommand(() => GenerateSample(), true);
             this.UpdateCmd = new RelayCommand(() => RefreshKnifeStores(), true);
-            this.GetKnives = new RelayCommand(() => RefreshKnives(),true);
+            this.GetKnives = new RelayCommand(() => { RefreshKnives(); Reviews = new ObservableCollection<Review>(); selectedReview = null; },true);
+            this.GetReviews = new RelayCommand(() => RefreshReview(), true);
+        }
 
-
+        private void GenerateSample()
+        {
+            if (knifeStores.Count > 0)
+            {
+                if (MessageBox.Show("Már van generált adatod!\nSzeretnél ismét generálni?", "Hoppá!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+            string api = "http://localhost:5000/SampleDataGenerator";
+            WebRequest request = WebRequest.Create(api);
+            request.Method = "POST";
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                RefreshKnifeStores();
+                Knives = new ObservableCollection<Knife>();
+                Reviews = new ObservableCollection<Review>();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void RefreshKnifeStores()
@@ -71,12 +117,20 @@ namespace KnifeStoreWpf.VM
                 this.Knives = new ObservableCollection<Knife>(knifeLogic.GetAllKnivesForStore(selectedKnifeStore.StorageId));
             }
         }
+        private void RefreshReview()
+        {
+            if (selectedKnife != null)
+            {
+                this.Reviews = new ObservableCollection<Review>(reviewLogic.GetAllReviewsForKnife(selectedKnife.SerialNumber));
+            }
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
         /// </summary>
         public MainViewModel()
             : this(IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IKnifeStoreLogic>(),
-                  IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IKnifeLogic>()) // IoC
+                  IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IKnifeLogic>(),
+                  IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IReviewLogic>()) // IoC
         {
         }
 
@@ -93,6 +147,11 @@ namespace KnifeStoreWpf.VM
             get { return this.knives; }
             set { this.Set(ref this.knives, value); }
         }
+        public ObservableCollection<Review> Reviews
+        {
+            get { return this.reviews; }
+            set { this.Set(ref this.reviews, value); }
+        }
 
         /// <summary>
         /// Gets or sets the KnifeStore which is currently selected from the frontend list.
@@ -107,6 +166,11 @@ namespace KnifeStoreWpf.VM
             get { return this.selectedKnife; }
             set { this.Set(ref this.selectedKnife, value); }
         }
+        public Review SelectedReview
+        {
+            get { return this.selectedReview; }
+            set { this.Set(ref this.selectedReview, value); }
+        }
 
         public ICommand AddKnifeStoreCmd { get; private set; }
 
@@ -114,8 +178,24 @@ namespace KnifeStoreWpf.VM
 
         public ICommand DelKnifeStoreCmd { get; private set; }
 
+        public ICommand AddKnifeCmd { get; private set; }
+
+        public ICommand ModKnifeCmd { get; private set; }
+
+        public ICommand DelKnifeCmd { get; private set; }
+
+        public ICommand AddReviewCmd { get; private set; }
+
+        public ICommand ModReviewCmd { get; private set; }
+
+        public ICommand DelReviewCmd { get; private set; }
+
         public ICommand UpdateCmd { get; private set; }
 
+        public ICommand GenerateCmd { get; private set; }
+
         public ICommand GetKnives { get; private set; }
+
+        public ICommand GetReviews { get; private set; }
     }
 }

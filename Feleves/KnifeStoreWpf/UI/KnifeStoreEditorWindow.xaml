@@ -6,7 +6,7 @@
         xmlns:ui="clr-namespace:KnifeStoreWpf.UI"
         xmlns:vm ="clr-namespace:KnifeStoreWpf.VM"
         mc:Ignorable="d"
-        Title="Edit Element" Height="443" Width="394">
+        Title="Edit Element" Height="443" Width="394" Background="#FFC1B4B4">
     <Window.Resources>
         <vm:EditorViewModel x:Key="VM"/>
     </Window.Resources>

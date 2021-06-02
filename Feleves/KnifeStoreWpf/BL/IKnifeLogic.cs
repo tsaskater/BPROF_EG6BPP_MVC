@@ -11,7 +11,7 @@ namespace KnifeStoreWpf.BL
     {
         void AddKnife(IList<Knife> list, string selectedKnifeStoreId);
         public void DelKnife(IList<Knife> list, Knife knife);
-        public void ModKnifeStore(Knife knifeToModify);
+        public void ModKnife(Knife knifeToModify);
         public IList<Knife> GetAllKnivesForStore(string knifeStoreId);
 
 

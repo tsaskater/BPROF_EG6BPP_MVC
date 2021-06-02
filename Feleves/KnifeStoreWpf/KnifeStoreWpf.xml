@@ -90,7 +90,7 @@
             <param name="list">The entity list where the entity should be deleted from.</param>
             <param name="knife">The entity which is intended to delete.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeLogic.ModKnifeStore(KnifeStoreWpf.Data.Knife)">
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.ModKnife(KnifeStoreWpf.Data.Knife)">
             <summary>
             Modifies an element of the knifeStore list as intended.
             </summary>
@@ -133,6 +133,33 @@
             Gets all the KesBolt elements from the database converts it to KnifeStore objects.
             </summary>
             <returns>All the KnifeStore entities from the database.</returns>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.BL.KnifeStoreLogic"/> class.
+            Initialize the components which are needed.
+            </summary>
+            <param name="editorService">Editor service component.</param>
+            <param name="messengerService">Messenger service component.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.AddReview(System.Collections.Generic.IList{KnifeStoreWpf.Data.Review},System.String)">
+            <summary>
+            Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
+            </summary>
+            <param name="list">The entity list where the entity should be added.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.DelReview(System.Collections.Generic.IList{KnifeStoreWpf.Data.Review},KnifeStoreWpf.Data.Review)">
+            <summary>
+            Deletes a Review from it's list and calls the database operation to syncronhize them.
+            </summary>
+            <param name="list">The entity list where the entity should be deleted from.</param>
+            <param name="review">The entity which is intended to delete.</param>
+        </member>
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.ModReview(KnifeStoreWpf.Data.Review)">
+            <summary>
+            Modifies an element of the knifeStore list as intended.
+            </summary>
+            <param name="reviewToModify">The Reveiew entity which should be modified.</param>
         </member>
         <member name="M:KnifeStoreWpf.Data.Knife.CopyFrom(KnifeStoreWpf.Data.Knife)">
             <summary>
@@ -219,6 +246,31 @@
         <member name="M:KnifeStoreWpf.UI.EditorServiceViaWindow.EditReview(KnifeStoreWpf.Data.Review)">
             <inheritdoc/>
         </member>
+        <member name="T:KnifeStoreWpf.UI.KnifeEditorWindow">
+            <summary>
+            Interaction logic for KnifeEditorWindow.xaml
+            </summary>
+            <summary>
+            KnifeEditorWindow
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.KnifeEditorWindow.#ctor(KnifeStoreWpf.Data.Knife)">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.UI.KnifeEditorWindow"/> class.
+            Constructor needed to edit elements.
+            </summary>
+            <param name="oldKnife">The item which is edited.</param>
+        </member>
+        <member name="P:KnifeStoreWpf.UI.KnifeEditorWindow.Knife">
+            <summary>
+            Gets KnifeStore.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.KnifeEditorWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:KnifeStoreWpf.UI.KnifeStoreEditorWindow">
             <summary>
             Interaction logic for EditorWindow.xaml .
@@ -249,6 +301,31 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="T:KnifeStoreWpf.UI.ReviewEditorWindow">
+            <summary>
+            Interaction logic for ReviewEditorWindow.xaml
+            </summary>
+            <summary>
+            ReviewEditorWindow
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.ReviewEditorWindow.#ctor(KnifeStoreWpf.Data.Review)">
+            <summary>
+            Initializes a new instance of the <see cref="T:KnifeStoreWpf.UI.ReviewEditorWindow"/> class.
+            Constructor needed to edit elements.
+            </summary>
+            <param name="oldReview">The item which is edited.</param>
+        </member>
+        <member name="P:KnifeStoreWpf.UI.ReviewEditorWindow.Review">
+            <summary>
+            Gets KnifeStore.
+            </summary>
+        </member>
+        <member name="M:KnifeStoreWpf.UI.ReviewEditorWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:KnifeStoreWpf.UI.WebsiteToBrushConverter">
             <summary>
             Converter for website from link to brush.
@@ -269,6 +346,16 @@
             <summary>
             Initializes a new instance of the <see cref="T:KnifeStoreWpf.VM.EditorViewModel"/> class.
             Constructor which sets up a new entity fills it in designer mode.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.VM.EditorViewModel.Review">
+            <summary>
+            Gets or sets review.
+            </summary>
+        </member>
+        <member name="P:KnifeStoreWpf.VM.EditorViewModel.Knife">
+            <summary>
+            Gets or sets knife.
             </summary>
         </member>
         <member name="P:KnifeStoreWpf.VM.EditorViewModel.KnifeStore">

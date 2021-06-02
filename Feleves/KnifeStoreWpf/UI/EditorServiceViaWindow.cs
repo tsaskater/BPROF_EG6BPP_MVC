@@ -21,16 +21,14 @@ namespace KnifeStoreWpf.UI
         /// <inheritdoc/>
         public bool EditKnife(Knife k)
         {
-            /*EditorWindow win = new EditorWindow(r);
-            return win.ShowDialog() ?? false;*/
-            return false;
+            KnifeEditorWindow win = new KnifeEditorWindow(k);
+            return win.ShowDialog() ?? false;
         }
         /// <inheritdoc/>
         public bool EditReview(Review r)
         {
-            /*EditorWindow win = new EditorWindow(r);
-            return win.ShowDialog() ?? false;*/
-            return false;
+            ReviewEditorWindow win = new ReviewEditorWindow(r);
+            return win.ShowDialog() ?? false;
         }
     }
 }

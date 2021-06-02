@@ -25,7 +25,7 @@ namespace Feleves.Controllers
         }
 
         [HttpPost]
-        public IActionResult InsertLessonBellrings()
+        public IActionResult GenerateData()
         {
             try
             {
@@ -48,28 +48,28 @@ namespace Feleves.Controllers
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Blade Hq",
                 Cim = "564 West 700 South, Pleasant Grove, UT 84062, Egyesült Államok",
-                Weboldal = "https://www.bladehq.com/"
+                Weboldal = "https://www.bladehq.com"
             });
             KesBoltLista.Add(new Kes_Bolt()
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Extrametál Kés (üzlethálózat)",
                 Cim = "Extrametál,Magyarország",
-                Weboldal = "https://extrametal.hu/"
+                Weboldal = "https://extrametal.hu"
             });
             KesBoltLista.Add(new Kes_Bolt()
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Blade Shop",
                 Cim = "Budapest, Vendel u. 15 - 17, 1096, Magyarország",
-                Weboldal = "https://www.bladeshop.hu/"
+                Weboldal = "https://www.bladeshop.hu"
             });
             KesBoltLista.Add(new Kes_Bolt()
             {
                 Raktar_Id = Guid.NewGuid().ToString(),
                 Bolt_Nev = "Knife Center",
                 Cim = "5201 Lad Land Dr, Fredericksburg, VA 22407, Egyesült Államok",
-                Weboldal = "https://www.knifecenter.com/"
+                Weboldal = "https://www.knifecenter.com"
             });
             /*KESEK:-----------*/
             List<Kes> KesLista = new List<Kes>();

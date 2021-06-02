@@ -22,6 +22,9 @@ namespace Models
         public string Acel { get; set; }
         [Range(0, 2000000)]
         public int Ar{ get; set; }
+        [NotMapped]
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<Velemeny> Velemenyek { get; set; }
         public string Raktar_Id { get; set; }
 

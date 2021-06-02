@@ -1,0 +1,44 @@
+﻿<Window x:Class="KnifeStoreWpf.UI.KnifeEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="clr-namespace:KnifeStoreWpf.UI"
+        xmlns:vm ="clr-namespace:KnifeStoreWpf.VM"
+        mc:Ignorable="d"
+        Title="Kés" Height="460" Width="394" Background="#FFC1B4B4">
+    <Window.Resources>
+        <vm:EditorViewModel x:Key="VM"/>
+        <ui:BoolToStringConverter x:Key="BoolToStringConverter" />
+    </Window.Resources>
+    <Grid DataContext="{StaticResource VM}" >
+        <Label Content="Gyártó" HorizontalAlignment="Left" Margin="34,24,0,0" VerticalAlignment="Top"/>
+        <Label Content="Modell" HorizontalAlignment="Left" Margin="34,79,0,0" VerticalAlignment="Top"/>
+        <Label Content="Penge Hossz" HorizontalAlignment="Left" Margin="20,130,0,0" VerticalAlignment="Top"/>
+
+
+        <TextBox Text="{Binding Path=Knife.Maker}" HorizontalAlignment="Left"  Margin="119,10,0,0" TextWrapping="Wrap"  Padding="10"  VerticalAlignment="Top"
+                 Width="200" Height="40" />
+
+        <TextBox Text="{Binding Path=Knife.Model}" HorizontalAlignment="Left" Margin="119,65,0,0" TextWrapping="wrap" Padding="10" VerticalAlignment="Top" Width="200" Height="40"/>
+
+        <TextBox Text="{Binding Path=Knife.BladeLength}" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Margin="119,123,0,0" Padding="10" VerticalAlignment="Top" Width="200" Height="40"/>
+
+        <Button Content="OK" HorizontalAlignment="Left" Margin="36,394,0,0" VerticalAlignment="Top" Width="75" Click="OK_Click"/>
+
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="172,394,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click" />
+        <Label Content="mm" HorizontalAlignment="Left" Margin="317,127,0,0" VerticalAlignment="Top" Width="54"/>
+
+        <Label Content="Acél" HorizontalAlignment="Left" Margin="41,196,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Knife.Steel}" HorizontalAlignment="Left" Margin="119,184,0,0" TextWrapping="wrap" Padding="10" VerticalAlignment="Top" Width="200" Height="40"/>
+        <Label Content="Markolat" HorizontalAlignment="Left" Margin="41,255,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Knife.Handle}" HorizontalAlignment="Left" Margin="119,243,0,0" TextWrapping="wrap" Padding="10" VerticalAlignment="Top" Width="200" Height="40"/>
+        <Label Content="Bevont Penge" HorizontalAlignment="Left" Margin="28,308,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="{Binding Knife.Coated}" HorizontalAlignment="Left" Margin="119,313,0,0" Padding="10" VerticalAlignment="Top" Width="200" Height="16"/>
+        <Label Content="{Binding Knife.Coated,Converter={StaticResource BoolToStringConverter},
+                                       ConverterParameter='Bevont;Nem Bevont'}" MaxWidth="200" Margin="142,308,98,85"/>
+        <Label Content="Ár" HorizontalAlignment="Left" Margin="41,361,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Knife.Price}" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Margin="119,349,0,0" TextWrapping="wrap" Padding="10" VerticalAlignment="Top" Width="200" Height="40"/>
+        <Label Content="Ft" HorizontalAlignment="Left" Margin="317,356,0,0" VerticalAlignment="Top" Width="54"/>
+    </Grid>
+</Window>
