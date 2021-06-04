@@ -14,9 +14,9 @@ namespace KnifeStoreWpf.BL
 {
     internal class KnifeLogic:IKnifeLogic
     {
-        const string url = "http://localhost:5000/";
         private IEditorService editorService;
         private IMessenger messengerService;
+        private IHostSettings hostSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KnifeStoreLogic"/> class.
@@ -24,10 +24,11 @@ namespace KnifeStoreWpf.BL
         /// </summary>
         /// <param name="editorService">Editor service component.</param>
         /// <param name="messengerService">Messenger service component.</param>
-        public KnifeLogic(IEditorService editorService, IMessenger messengerService)
+        public KnifeLogic(IEditorService editorService, IMessenger messengerService, IHostSettings hostSettings)
         {
             this.editorService = editorService;
             this.messengerService = messengerService;
+            this.hostSettings = hostSettings;
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace KnifeStoreWpf.BL
                     Markolat = newKnife.Handle == null ? string.Empty : newKnife.Handle,
                     Modell_nev= newKnife.Model == null ? string.Empty : newKnife.Model,
                 };
-                string api = url + $"Knife";
+                string api = hostSettings.Address() + $"Knife";
                 WebClient wc = new WebClient();
                 var json = JsonConvert.SerializeObject(kb);
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -92,7 +93,7 @@ namespace KnifeStoreWpf.BL
             {
                 if (knife != null)
                 {
-                    string api = url + $"Knife" + $"/{knife.SerialNumber}";
+                    string api = hostSettings.Address() + $"Knife" + $"/{knife.SerialNumber}";
                     WebRequest request = WebRequest.Create(api);
                     request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                     request.Method = "DELETE";
@@ -153,7 +154,7 @@ namespace KnifeStoreWpf.BL
                  };
 
 
-                string api = url + $"Knife" + $"/{knifeToModify.SerialNumber}";
+                string api = hostSettings.Address() + $"Knife" + $"/{knifeToModify.SerialNumber}";
                 try
                 {
                     WebClient wc = new WebClient();
@@ -185,7 +186,7 @@ namespace KnifeStoreWpf.BL
             ObservableCollection<Knife> knifeStores = new ObservableCollection<Knife>();
             try
             {
-                string api = url + $"Knife/AllKnifesForKnifeStore/{knifeStoreId}";
+                string api = hostSettings.Address() + $"Knife/AllKnifesForKnifeStore/{knifeStoreId}";
                 WebClient wc = new WebClient();
                 wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                 string jsonContent = wc.DownloadString(api);

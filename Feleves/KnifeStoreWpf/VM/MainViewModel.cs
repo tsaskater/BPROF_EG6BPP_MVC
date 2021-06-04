@@ -24,6 +24,7 @@ namespace KnifeStoreWpf.VM
         private IKnifeStoreLogic knifeStoreLogic;
         private IKnifeLogic knifeLogic;
         private IReviewLogic reviewLogic;
+        private IHostSettings hostSettings;
         private KnifeStore selectedKnifeStore;
         private Knife selectedKnife;
         private Review selectedReview;
@@ -32,11 +33,12 @@ namespace KnifeStoreWpf.VM
         private ObservableCollection<Review> reviews;
         private string token;
 
-        public MainViewModel(IKnifeStoreLogic knifeStoreLogic, IKnifeLogic knifeLogic, IReviewLogic reviewLogic)
+        public MainViewModel(IKnifeStoreLogic knifeStoreLogic, IKnifeLogic knifeLogic, IReviewLogic reviewLogic,IHostSettings hostSettings)
         {
             this.knifeStoreLogic = knifeStoreLogic;
             this.knifeLogic = knifeLogic;
             this.reviewLogic = reviewLogic;
+            this.hostSettings = hostSettings;
 
             if (!this.IsInDesignMode)
             {
@@ -102,7 +104,7 @@ namespace KnifeStoreWpf.VM
             }
             try
             {
-                string api = "http://localhost:5000/SampleDataGenerator";
+                string api = hostSettings.Address() + "SampleDataGenerator";
                 WebRequest request = WebRequest.Create(api);
                 request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                 request.Method = "POST";
@@ -159,7 +161,8 @@ namespace KnifeStoreWpf.VM
         public MainViewModel()
             : this(IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IKnifeStoreLogic>(),
                   IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IKnifeLogic>(),
-                  IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IReviewLogic>()) // IoC
+                  IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IReviewLogic>(),
+                  IsInDesignModeStatic ? null : ServiceLocator.Current.GetInstance<IHostSettings>()) // IoC
         {
         }
 

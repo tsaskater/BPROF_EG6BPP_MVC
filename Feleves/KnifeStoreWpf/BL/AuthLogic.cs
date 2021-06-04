@@ -16,26 +16,26 @@ namespace KnifeStoreWpf.BL
 {
     internal class AuthLogic : IAuthLogic
     {
-        const string url = "http://localhost:5000/";
         private IMessenger messengerService;
-
-        public AuthLogic(IMessenger messengerService)
+        private IHostSettings hostSettings;
+        public AuthLogic(IMessenger messengerService, IHostSettings hostSettings)
         {
             this.messengerService = messengerService;
+            this.hostSettings = hostSettings;
         }
 
         public SimpUser Auth(User u)
         {
             try
             {
-                string api = url + $"Auth/Login";
+                string api = hostSettings.Address() + $"Auth/Login";
                 WebClient wc = new WebClient();
                 var json = JsonConvert.SerializeObject(new { validationName = u.ValidationName, password=u.Password.Password });
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = wc.UploadString(api, "PUT", json);
                 TokenData tokendata = JsonConvert.DeserializeObject<TokenData>(response);
 
-                api = url + $"Auth/GetUser/{u.ValidationName}";
+                api = hostSettings.Address() + $"Auth/GetUser/{u.ValidationName}";
                 wc = new WebClient();
                 wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {tokendata.Token}";
                 response = wc.DownloadString(api);

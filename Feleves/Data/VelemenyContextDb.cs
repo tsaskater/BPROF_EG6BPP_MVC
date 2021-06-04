@@ -28,7 +28,9 @@ namespace Data
                 optionsBuilder.
                     UseLazyLoadingProxies().
                     //UseSqlServer(@"data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Velemeny.mdf;integrated security=True;MultipleActiveResultSets=True", b => b.MigrationsAssembly("Feleves"));
-                    UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = KnifeStoreDb; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False", b => b.MigrationsAssembly("Feleves"));
+                    //UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = KnifeStoreDb; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False", b => b.MigrationsAssembly("Feleves"));
+                    UseSqlServer(@"Server = tcp:smartbelldb.database.windows.net,1433; Initial Catalog = knifestoredb; Persist Security Info = False; User ID = sbadmin; Password =Passw0rd; MultipleActiveResultSets = True; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;", b => b.MigrationsAssembly("Feleves"));
+                    
             }
         }
 

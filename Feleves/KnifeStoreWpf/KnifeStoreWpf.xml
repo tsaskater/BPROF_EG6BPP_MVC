@@ -69,7 +69,7 @@
             </summary>
             <returns>KnifeStore List from database.</returns>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger)">
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger,KnifeStoreWpf.BL.IHostSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:KnifeStoreWpf.BL.KnifeStoreLogic"/> class.
             Initialize the components which are needed.
@@ -101,7 +101,7 @@
             Logic Portion for the frontend methods which are required such as cruds.
             </summary>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger)">
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger,KnifeStoreWpf.BL.IHostSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:KnifeStoreWpf.BL.KnifeStoreLogic"/> class.
             Initialize the components which are needed.
@@ -134,7 +134,7 @@
             </summary>
             <returns>All the KnifeStore entities from the database.</returns>
         </member>
-        <member name="M:KnifeStoreWpf.BL.ReviewLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger)">
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.#ctor(KnifeStoreWpf.BL.IEditorService,GalaSoft.MvvmLight.Messaging.IMessenger,KnifeStoreWpf.BL.IHostSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:KnifeStoreWpf.BL.KnifeStoreLogic"/> class.
             Initialize the components which are needed.

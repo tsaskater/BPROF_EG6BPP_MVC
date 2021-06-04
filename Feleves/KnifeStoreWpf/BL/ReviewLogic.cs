@@ -14,9 +14,9 @@ namespace KnifeStoreWpf.BL
 {
     internal class ReviewLogic:IReviewLogic
     {
-        const string url = "http://localhost:5000/";
         private IEditorService editorService;
         private IMessenger messengerService;
+        private IHostSettings hostSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KnifeStoreLogic"/> class.
@@ -24,10 +24,11 @@ namespace KnifeStoreWpf.BL
         /// </summary>
         /// <param name="editorService">Editor service component.</param>
         /// <param name="messengerService">Messenger service component.</param>
-        public ReviewLogic(IEditorService editorService, IMessenger messengerService)
+        public ReviewLogic(IEditorService editorService, IMessenger messengerService,IHostSettings hostSettings)
         {
             this.editorService = editorService;
             this.messengerService = messengerService;
+            this.hostSettings = hostSettings;
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace KnifeStoreWpf.BL
                         Szerzo = newReview.Author == null ? string.Empty : newReview.Author,
                         Gyartasi_Cikkszam = selectedKnifeId,
                     };
-                    string api = url + $"Review";
+                    string api = hostSettings.Address() + $"Review";
                     WebClient wc = new WebClient();
                     var json = JsonConvert.SerializeObject(kb);
                     wc.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -83,7 +84,7 @@ namespace KnifeStoreWpf.BL
             {
                 if (review != null)
                 {
-                    string api = url + $"Review" + $"/{review.ReviewId}";
+                    string api = hostSettings.Address() + $"Review" + $"/{review.ReviewId}";
                     WebRequest request = WebRequest.Create(api);
                     request.Method = "DELETE";
                     request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
@@ -143,7 +144,7 @@ namespace KnifeStoreWpf.BL
                     };
 
 
-                    string api = url + $"Review" + $"/{reviewToModify.ReviewId}";
+                    string api = hostSettings.Address() + $"Review" + $"/{reviewToModify.ReviewId}";
                     try
                     {
                         WebClient wc = new WebClient();
@@ -181,7 +182,7 @@ namespace KnifeStoreWpf.BL
             ObservableCollection<Review> reviews = new ObservableCollection<Review>();
             try
             {
-                string api = url + $"Review/GetAllReviewsForKnife/{knifeId}";
+                string api = hostSettings.Address() + $"Review/GetAllReviewsForKnife/{knifeId}";
                 WebClient wc = new WebClient();
                 wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                 string jsonContent = wc.DownloadString(api);

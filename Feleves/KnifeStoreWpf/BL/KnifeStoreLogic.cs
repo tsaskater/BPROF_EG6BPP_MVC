@@ -16,9 +16,9 @@
     /// </summary>
     internal class KnifeStoreLogic : IKnifeStoreLogic
     {
-        const string url = "http://localhost:5000/";
         private IEditorService editorService;
         private IMessenger messengerService;
+        private IHostSettings hostSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KnifeStoreLogic"/> class.
@@ -26,10 +26,11 @@
         /// </summary>
         /// <param name="editorService">Editor service component.</param>
         /// <param name="messengerService">Messenger service component.</param>
-        public KnifeStoreLogic(IEditorService editorService, IMessenger messengerService)
+        public KnifeStoreLogic(IEditorService editorService, IMessenger messengerService,IHostSettings hostSettings)
         {
             this.editorService = editorService;
             this.messengerService = messengerService;
+            this.hostSettings = hostSettings;
         }
 
         /// <summary>
@@ -50,7 +51,7 @@
                         Cim = newKnifeStore.Address,
                         Weboldal = newKnifeStore.Website,
                     };
-                    string api = url + $"KnifeStore";
+                    string api = hostSettings.Address() + $"KnifeStore";
                     WebClient wc = new WebClient();
                     wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                     var json = JsonConvert.SerializeObject(kb);
@@ -85,7 +86,7 @@
             {
                 if (knifeStore != null)
                 {
-                    string api = url + $"KnifeStore" + $"/{knifeStore.StorageId}";
+                    string api = hostSettings.Address() + $"KnifeStore" + $"/{knifeStore.StorageId}";
                     WebRequest request = WebRequest.Create(api);
                     request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                     request.Method = "DELETE";
@@ -141,7 +142,7 @@
                 };
 
 
-                string api = url + $"KnifeStore" + $"/{knifeStoreToModify.StorageId}";
+                string api = hostSettings.Address() + $"KnifeStore" + $"/{knifeStoreToModify.StorageId}";
                 try
                 {
                     WebClient wc = new WebClient();
@@ -177,7 +178,7 @@
             ObservableCollection<KnifeStore> knifeStores = new ObservableCollection<KnifeStore>();
             try
             {
-                string api = url + $"KnifeStore";
+                string api = hostSettings.Address() + $"KnifeStore";
                 WebClient wc = new WebClient();
                 wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                 string jsonContent = wc.DownloadString(api);
