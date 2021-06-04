@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Feleves.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("SampleDataGenerator")]
     [ApiController]
     public class SampleDataGeneratorController : ControllerBase

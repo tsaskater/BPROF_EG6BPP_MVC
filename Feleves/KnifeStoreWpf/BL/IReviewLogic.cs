@@ -8,9 +8,9 @@ namespace KnifeStoreWpf.BL
 {
     public interface IReviewLogic
     {
-        void AddReview(IList<Review> list, string selectedKnifeId);
-        void DelReview(IList<Review> list, Review review);
-        void ModReview(Review reviewToModify);
-        IList<Review> GetAllReviewsForKnife(string knifeId);
+        void AddReview(IList<Review> list, string selectedKnifeId,string token);
+        void DelReview(IList<Review> list, Review review,string token);
+        void ModReview(Review reviewToModify,string token);
+        IList<Review> GetAllReviewsForKnife(string knifeId,string token);
     }
 }

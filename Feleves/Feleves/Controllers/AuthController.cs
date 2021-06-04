@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,20 @@ namespace Feleves.Controllers
         public IEnumerable<IdentityUser> GetUsers()
         {
             return _authLogic.GetAllUser();
+        }
+
+        [Authorize]
+        [HttpGet("GetUser/{validationName}")]
+        public IActionResult GetUser(string validationName)
+        {
+            try
+            {
+                return Ok( _authLogic.GetUser(validationName));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
         }
 
         [HttpPut("Login")]

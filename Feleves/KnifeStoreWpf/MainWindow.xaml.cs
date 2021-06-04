@@ -18,11 +18,11 @@ namespace KnifeStoreWpf
     {
         private MainViewModel vM;
         private string token;
-        private User user;
+        private SimpUser user;
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
-        public MainWindow(string token,User u)
+        public MainWindow(string token,SimpUser u)
         {
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -33,7 +33,7 @@ namespace KnifeStoreWpf
                 this.token = token;
                 this.Resources.Add("token", token);
                 this.user = u;
-                this.Resources.Add("username", user.ValidationName);
+                this.Resources.Add("username", user.UserName);
             }
             this.InitializeComponent();
 
@@ -52,6 +52,14 @@ namespace KnifeStoreWpf
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Messenger.Default.Unregister(this);
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            this.Resources.Clear();
+            Login win = new Login();
+            win.Show();
+            this.Close();
         }
     }
 }

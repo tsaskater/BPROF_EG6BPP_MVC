@@ -34,8 +34,12 @@ namespace KnifeStoreWpf.BL
         /// Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
         /// </summary>
         /// <param name="list">The entity list where the entity should be added.</param>
-        public void AddKnife(IList<Knife> list,string selectedKnifeStoreId)
+        public void AddKnife(IList<Knife> list,string selectedKnifeStoreId,string token)
         {
+            if (selectedKnifeStoreId==null)
+            {
+                this.messengerService.Send("HOZZÁADÁS SIKERTELEN", "LogicResult");
+            }
             Knife newKnife = new Knife();
             if ((selectedKnifeStoreId != null && selectedKnifeStoreId != string.Empty) && this.editorService.EditKnife(newKnife) == true)
             {
@@ -55,20 +59,26 @@ namespace KnifeStoreWpf.BL
                 WebClient wc = new WebClient();
                 var json = JsonConvert.SerializeObject(kb);
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+                wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                 try
                 {
                     wc.UploadString(api, "POST", json);
                 }
                 catch (Exception ex)
                 {
-                    this.messengerService.Send($"{ex}", "LogicResult");
+                    if (ex.Message.ToString().Contains("403"))
+                    {
+                        this.messengerService.Send("TÖRLÉS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                        return;
+                    }
+                    this.messengerService.Send("HOZZÁADÁS SIKERTELEN", "LogicResult");
                     return;
                 }
-                this.messengerService.Send("ADD OK", "LogicResult");
+                this.messengerService.Send("HOZZÁADÁS SIKERES", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("ADD FAILED", "LogicResult");
+            this.messengerService.Send("HOZZÁADÁS MEGSZAKÍTVA", "LogicResult");
         }
 
         /// <summary>
@@ -76,39 +86,51 @@ namespace KnifeStoreWpf.BL
         /// </summary>
         /// <param name="list">The entity list where the entity should be deleted from.</param>
         /// <param name="knife">The entity which is intended to delete.</param>
-        public void DelKnife(IList<Knife> list, Knife knife)
+        public void DelKnife(IList<Knife> list, Knife knife,string token)
         {
-            if (knife != null)
+            try
             {
-                string api = url + $"Knife" + $"/{knife.SerialNumber}";
-                WebRequest request = WebRequest.Create(api);
-                request.Method = "DELETE";
-                try
+                if (knife != null)
                 {
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                }
-                catch (Exception ex)
-                {
-                    this.messengerService.Send(ex.ToString(), "LogicResult");
+                    string api = url + $"Knife" + $"/{knife.SerialNumber}";
+                    WebRequest request = WebRequest.Create(api);
+                    request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                    request.Method = "DELETE";
+                    try
+                    {
+                        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToString().Contains("403"))
+                        {
+                            this.messengerService.Send("TÖRLÉS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                            return;
+                        }
+                        this.messengerService.Send("TÖRLÉS SIKERTELEN", "LogicResult");
+                        return;
+                    }
+                    list.Remove(knife);
+                    this.messengerService.Send("TÖRLÉS SIKERES", "LogicResult");
                     return;
                 }
-                list.Remove(knife);
-                this.messengerService.Send("DELETE OK", "LogicResult");
+            }
+            catch
+            {
+                this.messengerService.Send("TÖRLÉS SIKERTELEN", "LogicResult");
                 return;
             }
-
-            this.messengerService.Send("DELETE FAILED", "LogicResult");
         }
 
         /// <summary>
         /// Modifies an element of the knifeStore list as intended.
         /// </summary>
         /// <param name="knifeToModify">The KnifeStore entity which should be modified.</param>
-        public void ModKnife(Knife knifeToModify)
+        public void ModKnife(Knife knifeToModify,string token)
         {
             if (knifeToModify == null)
             {
-                this.messengerService.Send("EDIT FAILED", "LogicResult");
+                this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN", "LogicResult");
                 return;
             }
 
@@ -137,53 +159,66 @@ namespace KnifeStoreWpf.BL
                     WebClient wc = new WebClient();
                     var json = JsonConvert.SerializeObject(kb);
                     wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                     wc.UploadString(api, "PUT", json);
                 }
                 catch (Exception ex)
                 {
-                    this.messengerService.Send(ex.ToString(), "LogicResult");
+                    if (ex.Message.ToString().Contains("403"))
+                    {
+                        this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                        return;
+                    }
+                    this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN", "LogicResult");
                     return;
                 }
                 //this.knifeStoreLogic.UpdateKes_Bolt(knifeStoreToModify.StorageId, kb);
-                this.messengerService.Send("MODIFY OK", "LogicResult");
+                this.messengerService.Send("MÓDOSÍTÁS SIKERES", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("MODIFY CANCEL", "LogicResult");
+            this.messengerService.Send("MÓDOSÍTÁS MEGSZAKÍTVA", "LogicResult");
         }
 
-        public IList<Knife> GetAllKnivesForStore(string knifeStoreId)
+        public IList<Knife> GetAllKnivesForStore(string knifeStoreId,string token)
         {
-            string api = url + $"Knife/AllKnifesForKnifeStore/{knifeStoreId}";
-            WebClient wc = new WebClient();
-            string jsonContent = wc.DownloadString(api);
-            IQueryable<Kes> ks = JsonConvert.DeserializeObject<List<Kes>>(jsonContent).AsQueryable();
-
-            //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
             ObservableCollection<Knife> knifeStores = new ObservableCollection<Knife>();
-            if (ks == null)
+            try
             {
-                return knifeStores;
-            }
+                string api = url + $"Knife/AllKnifesForKnifeStore/{knifeStoreId}";
+                WebClient wc = new WebClient();
+                wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                string jsonContent = wc.DownloadString(api);
+                IQueryable<Kes> ks = JsonConvert.DeserializeObject<List<Kes>>(jsonContent).AsQueryable();
 
-            foreach (var item in ks)
-            {
-                Knife k = new Knife()
+                //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
+                if (ks == null)
                 {
-                    StorageId = item.Raktar_Id,
-                    Maker = item.Gyarto,
-                    Steel = item.Acel,
-                    BladeLength = item.Penge_Hossz,
-                    SerialNumber = item.Gyartasi_Cikkszam,
-                    Coated=item.Bevont_Penge,
-                    Handle=item.Markolat,
-                    Model=item.Modell_nev,
-                    Price=item.Ar
-                    
-                };
-                knifeStores.Add(k);
-            }
+                    return knifeStores;
+                }
 
+                foreach (var item in ks)
+                {
+                    Knife k = new Knife()
+                    {
+                        StorageId = item.Raktar_Id,
+                        Maker = item.Gyarto,
+                        Steel = item.Acel,
+                        BladeLength = item.Penge_Hossz,
+                        SerialNumber = item.Gyartasi_Cikkszam,
+                        Coated = item.Bevont_Penge,
+                        Handle = item.Markolat,
+                        Model = item.Modell_nev,
+                        Price = item.Ar
+
+                    };
+                    knifeStores.Add(k);
+                }
+            }
+            catch
+            {
+                this.messengerService.Send("A SZERVER NEM ELÉRHETŐ", "LogicResult");
+            }
             return knifeStores;
         }
     }

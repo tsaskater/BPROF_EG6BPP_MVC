@@ -10,13 +10,15 @@
         Title="Bejelentkezés" Height="300" Width="580"
         ResizeMode="NoResize"
         Loaded="Window_Loaded"
-        Closing="Window_Closing" Background="#FFC1B4B4" >
+        Closing="Window_Closing" Background="#FFC1B4B4"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <vm:AuthViewModel x:Key="VM" />
     </Window.Resources>
     <Grid DataContext="{DynamicResource VM}">
-        <Label Content="Felhasználó" HorizontalAlignment="Left" Margin="11,14,0,0" VerticalAlignment="Top" FontSize="25"/>
-        <TextBox Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" HorizontalAlignment="Left"  Margin="204,17,0,0" TextWrapping="Wrap"  Padding="10"  VerticalAlignment="Top"
+        <Label Content="Felhasználó/" HorizontalAlignment="Left" Margin="11,14,0,0" VerticalAlignment="Top" FontSize="25"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="11,45,0,0" VerticalAlignment="Top" FontSize="25"/>
+        <TextBox Text="{Binding Path=UserName, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" HorizontalAlignment="Left"  Margin="204,36,0,0" TextWrapping="Wrap"  Padding="10"  VerticalAlignment="Top"
                  Width="292" Height="40" FontSize="15"/>
         <Label Content="Jelszó" HorizontalAlignment="Left" Margin="11,107,0,0" VerticalAlignment="Top" FontSize="25"/>
         <PasswordBox  Name="txtPassword" HorizontalAlignment="Left"  Margin="204,0,0,0"  Padding="10"  VerticalAlignment="Center"

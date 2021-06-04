@@ -36,28 +36,42 @@
         /// Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
         /// </summary>
         /// <param name="list">The entity list where the entity should be added.</param>
-        public void AddKnifeStore(IList<KnifeStore> list)
+        public void AddKnifeStore(IList<KnifeStore> list,string token)
         {
-            KnifeStore newKnifeStore = new KnifeStore();
-            if (this.editorService.EditKnifeStore(newKnifeStore) == true)
+            try
             {
-                Kes_Bolt kb = new Kes_Bolt()
+                KnifeStore newKnifeStore = new KnifeStore();
+                if (this.editorService.EditKnifeStore(newKnifeStore) == true)
                 {
-                    Raktar_Id = string.Empty,
-                    Bolt_Nev = newKnifeStore.Name,
-                    Cim = newKnifeStore.Address,
-                    Weboldal = newKnifeStore.Website,
-                };
-                string api = url + $"KnifeStore";
-                WebClient wc = new WebClient();
-                var json = JsonConvert.SerializeObject(kb);
-                wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-                wc.UploadString(api, "POST", json);
-                this.messengerService.Send("ADD OK", "LogicResult");
+                    Kes_Bolt kb = new Kes_Bolt()
+                    {
+                        Raktar_Id = string.Empty,
+                        Bolt_Nev = newKnifeStore.Name,
+                        Cim = newKnifeStore.Address,
+                        Weboldal = newKnifeStore.Website,
+                    };
+                    string api = url + $"KnifeStore";
+                    WebClient wc = new WebClient();
+                    wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                    var json = JsonConvert.SerializeObject(kb);
+                    wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    wc.UploadString(api, "POST", json);
+                    this.messengerService.Send("HOZZÁADÁS SIKERES", "LogicResult");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.ToString().Contains("403"))
+                {
+                    this.messengerService.Send("HOZZÁADÁS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                    return;
+                }
+                this.messengerService.Send("HOZZÁADÁS SIKERTELEN", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("ADD CANCEL", "LogicResult");
+            this.messengerService.Send("HOZZÁADÁS MEGSZAKÍTVA", "LogicResult");
         }
 
         /// <summary>
@@ -65,39 +79,51 @@
         /// </summary>
         /// <param name="list">The entity list where the entity should be deleted from.</param>
         /// <param name="knifeStore">The entity which is intended to delete.</param>
-        public void DelKnifeStore(IList<KnifeStore> list, KnifeStore knifeStore)
+        public void DelKnifeStore(IList<KnifeStore> list, KnifeStore knifeStore, string token)
         {
-            if (knifeStore != null)
+            try
             {
-                string api = url + $"KnifeStore"+$"/{knifeStore.StorageId}";
-                WebRequest request = WebRequest.Create(api);
-                request.Method = "DELETE";
-                try
+                if (knifeStore != null)
                 {
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                }
-                catch (Exception ex)
-                {
-                    this.messengerService.Send(ex.ToString(), "LogicResult");
+                    string api = url + $"KnifeStore" + $"/{knifeStore.StorageId}";
+                    WebRequest request = WebRequest.Create(api);
+                    request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                    request.Method = "DELETE";
+                    try
+                    {
+                        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToString().Contains("403"))
+                        {
+                            this.messengerService.Send("TÖRLÉS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                            return;
+                        }
+                        this.messengerService.Send("TÖRLÉS SIKERTELEN", "LogicResult");
+                        return;
+                    }
+                    list.Remove(knifeStore);
+                    this.messengerService.Send("TÖRLÉS SIKERES", "LogicResult");
                     return;
                 }
-                list.Remove(knifeStore);
-                this.messengerService.Send("DELETE OK", "LogicResult");
+            }
+            catch
+            {
+                this.messengerService.Send("TÖRLÉS SIKERTELEN", "LogicResult");
                 return;
             }
-
-            this.messengerService.Send("DELETE FAILED", "LogicResult");
         }
 
         /// <summary>
         /// Modifies an element of the knifeStore list as intended.
         /// </summary>
         /// <param name="knifeStoreToModify">The KnifeStore entity which should be modified.</param>
-        public void ModKnifeStore(KnifeStore knifeStoreToModify)
+        public void ModKnifeStore(KnifeStore knifeStoreToModify, string token)
         {
             if (knifeStoreToModify == null)
             {
-                this.messengerService.Send("EDIT FAILED", "LogicResult");
+                this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN", "LogicResult");
                 return;
             }
 
@@ -120,52 +146,67 @@
                 {
                     WebClient wc = new WebClient();
                     var json = JsonConvert.SerializeObject(kb);
+                    wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
                     wc.Headers[HttpRequestHeader.ContentType] = "application/json";
                     wc.UploadString(api, "PUT", json);
                 }
                 catch (Exception ex)
                 {
-                    this.messengerService.Send(ex.ToString(), "LogicResult");
+                    if (ex.Message.ToString().Contains("403"))
+                    {
+                        this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                        return;
+                    }
+                    this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN", "LogicResult");
                     return;
                 }
                 //this.knifeStoreLogic.UpdateKes_Bolt(knifeStoreToModify.StorageId, kb);
-                this.messengerService.Send("MODIFY OK", "LogicResult");
+                this.messengerService.Send("MÓDOSÍTÁS SIKERES", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("MODIFY CANCEL", "LogicResult");
+            this.messengerService.Send("MÓDOSÍTÁS MEGSZAKÍTVA", "LogicResult");
         }
 
         /// <summary>
         /// Gets all the KesBolt elements from the database converts it to KnifeStore objects.
         /// </summary>
         /// <returns>All the KnifeStore entities from the database.</returns>
-        public IList<KnifeStore> GetAllKnifeStore()
+        public IList<KnifeStore> GetAllKnifeStore(string token)
         {
-            string api = url + $"KnifeStore";
-            WebClient wc = new WebClient();
-            string jsonContent = wc.DownloadString(api);
-            IQueryable<Kes_Bolt> kbs = JsonConvert.DeserializeObject<List<Kes_Bolt>>(jsonContent).AsQueryable();
-
-            //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
             ObservableCollection<KnifeStore> knifeStores = new ObservableCollection<KnifeStore>();
-            if (kbs == null)
+            try
             {
-                return knifeStores;
-            }
+                string api = url + $"KnifeStore";
+                WebClient wc = new WebClient();
+                wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                string jsonContent = wc.DownloadString(api);
+                IQueryable<Kes_Bolt> kbs = JsonConvert.DeserializeObject<List<Kes_Bolt>>(jsonContent).AsQueryable();
 
-            foreach (var item in kbs)
-            {
-                KnifeStore ks = new KnifeStore()
+                //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
+                if (kbs == null)
                 {
-                    StorageId = item.Raktar_Id,
-                    Name = item.Bolt_Nev,
-                    Address = item.Cim,
-                    Website = item.Weboldal,
-                };
-                knifeStores.Add(ks);
-            }
+                    return knifeStores;
+                }
 
+                foreach (var item in kbs)
+                {
+                    KnifeStore ks = new KnifeStore()
+                    {
+                        StorageId = item.Raktar_Id,
+                        Name = item.Bolt_Nev,
+                        Address = item.Cim,
+                        Website = item.Weboldal,
+                    };
+                    knifeStores.Add(ks);
+                }
+
+            }
+            catch
+            {
+                this.messengerService.Send("A SZERVER NEM TALÁLHATÓ", "LogicResult");
+                throw;
+            }
             return knifeStores;
         }
     }

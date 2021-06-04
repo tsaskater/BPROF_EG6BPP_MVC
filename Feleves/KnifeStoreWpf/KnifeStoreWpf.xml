@@ -44,26 +44,26 @@
             Requires the logic methods for entity KnifeStore.
             </summary>
         </member>
-        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.AddKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore})">
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.AddKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},System.String)">
             <summary>
             Defines the method for creating an instance with the type of KnifeStore.
             </summary>
             <param name="list">The list where the entity will be added.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.ModKnifeStore(KnifeStoreWpf.Data.KnifeStore)">
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.ModKnifeStore(KnifeStoreWpf.Data.KnifeStore,System.String)">
             <summary>
             Defines the method for modifying an instance with the type of KnifeStore.
             </summary>
             <param name="knifeStoreToModify">Entity which is intended to modify.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.DelKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},KnifeStoreWpf.Data.KnifeStore)">
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.DelKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},KnifeStoreWpf.Data.KnifeStore,System.String)">
             <summary>
             Defines the method for deleting an instance with the type of KnifeStore.
             </summary>
             <param name="list">List where the entity is deleted from.</param>
             <param name="knifeStore">Entity which is intended to deleted.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.GetAllKnifeStore">
+        <member name="M:KnifeStoreWpf.BL.IKnifeStoreLogic.GetAllKnifeStore(System.String)">
             <summary>
             Gets all the entities from the database which and converts them into List of KnifeStore-s.
             </summary>
@@ -77,20 +77,20 @@
             <param name="editorService">Editor service component.</param>
             <param name="messengerService">Messenger service component.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeLogic.AddKnife(System.Collections.Generic.IList{KnifeStoreWpf.Data.Knife},System.String)">
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.AddKnife(System.Collections.Generic.IList{KnifeStoreWpf.Data.Knife},System.String,System.String)">
             <summary>
             Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
             </summary>
             <param name="list">The entity list where the entity should be added.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeLogic.DelKnife(System.Collections.Generic.IList{KnifeStoreWpf.Data.Knife},KnifeStoreWpf.Data.Knife)">
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.DelKnife(System.Collections.Generic.IList{KnifeStoreWpf.Data.Knife},KnifeStoreWpf.Data.Knife,System.String)">
             <summary>
             Deletes a Knife from it's list and calls the database operation to syncronhize them.
             </summary>
             <param name="list">The entity list where the entity should be deleted from.</param>
             <param name="knife">The entity which is intended to delete.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeLogic.ModKnife(KnifeStoreWpf.Data.Knife)">
+        <member name="M:KnifeStoreWpf.BL.KnifeLogic.ModKnife(KnifeStoreWpf.Data.Knife,System.String)">
             <summary>
             Modifies an element of the knifeStore list as intended.
             </summary>
@@ -109,26 +109,26 @@
             <param name="editorService">Editor service component.</param>
             <param name="messengerService">Messenger service component.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.AddKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore})">
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.AddKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},System.String)">
             <summary>
             Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
             </summary>
             <param name="list">The entity list where the entity should be added.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.DelKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},KnifeStoreWpf.Data.KnifeStore)">
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.DelKnifeStore(System.Collections.Generic.IList{KnifeStoreWpf.Data.KnifeStore},KnifeStoreWpf.Data.KnifeStore,System.String)">
             <summary>
             Deletes a KnifeStore from it's list and calls the database operation to syncronhize them.
             </summary>
             <param name="list">The entity list where the entity should be deleted from.</param>
             <param name="knifeStore">The entity which is intended to delete.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.ModKnifeStore(KnifeStoreWpf.Data.KnifeStore)">
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.ModKnifeStore(KnifeStoreWpf.Data.KnifeStore,System.String)">
             <summary>
             Modifies an element of the knifeStore list as intended.
             </summary>
             <param name="knifeStoreToModify">The KnifeStore entity which should be modified.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.GetAllKnifeStore">
+        <member name="M:KnifeStoreWpf.BL.KnifeStoreLogic.GetAllKnifeStore(System.String)">
             <summary>
             Gets all the KesBolt elements from the database converts it to KnifeStore objects.
             </summary>
@@ -142,20 +142,20 @@
             <param name="editorService">Editor service component.</param>
             <param name="messengerService">Messenger service component.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.ReviewLogic.AddReview(System.Collections.Generic.IList{KnifeStoreWpf.Data.Review},System.String)">
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.AddReview(System.Collections.Generic.IList{KnifeStoreWpf.Data.Review},System.String,System.String)">
             <summary>
             Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
             </summary>
             <param name="list">The entity list where the entity should be added.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.ReviewLogic.DelReview(System.Collections.Generic.IList{KnifeStoreWpf.Data.Review},KnifeStoreWpf.Data.Review)">
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.DelReview(System.Collections.Generic.IList{KnifeStoreWpf.Data.Review},KnifeStoreWpf.Data.Review,System.String)">
             <summary>
             Deletes a Review from it's list and calls the database operation to syncronhize them.
             </summary>
             <param name="list">The entity list where the entity should be deleted from.</param>
             <param name="review">The entity which is intended to delete.</param>
         </member>
-        <member name="M:KnifeStoreWpf.BL.ReviewLogic.ModReview(KnifeStoreWpf.Data.Review)">
+        <member name="M:KnifeStoreWpf.BL.ReviewLogic.ModReview(KnifeStoreWpf.Data.Review,System.String)">
             <summary>
             Modifies an element of the knifeStore list as intended.
             </summary>
@@ -230,7 +230,7 @@
             MainWindow
             </summary>
         </member>
-        <member name="M:KnifeStoreWpf.MainWindow.#ctor(System.String,KnifeStoreWpf.Data.User)">
+        <member name="M:KnifeStoreWpf.MainWindow.#ctor(System.String,KnifeStoreWpf.Data.SimpUser)">
             <summary>
             Initializes a new instance of the <see cref="T:KnifeStoreWpf.MainWindow"/> class.
             </summary>

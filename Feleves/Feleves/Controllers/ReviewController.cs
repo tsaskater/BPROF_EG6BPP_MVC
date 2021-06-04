@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Feleves.Controllers
 {
+    [Authorize]
     [Route("Review")]
     [ApiController]
     public class ReviewController : ControllerBase
@@ -20,6 +22,7 @@ namespace Feleves.Controllers
             this.reviewLogic = reviewLogic;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteReview(string id)
         {
@@ -33,6 +36,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetOneReview(string id)
         {
@@ -45,6 +49,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllReviews()
         {
@@ -57,6 +62,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize]
         [HttpGet("GetAllReviewsForKnife/{id}")]
         public IActionResult GetAllReviewsForKnife(string id)
         {
@@ -69,8 +75,9 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
-        public IActionResult AddKnife([FromBody] Velemeny v)
+        public IActionResult AddReview([FromBody] Velemeny v)
         {
             try
             {
@@ -83,6 +90,7 @@ namespace Feleves.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult UpdateReview(string id, [FromBody] Velemeny newVelmeny)
         {

@@ -17,25 +17,25 @@ namespace KnifeStoreWpf.BL
         /// Defines the method for creating an instance with the type of KnifeStore.
         /// </summary>
         /// <param name="list">The list where the entity will be added.</param>
-        void AddKnifeStore(IList<KnifeStore> list);
+        void AddKnifeStore(IList<KnifeStore> list, string token);
 
         /// <summary>
         /// Defines the method for modifying an instance with the type of KnifeStore.
         /// </summary>
         /// <param name="knifeStoreToModify">Entity which is intended to modify.</param>
-        void ModKnifeStore(KnifeStore knifeStoreToModify);
+        void ModKnifeStore(KnifeStore knifeStoreToModify, string token);
 
         /// <summary>
         /// Defines the method for deleting an instance with the type of KnifeStore.
         /// </summary>
         /// <param name="list">List where the entity is deleted from.</param>
         /// <param name="knifeStore">Entity which is intended to deleted.</param>
-        void DelKnifeStore(IList<KnifeStore> list, KnifeStore knifeStore);
+        void DelKnifeStore(IList<KnifeStore> list, KnifeStore knifeStore, string token);
 
         /// <summary>
         /// Gets all the entities from the database which and converts them into List of KnifeStore-s.
         /// </summary>
         /// <returns>KnifeStore List from database.</returns>
-        IList<KnifeStore> GetAllKnifeStore();
+        IList<KnifeStore> GetAllKnifeStore(string token);
     }
 }

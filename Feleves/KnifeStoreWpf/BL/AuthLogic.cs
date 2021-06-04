@@ -24,23 +24,31 @@ namespace KnifeStoreWpf.BL
             this.messengerService = messengerService;
         }
 
-        public string Auth(User u)
+        public SimpUser Auth(User u)
         {
             try
             {
                 string api = url + $"Auth/Login";
                 WebClient wc = new WebClient();
-                var json = JsonConvert.SerializeObject(u);
+                var json = JsonConvert.SerializeObject(new { validationName = u.ValidationName, password=u.Password.Password });
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = wc.UploadString(api, "PUT", json);
                 TokenData tokendata = JsonConvert.DeserializeObject<TokenData>(response);
-                this.messengerService.Send($"Bejelentkeztél {u.ValidationName} névvel.", "AuthResult");
-                return tokendata.Token;
+
+                api = url + $"Auth/GetUser/{u.ValidationName}";
+                wc = new WebClient();
+                wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {tokendata.Token}";
+                response = wc.DownloadString(api);
+                SimpUser simpUser = JsonConvert.DeserializeObject<SimpUser>(response);
+                simpUser.Token = tokendata.Token;
+
+                this.messengerService.Send($"Bejelentkeztél {simpUser.UserName} névvel.", "AuthResult");
+                return simpUser;
             }
             catch (Exception ex)
             {
-                this.messengerService.Send("LOGIN FAILED", "AuthResult");
-                return "";
+                this.messengerService.Send("BEJELENTKEZÉS SIKERTELEN", "AuthResult");
+                return new SimpUser();
             }
         }
     }

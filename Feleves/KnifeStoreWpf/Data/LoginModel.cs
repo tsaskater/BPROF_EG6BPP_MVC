@@ -5,11 +5,10 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace KnifeStoreWpf.Data
 {
-    public class User:ObservableObject
+    public class LoginModel:ObservableObject
     {
         private string validationName;
 
@@ -19,9 +18,9 @@ namespace KnifeStoreWpf.Data
             set { this.Set(ref this.validationName, value); }
         }
 
-        private PasswordBox password;
+        private string password;
 
-        public PasswordBox Password
+        public string Password
         {
             get { return this.password; }
             set { this.Set(ref this.password, value); }

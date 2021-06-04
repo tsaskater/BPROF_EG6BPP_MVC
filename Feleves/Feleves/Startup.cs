@@ -106,12 +106,12 @@ namespace Feleves
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseCors();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

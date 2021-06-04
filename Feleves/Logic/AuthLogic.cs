@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Models;
 using Models.VM;
 using System;
 using System.Collections.Generic;
@@ -103,6 +104,34 @@ namespace Logic
         public IQueryable<IdentityUser> GetAllUser()
         {
             return _userManager.Users;
+        }
+
+        public SimplifiedUser GetUser(string validationName)
+        {
+            IdentityUser u;
+            try
+            {
+
+
+                if (IsValidEmail(validationName))
+                {
+                    u = _userManager.Users.Where(x => x.Email == validationName).FirstOrDefault();
+                }
+                else
+                {
+                    u = _userManager.Users.Where(x => x.UserName == validationName).FirstOrDefault();
+                }
+                SimplifiedUser simpUser = new SimplifiedUser()
+                {
+                    UserName = u.UserName,
+                    Email = u.Email,
+                };
+                return simpUser;
+            }
+            catch
+            {
+                throw new ArgumentException($"User not found with the parameter {validationName}");
+            }
         }
 
         private bool IsValidEmail(string email)

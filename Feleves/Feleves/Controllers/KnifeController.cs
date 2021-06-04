@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Feleves.Controllers
 {
+    [Authorize]
     [Route("Knife")]
     [ApiController]
     public class KnifeController : ControllerBase
@@ -20,6 +22,7 @@ namespace Feleves.Controllers
             this.knifeLogic = knfieLogic;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteKes(string id)
         {
@@ -33,6 +36,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetOneKnife(string id)
         {
@@ -45,6 +49,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllKnifes()
         {
@@ -57,6 +62,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize]
         [HttpGet("AllKnifesForKnifeStore/{id}")]
         public IActionResult GetAllKnifesForKnifeStore(string id)
         {
@@ -69,6 +75,7 @@ namespace Feleves.Controllers
                 return StatusCode(400, $"Bad request error: {ex}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AddKnife([FromBody] Kes k)
         {
@@ -83,6 +90,7 @@ namespace Feleves.Controllers
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult UpdateKnife(string id, [FromBody] Kes newKnife)
         {

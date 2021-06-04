@@ -9,10 +9,10 @@ namespace KnifeStoreWpf.BL
 {
     public interface IKnifeLogic
     {
-        void AddKnife(IList<Knife> list, string selectedKnifeStoreId);
-        public void DelKnife(IList<Knife> list, Knife knife);
-        public void ModKnife(Knife knifeToModify);
-        public IList<Knife> GetAllKnivesForStore(string knifeStoreId);
+        void AddKnife(IList<Knife> list, string selectedKnifeStoreId, string token);
+        public void DelKnife(IList<Knife> list, Knife knife, string token);
+        public void ModKnife(Knife knifeToModify, string token);
+        public IList<Knife> GetAllKnivesForStore(string knifeStoreId, string token);
 
 
     }

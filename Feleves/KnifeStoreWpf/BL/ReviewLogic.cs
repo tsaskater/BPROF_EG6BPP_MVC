@@ -34,29 +34,42 @@ namespace KnifeStoreWpf.BL
         /// Adds a new KnifeStore to it's list and calls the database operation to syncronhize them.
         /// </summary>
         /// <param name="list">The entity list where the entity should be added.</param>
-        public void AddReview(IList<Review> list, string selectedKnifeId)
+        public void AddReview(IList<Review> list, string selectedKnifeId,string token)
         {
-            Review newReview = new Review();
-            if ((selectedKnifeId != null && selectedKnifeId != string.Empty) && this.editorService.EditReview(newReview) == true)
+            try
             {
-                Velemeny kb = new Velemeny()
+                Review newReview = new Review();
+                if ((selectedKnifeId != null && selectedKnifeId != string.Empty) && this.editorService.EditReview(newReview) == true)
                 {
-                    Velemeny_Id = string.Empty,
-                    VelemenySzovege = newReview.ReviewText == null ? string.Empty : newReview.ReviewText,
-                    Elegedettseg = newReview.Rating,
-                    Szerzo = newReview.Author == null ? string.Empty : newReview.Author,
-                    Gyartasi_Cikkszam = selectedKnifeId,
-                };
-                string api = url + $"Review";
-                WebClient wc = new WebClient();
-                var json = JsonConvert.SerializeObject(kb);
-                wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-                wc.UploadString(api, "POST", json);
-                this.messengerService.Send("ADD OK", "LogicResult");
+                    Velemeny kb = new Velemeny()
+                    {
+                        Velemeny_Id = string.Empty,
+                        VelemenySzovege = newReview.ReviewText == null ? string.Empty : newReview.ReviewText,
+                        Elegedettseg = newReview.Rating,
+                        Szerzo = newReview.Author == null ? string.Empty : newReview.Author,
+                        Gyartasi_Cikkszam = selectedKnifeId,
+                    };
+                    string api = url + $"Review";
+                    WebClient wc = new WebClient();
+                    var json = JsonConvert.SerializeObject(kb);
+                    wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                    wc.UploadString(api, "POST", json);
+                    this.messengerService.Send("HOZZÁADÁS SIKERES", "LogicResult");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.ToString().Contains("403"))
+                {
+                    this.messengerService.Send("HOZZÁADÁS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                    return;
+                }
+                this.messengerService.Send("HOZZÁADÁS SIKERTELEN", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("ADD CANCEL", "LogicResult");
         }
 
         /// <summary>
@@ -64,35 +77,48 @@ namespace KnifeStoreWpf.BL
         /// </summary>
         /// <param name="list">The entity list where the entity should be deleted from.</param>
         /// <param name="review">The entity which is intended to delete.</param>
-        public void DelReview(IList<Review> list, Review review)
+        public void DelReview(IList<Review> list, Review review,string token)
         {
-            if (review != null)
+            try
             {
-                string api = url + $"Review" + $"/{review.ReviewId}";
-                WebRequest request = WebRequest.Create(api);
-                request.Method = "DELETE";
-                try
+                if (review != null)
                 {
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                }
-                catch (Exception ex)
-                {
-                    this.messengerService.Send(ex.ToString(), "LogicResult");
+                    string api = url + $"Review" + $"/{review.ReviewId}";
+                    WebRequest request = WebRequest.Create(api);
+                    request.Method = "DELETE";
+                    request.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                    try
+                    {
+                        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToString().Contains("403"))
+                        {
+                            this.messengerService.Send("TÖRLÉS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                            return;
+                        }
+                        this.messengerService.Send(ex.ToString(), "LogicResult");
+                        return;
+                    }
+                    list.Remove(review);
+                    this.messengerService.Send("TÖRLÉS SIKERES", "LogicResult");
                     return;
                 }
-                list.Remove(review);
-                this.messengerService.Send("DELETE OK", "LogicResult");
+            }
+            catch 
+            { 
+                this.messengerService.Send("TÖRLÉS SIKERTELEN", "LogicResult");
                 return;
             }
 
-            this.messengerService.Send("DELETE FAILED", "LogicResult");
         }
 
         /// <summary>
         /// Modifies an element of the knifeStore list as intended.
         /// </summary>
         /// <param name="reviewToModify">The Reveiew entity which should be modified.</param>
-        public void ModReview(Review reviewToModify)
+        public void ModReview(Review reviewToModify,string token)
         {
             if (reviewToModify == null)
             {
@@ -104,65 +130,87 @@ namespace KnifeStoreWpf.BL
             clone.CopyFrom(reviewToModify);
             if (this.editorService.EditReview(clone) == true)
             {
-                reviewToModify.CopyFrom(clone);
-                Velemeny kb = new Velemeny()
-                {
-                    Velemeny_Id = string.Empty,
-                    VelemenySzovege = clone.ReviewText == null ? string.Empty : clone.ReviewText,
-                    Elegedettseg = clone.Rating,
-                    Szerzo = clone.Author == null ? string.Empty : clone.Author,
-                    Gyartasi_Cikkszam = clone.SerialNumber,
-                };
-
-
-                string api = url + $"Review" + $"/{reviewToModify.ReviewId}";
                 try
                 {
-                    WebClient wc = new WebClient();
-                    var json = JsonConvert.SerializeObject(kb);
-                    wc.Headers[HttpRequestHeader.ContentType] = "application/json";
-                    wc.UploadString(api, "PUT", json);
-                }
-                catch (Exception ex)
-                {
-                    this.messengerService.Send(ex.ToString(), "LogicResult");
+                    reviewToModify.CopyFrom(clone);
+                    Velemeny kb = new Velemeny()
+                    {
+                        Velemeny_Id = string.Empty,
+                        VelemenySzovege = clone.ReviewText == null ? string.Empty : clone.ReviewText,
+                        Elegedettseg = clone.Rating,
+                        Szerzo = clone.Author == null ? string.Empty : clone.Author,
+                        Gyartasi_Cikkszam = clone.SerialNumber,
+                    };
+
+
+                    string api = url + $"Review" + $"/{reviewToModify.ReviewId}";
+                    try
+                    {
+                        WebClient wc = new WebClient();
+                        var json = JsonConvert.SerializeObject(kb);
+                        wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+                        wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                        wc.UploadString(api, "PUT", json);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToString().Contains("403"))
+                        {
+                            this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN\nNINCS ENGEDÉLYE EHHEZ", "LogicResult");
+                            return;
+                        }
+                        this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN", "LogicResult");
+                        return;
+                    }
+                    //this.knifeStoreLogic.UpdateKes_Bolt(knifeStoreToModify.StorageId, kb);
+                    this.messengerService.Send("MÓDOSÍTÁS SIKERES", "LogicResult");
                     return;
                 }
-                //this.knifeStoreLogic.UpdateKes_Bolt(knifeStoreToModify.StorageId, kb);
-                this.messengerService.Send("MODIFY OK", "LogicResult");
-                return;
+                catch
+                {
+
+                    this.messengerService.Send("MÓDOSÍTÁS SIKERTELEN", "LogicResult");
+                    return;
+                }
             }
 
-            this.messengerService.Send("MODIFY CANCEL", "LogicResult");
         }
 
-        public IList<Review> GetAllReviewsForKnife(string knifeId)
+        public IList<Review> GetAllReviewsForKnife(string knifeId,string token)
         {
-            string api = url + $"Review/GetAllReviewsForKnife/{knifeId}";
-            WebClient wc = new WebClient();
-            string jsonContent = wc.DownloadString(api);
-            IQueryable<Velemeny> ks = JsonConvert.DeserializeObject<List<Velemeny>>(jsonContent).AsQueryable();
-
-            //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
             ObservableCollection<Review> reviews = new ObservableCollection<Review>();
-            if (ks == null)
+            try
             {
-                return reviews;
-            }
+                string api = url + $"Review/GetAllReviewsForKnife/{knifeId}";
+                WebClient wc = new WebClient();
+                wc.Headers[HttpRequestHeader.Authorization] = $"Bearer {token}";
+                string jsonContent = wc.DownloadString(api);
+                IQueryable<Velemeny> ks = JsonConvert.DeserializeObject<List<Velemeny>>(jsonContent).AsQueryable();
 
-            foreach (var item in ks)
-            {
-                Review k = new Review()
+                //IQueryable<Kes_Bolt> kbs = this.knifeStoreLogic.GetAllKes_Bolt();
+                if (ks == null)
                 {
-                    ReviewId=item.Velemeny_Id,
-                    ReviewText=item.VelemenySzovege,
-                    Rating=item.Elegedettseg,
-                    Author=item.Szerzo,
-                    SerialNumber=item.Gyartasi_Cikkszam,
-                };
-                reviews.Add(k);
-            }
+                    return reviews;
+                }
 
+                foreach (var item in ks)
+                {
+                    Review k = new Review()
+                    {
+                        ReviewId = item.Velemeny_Id,
+                        ReviewText = item.VelemenySzovege,
+                        Rating = item.Elegedettseg,
+                        Author = item.Szerzo,
+                        SerialNumber = item.Gyartasi_Cikkszam,
+                    };
+                    reviews.Add(k);
+                }
+
+            }
+            catch
+            {
+                this.messengerService.Send("A SZERVER NEM TALÁLHATÓ", "LogicResult");
+            }
             return reviews;
         }
     }

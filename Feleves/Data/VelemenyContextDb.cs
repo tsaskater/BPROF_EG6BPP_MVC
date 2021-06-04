@@ -52,16 +52,33 @@ namespace Data
                 NormalizedUserName = "ADMIN",
                 SecurityStamp = string.Empty
             };
+            var appUser2 = new IdentityUser
+            {
+                Id = "e2174cf0–9412–4cfe-afbf-59f706d72cf6",
+                Email = "user@user.com",
+                NormalizedEmail = "USER@USER.COM",
+                EmailConfirmed = true,
+                UserName = "user",
+                NormalizedUserName = "USER",
+                SecurityStamp = string.Empty
+            };
 
             appUser.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admin123");
+            appUser2.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "user123");
 
 
             modelbuilder.Entity<IdentityUser>().HasData(appUser);
+            modelbuilder.Entity<IdentityUser>().HasData(appUser2);
 
             modelbuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
                 UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6"
+            });
+            modelbuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "341743f0-dee2–42de-bbbb-59kmkkmk72cf6",
+                UserId = "e2174cf0–9412–4cfe-afbf-59f706d72cf6"
             });
 
 

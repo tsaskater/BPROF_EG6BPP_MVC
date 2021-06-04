@@ -26,11 +26,11 @@ namespace KnifeStoreWpf.VM
             this.authLogic = authLogic;
 
             this.Login = new RelayCommand<PasswordBox>(x => {
-                User u = new User { ValidationName = userName, Password = x.Password };
-                string s = authLogic.Auth(u);
-                if (s!=string.Empty)
+                User u = new User { ValidationName = userName, Password = x };
+                SimpUser s = authLogic.Auth(u);
+                if (s.Token!=null)
                 {
-                    MainWindow win = new MainWindow(s,u);
+                    MainWindow win = new MainWindow(s.Token,s);
                     win.Show();
                     Application.Current.MainWindow.Close();
                 }

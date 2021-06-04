@@ -11,13 +11,14 @@
         Title="Peti Nagyker" Height="500" Width="900"
         Loaded="Window_Loaded"
         ResizeMode="NoResize"
-        Closing="Window_Closing" Background="#FFC1B4B4">
+        Closing="Window_Closing" Background="#FFC1B4B4"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="VM" />
         <ui:BoolToStringConverter x:Key="BoolToStringConverter" />
         <ui:WebsiteToBrushConverter x:Key="WebsiteToBrushConverter"/>
- 
+
         <DataTemplate x:Key="knifeStoreTemplate" DataType="{x:Type data:KnifeStore}">
             <StackPanel Background="{Binding Path=Website , Converter={StaticResource WebsiteToBrushConverter}}">
                 <TextBlock Text="{Binding Path=Name, StringFormat=Bolt név: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
@@ -46,47 +47,49 @@
                 <TextBlock Text="{Binding Path=Rating, StringFormat=Értékelés: {0}}" TextWrapping="Wrap" MaxWidth="200"/>
             </StackPanel>
         </DataTemplate>
-        
+
     </Window.Resources>
     <Grid DataContext="{StaticResource VM}">
         <TextBlock Text="Kés Boltok" Margin="10,5,644,426" FontSize="20" TextAlignment="Center"/>
         <TextBlock Text="Termékek" Margin="320,5,334,426" FontSize="20" TextAlignment="Center"/>
         <TextBlock Text="Vélemények" Margin="630,5,24,426" FontSize="20" TextAlignment="Center"/>
         <ListBox ItemTemplate="{StaticResource knifeStoreTemplate}" ItemsSource="{Binding Path=KnifeStores}" SelectedItem="{Binding Path=SelectedKnifeStore}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="302" Margin="10,58,0,0" VerticalAlignment="Top" Width="246" />
-        <Button Command="{Binding Path=AddKnifeStoreCmd}" Content="ADD" HorizontalAlignment="Left"
+        <Button Command="{Binding Path=AddKnifeStoreCmd}" Content="Hozzáad" HorizontalAlignment="Left"
                 Margin="10,366,0,0" VerticalAlignment="Top" Width="50" />
-        <Button Command="{Binding Path=ModKnifeStoreCmd}" Content="MOD" HorizontalAlignment="Left"
+        <Button Command="{Binding Path=ModKnifeStoreCmd}" Content="Módosít" HorizontalAlignment="Left"
                 Margin="108,366,0,0" VerticalAlignment="Top" Width="50" />
-        <Button Command="{Binding Path=DelKnifeStoreCmd}" Content="DEL" HorizontalAlignment="Left"
+        <Button Command="{Binding Path=DelKnifeStoreCmd}" Content="Töröl" HorizontalAlignment="Left"
                 Margin="206,366,0,0" VerticalAlignment="Top" Width="50" />
         <Button Command="{Binding Path=UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
             Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
 
         <ListBox ItemTemplate="{StaticResource knifeTemplate}" ItemsSource="{Binding Knives}" SelectedItem="{Binding SelectedKnife}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="302" Margin="320,58,0,0" VerticalAlignment="Top" Width="246" />
-        <Button Command="{Binding AddKnifeCmd}" Content="ADD" HorizontalAlignment="Left"
+        <Button Command="{Binding AddKnifeCmd}" Content="Hozzáad" HorizontalAlignment="Left"
             Margin="320,366,0,0" VerticalAlignment="Top" Width="50" />
-        <Button Command="{Binding ModKnifeCmd}" Content="MOD" HorizontalAlignment="Left"
+        <Button Command="{Binding ModKnifeCmd}" Content="Módosít" HorizontalAlignment="Left"
             Margin="418,366,0,0" VerticalAlignment="Top" Width="50" />
-        <Button Command="{Binding DelKnifeCmd}" Content="DEL" HorizontalAlignment="Left"
+        <Button Command="{Binding DelKnifeCmd}" Content="Töröl" HorizontalAlignment="Left"
             Margin="516,366,0,0" VerticalAlignment="Top" Width="50" />
 
         <Button Command="{Binding Path=GetKnives}" Content=">>" HorizontalAlignment="Left"
             Margin="275,200,0,0" VerticalAlignment="Top" Width="25" />
         <ListBox ItemTemplate="{StaticResource reviewTemplate}" ItemsSource="{Binding Reviews}" SelectedItem="{Binding SelectedReview}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="302" Margin="630,58,0,0" VerticalAlignment="Top" Width="246" />
-        <Button Command="{Binding AddReviewCmd}" Content="ADD" HorizontalAlignment="Left"
+        <Button Command="{Binding AddReviewCmd}" Content="Hozzáad" HorizontalAlignment="Left"
             Margin="630,366,0,0" VerticalAlignment="Top" Width="50" />
-        <Button Command="{Binding ModReviewCmd}" Content="MOD" HorizontalAlignment="Left"
+        <Button Command="{Binding ModReviewCmd}" Content="Módosít" HorizontalAlignment="Left"
             Margin="728,366,0,0" VerticalAlignment="Top" Width="50" />
-        <Button Command="{Binding DelReviewCmd}" Content="DEL" HorizontalAlignment="Left"
+        <Button Command="{Binding DelReviewCmd}" Content="Töröl" HorizontalAlignment="Left"
             Margin="826,366,0,0" VerticalAlignment="Top" Width="50" />
         <Button Command="{Binding GetReviews}" Content="&gt;&gt;" HorizontalAlignment="Left"
             Margin="585,200,0,0" VerticalAlignment="Top" Width="25" />
-        
-        <Button Command="{Binding UpdateCmd}" Content="UPDATE" HorizontalAlignment="Left"
+
+        <Button Command="{Binding UpdateCmd}" Content="Frissítés" HorizontalAlignment="Left"
             Margin="10,418,0,0" VerticalAlignment="Top" Width="100" />
-        <Button Command="{Binding GenerateCmd}" Content="GENERATE" HorizontalAlignment="Left"
+        <Button Command="{Binding GenerateCmd}" Content="Generálás" HorizontalAlignment="Left"
             Margin="156,418,0,0" VerticalAlignment="Top" Width="100" />
         <TextBlock Text="Bejelentkezve mint:" Margin="615,405,39,16" TextAlignment="Center"/>
         <TextBlock Text="{StaticResource ResourceKey=username}" Margin="615,425,39,16" TextAlignment="Center"/>
+        <Button Click="Logout" Content="Kijelentkezés" HorizontalAlignment="Left"
+            Margin="515,418,0,0" VerticalAlignment="Top" Width="100" />
     </Grid>
 </Window>

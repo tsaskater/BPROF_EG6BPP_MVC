@@ -7,7 +7,8 @@
         xmlns:vm="clr-namespace:KnifeStoreWpf.VM"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ReviewEditorWindow" Height="450" Width="500" Background="#FFC1B4B4">
+        Title="ReviewEditorWindow" Height="450" Width="500" Background="#FFC1B4B4"
+        WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <vm:EditorViewModel x:Key="VM"/>
     </Window.Resources>
@@ -27,7 +28,7 @@
 
         <Button Content="OK" HorizontalAlignment="Left" Margin="39,368,0,0" VerticalAlignment="Top" Width="75" Click="OK_Click"/>
 
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="175,368,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click" />
+        <Button Content="MÉGSE" HorizontalAlignment="Left" Margin="175,368,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_Click" />
         <Label Content="Nagyon jó" HorizontalAlignment="Left" Margin="372,278,0,0" VerticalAlignment="Top" Width="81" Height="47"/>
         <Label Content="Nagyon rossz" HorizontalAlignment="Left" Margin="119,278,0,0" VerticalAlignment="Top" Width="81" Height="48"/>
 

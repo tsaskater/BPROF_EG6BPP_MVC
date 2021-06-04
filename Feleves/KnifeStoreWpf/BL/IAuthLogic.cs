@@ -5,6 +5,6 @@ namespace KnifeStoreWpf.BL
 {
     public interface IAuthLogic
     {
-        string Auth(User u);
+        SimpUser Auth(User u);
     }
 }
